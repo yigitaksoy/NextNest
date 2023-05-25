@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { scrapeListings } = require("../services/listingService");
+const sendEmail = require("../config/email");
 
 router.get("/scrape-listings", async (req, res) => {
   const {
@@ -11,22 +12,25 @@ router.get("/scrape-listings", async (req, res) => {
     minSize,
     minBedrooms,
     maxAge,
+    email,
   } = req.query;
 
-  // Determine the listing type based on the query parameter
-  const listingTypeDutch = listingType === "forRent" ? "huur" : "koop";
+  const listingTypeDutch = listingType === "huur" ? "huur" : "koop";
+  const url = `https://www.funda.nl/en/${listingTypeDutch}/${location}/beschikbaar/${minPrice}-${maxPrice}/${minSize}+woonopp/${minBedrooms}+kamers/${maxAge}-dag/`;
 
-  // Build the URL based on the query parameters and listing type
-  const url = `https://www.funda.nl/en/${listingTypeDutch}/${location}/beschikbaar/${minPrice}-${maxPrice}/${minSize}+woonopp/${minBedrooms}+slaapkamers/${maxAge}-dag/`;
+  console.log("Form Data:", req.query);
+  console.log("URL:", url);
+  console.log("Scraping listings...");
 
   try {
-    // Call the listing service to scrape the listings
-    const scrapedListings = await scrapeListings(url);
+    const scrapedListings = await scrapeListings(url, email);
 
-    // Return the scraped listings as the API response
+    // Send email with the scraped listings
+    sendEmail(email, scrapedListings);
+
+    console.log("Email sent");
     res.json({ listings: scrapedListings });
   } catch (error) {
-    // Handle any errors that occur during scraping
     console.error("Error scraping listings:", error);
     res
       .status(500)
