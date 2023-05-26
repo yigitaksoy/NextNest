@@ -1,4 +1,9 @@
-const puppeteer = require("puppeteer");
+const puppeteer = require("puppeteer-extra");
+const StealthPlugin = require("puppeteer-extra-plugin-stealth");
+const AdblockerPlugin = require("puppeteer-extra-plugin-adblocker");
+
+puppeteer.use(StealthPlugin());
+puppeteer.use(AdblockerPlugin({ blockTrackers: true }));
 
 const scrapeListings = async (url) => {
   console.log("Scraping listings for URL:", url);
@@ -6,44 +11,68 @@ const scrapeListings = async (url) => {
   const browser = await puppeteer.launch({ headless: "new" });
   const page = await browser.newPage();
 
-  await page.goto(url, { waitUntil: "domcontentloaded" });
+  await page.setViewport({ width: 1280, height: 800 });
 
-  const listings = await page.evaluate(() => {
-    const elements = Array.from(document.querySelectorAll(".search-result"));
+  let currentPage = 1;
+  const allListings = [];
 
-    return elements.map((element) => {
-      const image = element?.querySelector(".search-result-image img")?.src;
-      const title = element
-        ?.querySelector(".search-result__header-title")
-        ?.textContent.trim();
-      const linkElement = element.querySelector(
-        ".search-result-main a[data-object-url-tracking='resultlist']"
-      );
-      const url = linkElement?.getAttribute("href")?.replace(/(\?.*)$/, "");
-      const price = element
-        ?.querySelector(".search-result-price")
-        ?.textContent.trim();
-      const details = Array.from(
-        element?.querySelectorAll(".search-result-kenmerken li")
-      ).map((li) => li.textContent.trim());
+  while (true) {
+    console.log("Scraping page:", currentPage);
+    await page.goto(url, { waitUntil: "domcontentloaded" });
 
-      return {
-        image,
-        title,
-        url: `https://www.funda.nl${url}`, // Add base URL to the scraped URL
-        price,
-        details,
-      };
+    const listings = await page.evaluate(() => {
+      const elements = Array.from(document.querySelectorAll(".search-result"));
+
+      return elements.map((element) => {
+        const image = element?.querySelector(".search-result-image img")?.src;
+        const title = element
+          ?.querySelector(".search-result__header-title")
+          ?.textContent.trim();
+        const linkElement = element.querySelector(
+          ".search-result-main a[data-object-url-tracking='resultlist']"
+        );
+        const url = linkElement?.getAttribute("href")?.replace(/(\?.*)$/, "");
+        const price = element
+          ?.querySelector(".search-result-price")
+          ?.textContent.trim();
+        const details = Array.from(
+          element?.querySelectorAll(".search-result-kenmerken li")
+        ).map((li) => li.textContent.trim());
+
+        return {
+          image,
+          title,
+          url: `https://www.funda.nl${url}`, // Add base URL to the scraped URL
+          price,
+          details,
+        };
+      });
     });
-  });
+
+    allListings.push(...listings);
+
+    const nextPageButton = await page.$(
+      ".pagination-pages a[aria-current='page'] + a"
+    );
+    if (!nextPageButton || currentPage >= 28) {
+      break; // Exit the loop if there's no next page button or reached the end of pagination
+    }
+
+    const nextPageUrl = await page.evaluate(
+      (nextPageButton) => nextPageButton.href,
+      nextPageButton
+    );
+    currentPage++;
+    await page.goto(nextPageUrl, { waitUntil: "domcontentloaded" });
+  }
 
   await browser.close();
 
-  listings.forEach((listing) => {
+  allListings.forEach((listing) => {
     console.log("Listing URL:", listing.url);
   });
 
-  return listings;
+  return allListings;
 };
 
 module.exports = {
