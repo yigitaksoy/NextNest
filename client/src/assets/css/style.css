@@ -1,3 +1,11 @@
+/* Adobe Fonts */
+@import url("https://use.typekit.net/nra7zxj.css");
+
+/* Tailwind */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+input[type="radio"]:checked + label {
+  @apply btn-warning;
+}
