@@ -42,7 +42,9 @@ const scrapeListings = async (url) => {
         return {
           image,
           title,
-          url: `https://www.funda.nl${url}`, // Add base URL to the scraped URL
+          url: url.startsWith("https://www.funda.nl")
+            ? url
+            : `https://www.funda.nl${url}`, // Add base URL to the scraped URL if necessary
           price,
           details,
         };
