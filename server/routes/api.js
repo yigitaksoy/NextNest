@@ -11,12 +11,11 @@ router.get("/scrape-listings", async (req, res) => {
     maxPrice,
     minSize,
     minBedrooms,
-    maxAge,
     email,
   } = req.query;
 
   const listingTypeDutch = listingType === "huur" ? "huur" : "koop";
-  const url = `https://www.funda.nl/en/${listingTypeDutch}/${location}/beschikbaar/${minPrice}-${maxPrice}/${minSize}+woonopp/${minBedrooms}+kamers/${maxAge}-dag/`;
+  const url = `https://www.funda.nl/en/${listingTypeDutch}/${location}/beschikbaar/${minPrice}-${maxPrice}/${minSize}+woonopp/${minBedrooms}+kamers/1-dag/`;
 
   console.log("Form Data:", req.query);
   console.log("URL:", url);
