@@ -19,7 +19,7 @@ const sendEmail = (toEmail, listingData) => {
       console.log(error);
     } else {
       const mailOptions = {
-        from: process.env.GOOGLE_EMAIL,
+        from: "NextNest Realtors <info@nextnest.com>",
         to: toEmail,
         subject: "New Listings",
         html: renderedHtml,
