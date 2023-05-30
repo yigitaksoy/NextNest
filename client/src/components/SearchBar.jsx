@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { doc, setDoc, getDoc } from "firebase/firestore";
+import { db, auth } from "../utils/firebase";
 import axios from "axios";
 import { MapIcon } from "@heroicons/react/24/outline";
 import { EnvelopeIcon } from "@heroicons/react/24/outline";
@@ -26,15 +28,40 @@ const SearchBar = () => {
     console.log("Form Data:", formData);
   }, [formData]);
 
+  useEffect(() => {
+    const fetchSearchCriteria = async () => {
+      try {
+        const user = auth.currentUser;
+        if (user) {
+          const searchCriteriaRef = doc(db, "userSearch", user.uid);
+          const snapshot = await getDoc(searchCriteriaRef);
+          if (snapshot.exists()) {
+            const data = snapshot.data();
+            setFormData((prevData) => ({ ...prevData, ...data }));
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching search criteria:", error);
+      }
+    };
+
+    fetchSearchCriteria();
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("Request Payload:", {
-      ...formData,
-      toEmail: formData.email,
-    });
-
     try {
+      // Save search criteria to Firestore
+      const user = auth.currentUser;
+      const searchCriteriaRef = doc(db, "userSearch", user.uid);
+      await setDoc(searchCriteriaRef, formData);
+
+      console.log("Request Payload:", {
+        ...formData,
+        toEmail: formData.email,
+      });
+
       const response = await axios.get(
         "http://localhost:3000/api/scrape-listings",
         {
@@ -66,6 +93,7 @@ const SearchBar = () => {
                   value="huur"
                   name="listingType"
                   onChange={handleChange}
+                  checked={formData.listingType === "huur"}
                   required
                 />
                 <label
@@ -83,6 +111,7 @@ const SearchBar = () => {
                   value="koop"
                   name="listingType"
                   onChange={handleChange}
+                  checked={formData.listingType === "koop"}
                   required
                 />
                 <label
