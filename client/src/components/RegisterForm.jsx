@@ -1,4 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { auth, db } from "../utils/firebase";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 
 const RegisterForm = ({
   handleSubmit,
@@ -7,6 +10,29 @@ const RegisterForm = ({
   setConfirmPassword,
   passwordsMatch,
 }) => {
+  const navigate = useNavigate();
+
+  const googleSignUp = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      // Check if user already exists in the database
+      const userRef = doc(db, "users", user.uid);
+      const userDoc = await getDoc(userRef);
+      if (!userDoc.exists()) {
+        // Create a new user document in the database
+        await setDoc(userRef, {
+          email: user.email,
+          uid: user.uid,
+        });
+      }
+      // Redirect after successful sign-up
+      navigate("/home");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="w-full rounded-lg bg-white shadow sm:max-w-md md:mt-0 xl:p-0">
       <div className="space-y-4 p-6 sm:p-8 md:space-y-6">
@@ -107,8 +133,8 @@ const RegisterForm = ({
             <p className="mx-4 mb-0 text-center font-semibold ">or</p>
           </div>
           <div className="flex flex-col space-y-4">
-            <Link
-              to="#"
+            <button
+              onClick={googleSignUp}
               className="group flex items-center justify-center space-x-2 rounded-md border border-gray-800 px-4 py-2 transition-colors duration-300 hover:bg-gray-800 focus:outline-none"
             >
               <svg
@@ -135,7 +161,7 @@ const RegisterForm = ({
               <span className="text-sm font-medium text-gray-800 group-hover:text-white">
                 Sign up with Google
               </span>
-            </Link>
+            </button>
           </div>
         </form>
       </div>
