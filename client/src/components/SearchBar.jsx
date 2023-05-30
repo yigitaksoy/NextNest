@@ -165,7 +165,7 @@ const SearchBar = () => {
             <div className="flex justify-center">
               <button className="btn w-full rounded-md border bg-gray-800 p-2 text-white lg:w-1/4">
                 Search & Send
-                <PaperAirplaneIcon class=" h-5 w-5 text-white" />
+                <PaperAirplaneIcon className=" h-5 w-5 text-white" />
               </button>
             </div>
           </div>
