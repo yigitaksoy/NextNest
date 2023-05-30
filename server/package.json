@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "tailwind:css": "postcss public/styles/tailwind.css -o public/styles/style.css"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
@@ -17,7 +16,6 @@
     "ejs": "^3.1.9",
     "express": "^4.18.2",
     "express-validator": "^7.0.1",
-    "jsdom": "^22.0.0",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.2.0",
     "node-cron": "^3.0.2",
@@ -25,6 +23,7 @@
     "puppeteer": "^20.3.0",
     "puppeteer-extra": "^3.3.6",
     "puppeteer-extra-plugin-adblocker": "^2.13.6",
-    "puppeteer-extra-plugin-stealth": "^2.11.2"
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "serverless-http": "^3.2.0"
   }
 }
