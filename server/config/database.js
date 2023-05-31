@@ -1,10 +1,12 @@
-const mongoose = require("mongoose");
+const admin = require("firebase-admin");
 
 const connectToDatabase = async () => {
   try {
-    await mongoose.connect(process.env.MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
+    // Initialize Firebase Admin SDK
+    admin.initializeApp({
+      credential: admin.credential.applicationDefault(),
+      projectId: process.env.FIREBASE_PROJECT_ID,
+      databaseURL: process.env.FIREBASE_DATABASE_URL,
     });
   } catch (error) {
     console.error("Database connection error:", error.message);
