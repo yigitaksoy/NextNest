@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../utils/firebase";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, collection } from "firebase/firestore";
 import RegisterForm from "../components/RegisterForm";
 import { ChatBubbleLeftRightIcon } from "@heroicons/react/24/outline";
 
@@ -36,11 +36,22 @@ const Register = () => {
 
         const res = await createUserWithEmailAndPassword(auth, email, password);
 
+        // Create user document in the "users" collection
         await setDoc(doc(db, "users", res.user.uid), {
           uid: res.user.uid,
           email,
         });
+
+        // Create userSearch document in the "userSearch" collection
         await setDoc(doc(db, "userSearch", res.user.uid), {});
+
+        // Automatically create the "listings" collection for the new user
+        const userRef = doc(db, "users", res.user.uid);
+        const listingsCollectionRef = collection(db, "userListings");
+        await setDoc(doc(listingsCollectionRef, res.user.uid), {
+          userRef: userRef.path,
+        });
+
         console.log(res);
 
         navigate("/home");
@@ -80,7 +91,6 @@ const Register = () => {
           handleChange={handleChange}
           err={err}
         />
-
         <div className="mt-5 text-center font-black text-black transition duration-100 hover:text-white">
           <Link to="/">Go back to the homepage</Link>
         </div>

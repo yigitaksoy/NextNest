@@ -6,7 +6,7 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import { auth, db } from "../utils/firebase";
-import { doc, setDoc, getDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc, collection } from "firebase/firestore";
 import { ChatBubbleLeftRightIcon } from "@heroicons/react/24/outline";
 
 const Login = () => {
@@ -30,6 +30,7 @@ const Login = () => {
       .then(async (result) => {
         const user = result.user;
 
+        const userRef = doc(db, "users", user.uid);
         const userDocRef = doc(db, "users", user.uid);
         const userDocSnapshot = await getDoc(userDocRef);
 
@@ -48,6 +49,12 @@ const Login = () => {
           // userSearch document does not exist, create it
           await setDoc(userSearchDocRef, {});
         }
+
+        // Automatically create the "userListings" collection for the new user
+        const listingsCollectionRef = collection(db, "userListings");
+        await setDoc(doc(listingsCollectionRef, user.uid), {
+          userRef,
+        });
 
         navigate("/home");
       })
