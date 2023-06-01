@@ -1,6 +1,7 @@
 const puppeteer = require("puppeteer-extra");
 const StealthPlugin = require("puppeteer-extra-plugin-stealth");
 const AdblockerPlugin = require("puppeteer-extra-plugin-adblocker");
+const useProxy = require("puppeteer-page-proxy");
 require("dotenv").config();
 
 puppeteer.use(StealthPlugin());
@@ -29,6 +30,11 @@ const scrapeListings = async (url) => {
 
   let currentPage = 1;
   const allListings = [];
+
+  await useProxy(page, process.env.PROXY);
+
+  const data = await useProxy.lookup(page);
+  console.log("Page IP:", data.ip);
 
   while (true) {
     console.log("Scraping page:", currentPage);
