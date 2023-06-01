@@ -40,6 +40,13 @@ const scrapeListings = async (url) => {
     console.log("Scraping page:", currentPage);
     await page.goto(url, { waitUntil: "domcontentloaded" });
 
+    // Wait for the title element to appear
+    await page.waitForSelector("title");
+
+    // Extract the page title
+    const title = await page.title();
+    console.log("Page Title:", title);
+
     const listings = await page.evaluate(() => {
       const elements = Array.from(document.querySelectorAll(".search-result"));
 
