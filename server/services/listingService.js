@@ -16,6 +16,7 @@ const scrapeListings = async (url) => {
       "--no-sandbox",
       "--single-process",
       "--no-zygote",
+      `--proxy-server=${process.env.PROXY}`,
     ],
     executablePath:
       process.env.NODE_ENV === "production"
