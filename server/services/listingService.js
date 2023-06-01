@@ -11,7 +11,7 @@ const scrapeListings = async (url) => {
   const browser = await puppeteer.launch({ headless: "new" });
   const page = await browser.newPage();
 
-  await page.setViewport({ width: 1280, height: 800 });
+  await page.setViewport({ width: 1080, height: 1024 });
 
   let currentPage = 1;
   const allListings = [];
