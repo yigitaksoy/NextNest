@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth, db } from "../utils/firebase";
-import { doc, setDoc, getDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc, collection } from "firebase/firestore";
 
 const RegisterForm = ({
   handleSubmit,
@@ -17,16 +17,25 @@ const RegisterForm = ({
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
+
       // Check if user already exists in the database
       const userRef = doc(db, "users", user.uid);
       const userDoc = await getDoc(userRef);
+
       if (!userDoc.exists()) {
         // Create a new user document in the database
         await setDoc(userRef, {
           email: user.email,
           uid: user.uid,
         });
+
+        // Automatically create the "userListings" collection for the new user
+        const listingsCollectionRef = collection(db, "userListings");
+        await setDoc(doc(listingsCollectionRef, user.uid), {
+          userRef,
+        });
       }
+
       // Redirect after successful sign-up
       navigate("/home");
     } catch (error) {
