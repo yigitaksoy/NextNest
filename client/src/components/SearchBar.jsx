@@ -63,7 +63,9 @@ const SearchBar = () => {
       });
 
       const response = await axios.get(
-        "http://localhost:3000/api/scrape-listings",
+        import.meta.env.MODE === "production"
+          ? import.meta.env.VITE_NEXTNEST_API
+          : "http://localhost:3000/api/scrape-listings",
         {
           params: {
             ...formData,
