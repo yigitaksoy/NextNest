@@ -1,6 +1,7 @@
 const puppeteer = require("puppeteer-extra");
 const StealthPlugin = require("puppeteer-extra-plugin-stealth");
 const AdblockerPlugin = require("puppeteer-extra-plugin-adblocker");
+require("dotenv").config();
 
 puppeteer.use(StealthPlugin());
 puppeteer.use(AdblockerPlugin({ blockTrackers: true }));
@@ -8,7 +9,19 @@ puppeteer.use(AdblockerPlugin({ blockTrackers: true }));
 const scrapeListings = async (url) => {
   console.log("Scraping listings for URL:", url);
 
-  const browser = await puppeteer.launch({ headless: "new" });
+  const browser = await puppeteer.launch({
+    args: [
+      "--disable-setuid-sandbox",
+      "--disable-web-security",
+      "--no-sandbox",
+      "--single-process",
+      "--no-zygote",
+    ],
+    executablePath:
+      process.env.NODE_ENV === "production"
+        ? process.env.PUPPETEER_EXECUTABLE_PATH
+        : puppeteer.executablePath(),
+  });
   const page = await browser.newPage();
 
   await page.setViewport({ width: 1080, height: 1024 });
