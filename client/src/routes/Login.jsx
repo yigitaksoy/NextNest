@@ -42,7 +42,13 @@ const Login = () => {
           });
         }
 
-        const userSearchDocRef = doc(db, "userSearch", user.uid);
+        const userSearchDocRef = doc(
+          db,
+          "users",
+          user.uid,
+          "userSearch",
+          user.uid
+        );
         const userSearchDocSnapshot = await getDoc(userSearchDocRef);
 
         if (!userSearchDocSnapshot.exists()) {
@@ -50,10 +56,10 @@ const Login = () => {
           await setDoc(userSearchDocRef, {});
         }
 
-        // Automatically create the "userListings" collection for the new user
-        const listingsCollectionRef = collection(db, "userListings");
-        await setDoc(doc(listingsCollectionRef, user.uid), {
-          userRef,
+        // Automatically create the "userListing" collection for the new user
+        const userListingRef = collection(db, "users", user.uid, "userListing");
+        await setDoc(doc(userListingRef, user.uid), {
+          userRef: userRef.path,
         });
 
         navigate("/home");

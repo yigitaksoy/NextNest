@@ -12,35 +12,49 @@ const RegisterForm = ({
 }) => {
   const navigate = useNavigate();
 
-  const googleSignUp = async () => {
+  const googleSignUp = () => {
     const provider = new GoogleAuthProvider();
-    try {
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
+    signInWithPopup(auth, provider)
+      .then(async (result) => {
+        const user = result.user;
 
-      // Check if user already exists in the database
-      const userRef = doc(db, "users", user.uid);
-      const userDoc = await getDoc(userRef);
+        const userRef = doc(db, "users", user.uid);
+        const userDocRef = doc(db, "users", user.uid);
+        const userDocSnapshot = await getDoc(userDocRef);
 
-      if (!userDoc.exists()) {
-        // Create a new user document in the database
-        await setDoc(userRef, {
-          email: user.email,
-          uid: user.uid,
+        if (!userDocSnapshot.exists()) {
+          // User document does not exist, create it
+          await setDoc(userDocRef, {
+            uid: user.uid,
+            email: user.email,
+          });
+        }
+
+        const userSearchDocRef = doc(
+          db,
+          "users",
+          user.uid,
+          "userSearch",
+          user.uid
+        );
+        const userSearchDocSnapshot = await getDoc(userSearchDocRef);
+
+        if (!userSearchDocSnapshot.exists()) {
+          // userSearch document does not exist, create it
+          await setDoc(userSearchDocRef, {});
+        }
+
+        // Automatically create the "userListing" collection for the new user
+        const userListingRef = collection(db, "users", user.uid, "userListing");
+        await setDoc(doc(userListingRef, user.uid), {
+          userRef: userRef.path,
         });
 
-        // Automatically create the "userListings" collection for the new user
-        const listingsCollectionRef = collection(db, "userListings");
-        await setDoc(doc(listingsCollectionRef, user.uid), {
-          userRef,
-        });
-      }
-
-      // Redirect after successful sign-up
-      navigate("/home");
-    } catch (error) {
-      console.log(error);
-    }
+        navigate("/home");
+      })
+      .catch((error) => {
+        console.info(error);
+      });
   };
   return (
     <div className="w-full rounded-lg bg-white shadow sm:max-w-md md:mt-0 xl:p-0">

@@ -42,17 +42,22 @@ const Register = () => {
           email,
         });
 
-        // Create userSearch document in the "userSearch" collection
-        await setDoc(doc(db, "userSearch", res.user.uid), {});
+        // Create userSearch document in the "users" collection
+        await setDoc(
+          doc(db, "users", res.user.uid, "userSearch", res.user.uid),
+          {}
+        );
 
-        // Automatically create the "listings" collection for the new user
-        const userRef = doc(db, "users", res.user.uid);
-        const listingsCollectionRef = collection(db, "userListings");
-        await setDoc(doc(listingsCollectionRef, res.user.uid), {
-          userRef: userRef.path,
+        // Automatically create the "userListing" collection for the new user
+        const userListingRef = collection(
+          db,
+          "users",
+          res.user.uid,
+          "userListing"
+        );
+        await setDoc(doc(userListingRef, res.user.uid), {
+          userRef: doc(db, "users", res.user.uid).path,
         });
-
-        console.log(res);
 
         navigate("/home");
       } catch (error) {
