@@ -33,7 +33,13 @@ const SearchBar = () => {
       try {
         const user = auth.currentUser;
         if (user) {
-          const searchCriteriaRef = doc(db, "userSearch", user.uid);
+          const searchCriteriaRef = doc(
+            db,
+            "users",
+            user.uid,
+            "userSearch",
+            user.uid
+          );
           const snapshot = await getDoc(searchCriteriaRef);
           if (snapshot.exists()) {
             const data = snapshot.data();
@@ -54,7 +60,13 @@ const SearchBar = () => {
     try {
       // Save search criteria to Firestore
       const user = auth.currentUser;
-      const searchCriteriaRef = doc(db, "userSearch", user.uid);
+      const searchCriteriaRef = doc(
+        db,
+        "users",
+        user.uid,
+        "userSearch",
+        user.uid
+      );
       await setDoc(searchCriteriaRef, formData);
 
       console.log("Request Payload:", {
