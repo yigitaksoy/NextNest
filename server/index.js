@@ -1,9 +1,10 @@
 require("dotenv").config();
 const express = require("express");
+const path = require("path");
 const cors = require("cors");
 const { connectToDatabase } = require("./config/database");
 const apiRoutes = require("./routes/api");
-const path = require("path");
+const errorHandler = require("./middleware/errorHandler");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -21,16 +22,20 @@ connectToDatabase()
   .then(() => {
     console.log("Connected to the database");
 
+    app.get("/", (req, res) => {
+      res.send("Server Status: OK");
+    });
+
     // API routes
     app.use("/api", apiRoutes);
+
+    // Error handler middleware
+    app.use(errorHandler);
 
     // Start the server
     app.listen(port, () => {
       console.log(`Server running on port ${port}`);
     });
-
-    // Schedule the cron job
-    // scheduleCronJob();
   })
   .catch((error) => {
     console.error("Database connection error:", error);
