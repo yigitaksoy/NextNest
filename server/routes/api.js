@@ -1,7 +1,8 @@
 const express = require("express");
-const router = express.Router();
 const { scrapeListings } = require("../services/listingService");
 const sendEmail = require("../config/email");
+
+const router = express.Router();
 
 router.get("/scrape-listings", async (req, res) => {
   const {
