@@ -25,10 +25,6 @@ const SearchBar = () => {
   };
 
   useEffect(() => {
-    console.log("Form Data:", formData);
-  }, [formData]);
-
-  useEffect(() => {
     const fetchSearchCriteria = async () => {
       try {
         const user = auth.currentUser;
