@@ -48,12 +48,12 @@ const Register = () => {
           {}
         );
 
-        // Automatically create the "userListing" collection for the new user
+        // Automatically create the "userListings" collection for the new user
         const userListingRef = collection(
           db,
           "users",
           res.user.uid,
-          "userListing"
+          "userListings"
         );
         await setDoc(doc(userListingRef, res.user.uid), {
           userRef: doc(db, "users", res.user.uid).path,

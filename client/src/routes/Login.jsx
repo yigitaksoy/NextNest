@@ -56,8 +56,13 @@ const Login = () => {
           await setDoc(userSearchDocRef, {});
         }
 
-        // Automatically create the "userListing" collection for the new user
-        const userListingRef = collection(db, "users", user.uid, "userListing");
+        // Automatically create the "userListings" collection for the new user
+        const userListingRef = collection(
+          db,
+          "users",
+          user.uid,
+          "userListings"
+        );
         await setDoc(doc(userListingRef, user.uid), {
           userRef: userRef.path,
         });
