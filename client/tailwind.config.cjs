@@ -4,7 +4,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        fontDegular: ["degular, sans-serif"],
+        degular: ["degular, sans-serif"],
+        nove: ["nove, sans-serif"],
       },
       fontWeight: {
         thin: 300,
