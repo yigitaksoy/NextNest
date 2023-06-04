@@ -18,8 +18,8 @@ const Navbar = () => {
           onClick={() => signOut(auth)}
         >
           <div className="mr-10 flex items-center">
-            <p className="mr-2">Logout</p>
-            <ArrowRightOnRectangleIcon className="h-5 w-5 text-gray-300" />
+            <p className="mr-2 text-white">Logout</p>
+            <ArrowRightOnRectangleIcon className="h-5 w-5 text-white" />
           </div>
         </button>
       </div>
