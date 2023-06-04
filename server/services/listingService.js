@@ -1,6 +1,6 @@
+require("dotenv").config();
 const puppeteer = require("puppeteer-extra");
 const useProxy = require("puppeteer-page-proxy");
-require("dotenv").config();
 
 const scrapeListings = async (url) => {
   console.log("Scraping listings for URL:", url);
