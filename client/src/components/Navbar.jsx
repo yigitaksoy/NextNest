@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
+import NextNest from "../assets/images/nextnest-white.png";
 import { ArrowRightOnRectangleIcon } from "@heroicons/react/24/outline";
 
 const Navbar = () => {
@@ -9,9 +10,7 @@ const Navbar = () => {
   return (
     <div className="navbar fixed bg-black p-5">
       <div className="flex-1">
-        <p className="btn-ghost btn text-lg font-bold normal-case text-sky-400">
-          NextNest
-        </p>
+        <img src={NextNest} alt="nextnest-logo" className="w-22 h-10" />
       </div>
       <div className="mx-auto text-lg text-gray-300">
         <button

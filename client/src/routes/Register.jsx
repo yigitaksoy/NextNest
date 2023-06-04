@@ -4,7 +4,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../utils/firebase";
 import { doc, setDoc, collection } from "firebase/firestore";
 import RegisterForm from "../components/RegisterForm";
-import { ChatBubbleLeftRightIcon } from "@heroicons/react/24/outline";
+import NextNest from "../assets/images/nextnest-black.png";
 
 const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -78,16 +78,10 @@ const Register = () => {
   }, [userPassword, confirmPassword]);
 
   return (
-    <section className="font-fontInforma h-auto bg-sky-400">
+    <section className="h-screen bg-sky-400 font-degular lg:h-full">
       <div className="mx-auto flex flex-col items-center justify-center px-6 py-8 md:h-auto md:py-3.5">
-        <Link
-          to="/"
-          className="font-fontNove mb-6 flex items-center text-2xl font-semibold text-gray-900"
-        >
-          <h3 className="font-fontNove flex items-center justify-center">
-            <span className="mr-2">Next Nest</span>
-            <ChatBubbleLeftRightIcon className="h-6 w-6 text-center" />
-          </h3>
+        <Link to="/" className="mb-6">
+          <img src={NextNest} alt="nextnest-logo" className="w-22 h-10" />
         </Link>
         <RegisterForm
           handleSubmit={handleSubmit}
