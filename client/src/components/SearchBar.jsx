@@ -90,10 +90,10 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="">
-      <div className="container mx-auto flex h-screen items-center justify-center p-2 md:p-0">
+    <div className="font-fontDegular">
+      <div className="container mx-auto flex h-screen items-center justify-center p-2 md:p-0 lg:w-2/3">
         <form onSubmit={handleSubmit}>
-          <div className="grid grid-cols-1 gap-6 rounded-3xl border-4 border-sky-400 bg-gray-100 p-6 shadow-lg">
+          <div className="grid grid-cols-1 gap-2 rounded-3xl bg-gray-100 p-6">
             <div className="flex flex-shrink-0">
               <button className="bg-transparent p-2" type="button">
                 <input
@@ -204,7 +204,7 @@ const SearchBar = () => {
             <div className="flex justify-center">
               <button className="btn w-full rounded-md border bg-gray-800 p-2 text-white lg:w-1/4">
                 Search & Send
-                <PaperAirplaneIcon className=" h-5 w-5 text-white" />
+                <PaperAirplaneIcon className="h-5 w-5 text-white" />
               </button>
             </div>
           </div>
