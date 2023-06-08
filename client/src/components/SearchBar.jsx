@@ -65,10 +65,7 @@ const SearchBar = () => {
       );
       await setDoc(searchCriteriaRef, formData);
 
-      console.log("Request Payload:", {
-        ...formData,
-        toEmail: formData.email,
-      });
+      const idToken = await user.getIdToken(); // Get the user token
 
       const response = await axios.get(
         import.meta.env.MODE === "production"
@@ -79,10 +76,12 @@ const SearchBar = () => {
             ...formData,
             toEmail: formData.email,
           },
+          headers: {
+            Authorization: `Bearer ${idToken}`, // Add the user token to the request headers
+          },
         }
       );
 
-      console.log(response);
       console.log("Email sent:", response.data);
     } catch (error) {
       console.error("Error sending email:", error);
