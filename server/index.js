@@ -5,6 +5,7 @@ const cors = require("cors");
 const { connectToDatabase } = require("./config/database");
 const apiRoutes = require("./routes/api");
 const errorHandler = require("./middleware/errorHandler");
+const { verifyToken } = require("./middleware/verifyToken");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -19,15 +20,16 @@ app.set("view engine", "ejs");
 
 // Connect to the database
 connectToDatabase()
-  .then(() => {
+  .then((admin) => {
     console.log("Connected to the database");
 
+    // Define a route for server status
     app.get("/", (req, res) => {
       res.send("Server Status: OK");
     });
 
-    // API routes
-    app.use("/api", apiRoutes);
+    // API routes with token verification middleware
+    app.use("/api", verifyToken(admin), apiRoutes);
 
     // Error handler middleware
     app.use(errorHandler);
@@ -38,6 +40,6 @@ connectToDatabase()
     });
   })
   .catch((error) => {
-    console.error("Database connection error:", error);
+    console.error("Database connection error:", error.message);
     process.exit(1);
   });
