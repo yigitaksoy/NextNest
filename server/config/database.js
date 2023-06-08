@@ -1,13 +1,31 @@
+require("dotenv").config();
 const admin = require("firebase-admin");
+const { serviceAccount, firebaseConfig } = require("./firebaseConfig.js");
+
+let initialized = false;
+let appInstance = null;
 
 const connectToDatabase = async () => {
   try {
-    // Initialize Firebase Admin SDK
-    admin.initializeApp({
-      credential: admin.credential.applicationDefault(),
-      projectId: process.env.FIREBASE_PROJECT_ID,
-      databaseURL: process.env.FIREBASE_DATABASE_URL,
-    });
+    if (!initialized) {
+      if (!admin.apps.length) {
+        // Parse the private key as an object
+        const privateKey = process.env.FIREBASE_PRIVATE_KEY.replace(
+          /\\n/g,
+          "\n"
+        );
+
+        // Initialize Firebase Admin SDK and store the app instance
+        appInstance = admin.initializeApp({
+          credential: admin.credential.cert(serviceAccount),
+          databaseURL: firebaseConfig.databaseURL,
+        });
+      }
+
+      initialized = true;
+    }
+
+    return admin.apps.length ? admin.app() : appInstance; // Return the admin instance
   } catch (error) {
     console.error("Database connection error:", error.message);
     process.exit(1);
