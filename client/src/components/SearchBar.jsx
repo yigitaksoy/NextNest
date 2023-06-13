@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-import { doc, setDoc, getDoc } from "firebase/firestore";
-import { db, auth } from "../utils/firebase";
+import { auth } from "../utils/firebase";
 import axios from "axios";
-import { MapIcon } from "@heroicons/react/24/outline";
-import { EnvelopeIcon } from "@heroicons/react/24/outline";
-import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
+import {
+  MapIcon,
+  PaperAirplaneIcon,
+  EnvelopeIcon,
+} from "@heroicons/react/24/outline";
 
 const SearchBar = () => {
   const [formData, setFormData] = useState({
@@ -28,19 +29,22 @@ const SearchBar = () => {
     const fetchSearchCriteria = async () => {
       try {
         const user = auth.currentUser;
+        const idToken = await user.getIdToken();
+
         if (user) {
-          const searchCriteriaRef = doc(
-            db,
-            "users",
-            user.uid,
-            "userSearch",
-            user.uid
+          const response = await axios.get(
+            import.meta.env.MODE === "production"
+              ? import.meta.env.VITE_NEXTNEST_API_USER
+              : "http://localhost:3000/user/search",
+            {
+              headers: {
+                Authorization: `Bearer ${idToken}`,
+              },
+            }
           );
-          const snapshot = await getDoc(searchCriteriaRef);
-          if (snapshot.exists()) {
-            const data = snapshot.data();
-            setFormData((prevData) => ({ ...prevData, ...data }));
-          }
+
+          const searchCriteria = response.data;
+          setFormData((prevData) => ({ ...prevData, ...searchCriteria }));
         }
       } catch (error) {
         console.error("Error fetching search criteria:", error);
@@ -53,38 +57,47 @@ const SearchBar = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      // Save search criteria to Firestore
-      const user = auth.currentUser;
-      const searchCriteriaRef = doc(
-        db,
-        "users",
-        user.uid,
-        "userSearch",
-        user.uid
-      );
-      await setDoc(searchCriteriaRef, formData);
+    console.log("Form Data:", formData);
 
+    try {
+      // Save search criteria to MongoDB
+      const user = auth.currentUser;
       const idToken = await user.getIdToken(); // Get the user token
 
-      const response = await axios.get(
+      const saveSearchResponse = await axios.post(
         import.meta.env.MODE === "production"
-          ? import.meta.env.VITE_NEXTNEST_API
-          : "http://localhost:3000/api/scrape-listings",
+          ? import.meta.env.VITE_NEXTNEST_API_USER
+          : "http://localhost:3000/user/search",
+        formData,
         {
-          params: {
-            ...formData,
-            toEmail: formData.email,
-          },
           headers: {
-            Authorization: `Bearer ${idToken}`, // Add the user token to the request headers
+            Authorization: `Bearer ${idToken}`,
           },
         }
       );
 
-      console.log("Email sent:", response.data);
+      console.log("Search Payload:", saveSearchResponse);
+      console.log("Search criteria saved:", saveSearchResponse.data);
+
+      try {
+        //Make API call to scrape listings and send email
+        const scrapeListingsResponse = await axios.get(
+          import.meta.env.MODE === "production"
+            ? import.meta.env.VITE_NEXTNEST_API
+            : "http://localhost:3000/api/scrape-listings",
+          {
+            params: formData,
+            headers: {
+              Authorization: `Bearer ${idToken}`,
+            },
+          }
+        );
+        console.log("Email sent:", scrapeListingsResponse.data);
+      } catch (error) {
+        console.error("Error sending listing data:", error);
+      }
     } catch (error) {
-      console.error("Error sending email:", error);
+      console.error("Error:", error);
     }
   };
 
@@ -130,6 +143,34 @@ const SearchBar = () => {
                   For Sale
                 </label>
               </button>
+            </div>
+            <div className="grid grid-cols-2 gap-2 p-2">
+              <div className="relative flex items-center">
+                <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"></div>
+                <input
+                  type="number"
+                  id="minSize"
+                  className="input block w-full rounded-lg border p-2.5 pl-16 text-sm"
+                  placeholder="Size"
+                  value={formData.minSize}
+                  name="minSize"
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="relative flex items-center">
+                <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"></div>
+                <input
+                  type="number"
+                  id="minBedrooms"
+                  className="input block w-full rounded-lg border p-2.5 pl-10 text-sm"
+                  placeholder="Bedrooms"
+                  value={formData.minBedrooms}
+                  name="minBedrooms"
+                  onChange={handleChange}
+                  required
+                />
+              </div>
             </div>
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <div className="p-2">
