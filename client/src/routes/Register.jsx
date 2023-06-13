@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth, db } from "../utils/firebase";
-import { doc, setDoc, collection } from "firebase/firestore";
+import { auth } from "../utils/firebase";
+import axios from "axios";
 import RegisterForm from "../components/RegisterForm";
 import NextNest from "../assets/images/nextnest-black.png";
 
@@ -34,30 +34,23 @@ const Register = () => {
         const { value: email } = e.target[0];
         const { value: password } = e.target[1];
 
-        const res = await createUserWithEmailAndPassword(auth, email, password);
-
-        // Create user document in the "users" collection
-        await setDoc(doc(db, "users", res.user.uid), {
-          uid: res.user.uid,
+        // Create user in Firebase Authentication
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
           email,
-        });
-
-        // Create userSearch document in the "users" collection
-        await setDoc(
-          doc(db, "users", res.user.uid, "userSearch", res.user.uid),
-          {}
+          password
         );
 
-        // Automatically create the "userListings" collection for the new user
-        const userListingRef = collection(
-          db,
-          "users",
-          res.user.uid,
-          "userListings"
+        // Make a POST request to the server-side /register route
+        const response = await axios.post(
+          import.meta.env.MODE === "production"
+            ? import.meta.env.VITE_NEXTNEST_API_REGISTER
+            : "http://localhost:3000/register",
+          {
+            uid: userCredential.user.uid,
+            email,
+          }
         );
-        await setDoc(doc(userListingRef, res.user.uid), {
-          userRef: doc(db, "users", res.user.uid).path,
-        });
 
         navigate("/home");
       } catch (error) {

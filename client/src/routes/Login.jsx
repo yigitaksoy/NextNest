@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import axios from "axios";
 import {
   signInWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
 import { auth, db } from "../utils/firebase";
-import { doc, setDoc, getDoc, collection } from "firebase/firestore";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 import NextNest from "../assets/images/nextnest-black.png";
 
 const Login = () => {
@@ -29,8 +30,6 @@ const Login = () => {
     signInWithPopup(auth, provider)
       .then(async (result) => {
         const user = result.user;
-
-        const userRef = doc(db, "users", user.uid);
         const userDocRef = doc(db, "users", user.uid);
         const userDocSnapshot = await getDoc(userDocRef);
 
@@ -40,34 +39,23 @@ const Login = () => {
             uid: user.uid,
             email: user.email,
           });
+
+          // Make a POST request to the server-side /register route
+          const response = await axios.post(
+            import.meta.env.MODE === "production"
+              ? import.meta.env.VITE_NEXTNEST_API_REGISTER
+              : "http://localhost:3000/register",
+            {
+              uid: user.uid,
+              email: user.email,
+            }
+          );
+
+          navigate("/home");
+        } else {
+          // User document already exists, no need to create it again
+          console.info("User already exists in Firestore.");
         }
-
-        const userSearchDocRef = doc(
-          db,
-          "users",
-          user.uid,
-          "userSearch",
-          user.uid
-        );
-        const userSearchDocSnapshot = await getDoc(userSearchDocRef);
-
-        if (!userSearchDocSnapshot.exists()) {
-          // userSearch document does not exist, create it
-          await setDoc(userSearchDocRef, {});
-        }
-
-        // Automatically create the "userListings" collection for the new user
-        const userListingRef = collection(
-          db,
-          "users",
-          user.uid,
-          "userListings"
-        );
-        await setDoc(doc(userListingRef, user.uid), {
-          userRef: userRef.path,
-        });
-
-        navigate("/home");
       })
       .catch((error) => {
         console.info(error);
