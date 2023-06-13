@@ -1,9 +1,12 @@
 const verifyToken = (admin) => {
   return async (req, res, next) => {
     try {
+      console.log("Verifying token...");
+
       const authorizationHeader = req.headers.authorization;
 
       if (!authorizationHeader) {
+        console.log("No authorization header found");
         return res.status(401).json({ message: "Missing token" });
       }
 
@@ -15,14 +18,17 @@ const verifyToken = (admin) => {
       }
 
       if (!token) {
+        console.log("No token found");
         return res.status(401).json({ message: "Missing token" });
       }
 
+      console.log("Token found, verifying...");
       console.log("admin.apps.length:", admin.apps?.length || 0);
 
       try {
+        console.log("Invoking Firebase Admin SDK...");
         const decodedToken = await admin.auth().verifyIdToken(token);
-
+        console.log("Token verified");
         // Proceed with the next middleware or route handler
         req.user = {
           uid: decodedToken.uid,
