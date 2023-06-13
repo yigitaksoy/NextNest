@@ -1,31 +1,15 @@
+const mongoose = require("mongoose");
 require("dotenv").config();
-const admin = require("firebase-admin");
-const { serviceAccount, firebaseConfig } = require("./firebaseConfig.js");
-
-let initialized = false;
-let appInstance = null;
 
 const connectToDatabase = async () => {
   try {
-    if (!initialized) {
-      if (!admin.apps.length) {
-        // Parse the private key as an object
-        const privateKey = process.env.FIREBASE_PRIVATE_KEY.replace(
-          /\\n/g,
-          "\n"
-        );
+    const uri = process.env.MONGODB_URI;
+    await mongoose.connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
 
-        // Initialize Firebase Admin SDK and store the app instance
-        appInstance = admin.initializeApp({
-          credential: admin.credential.cert(serviceAccount),
-          databaseURL: firebaseConfig.databaseURL,
-        });
-      }
-
-      initialized = true;
-    }
-
-    return admin.apps.length ? admin.app() : appInstance; // Return the admin instance
+    console.log("Connected to the database");
   } catch (error) {
     console.error("Database connection error:", error.message);
     process.exit(1);
