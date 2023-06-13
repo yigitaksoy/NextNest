@@ -6,6 +6,9 @@ const { connectToDatabase } = require("./config/database");
 const apiRoutes = require("./routes/api");
 const errorHandler = require("./middleware/errorHandler");
 const { verifyToken } = require("./middleware/verifyToken");
+const registerRoutes = require("./routes/register");
+const userRoutes = require("./routes/user");
+const admin = require("./config/firebaseAdmin");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -20,7 +23,7 @@ app.set("view engine", "ejs");
 
 // Connect to the database
 connectToDatabase()
-  .then((admin) => {
+  .then(() => {
     console.log("Connected to the database");
 
     // Define a route for server status
@@ -28,10 +31,16 @@ connectToDatabase()
       res.send("Server Status: OK");
     });
 
-    // API routes with token verification middleware
+    // Apply the middleware before the API routes
     app.use("/api", verifyToken(admin), apiRoutes);
 
-    // Error handler middleware
+    // Register route
+    app.use("/register", registerRoutes);
+
+    // User route
+    app.use("/user", verifyToken(admin), userRoutes);
+
+    //Error handler middleware
     app.use(errorHandler);
 
     // Start the server
