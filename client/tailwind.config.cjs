@@ -6,6 +6,7 @@ module.exports = {
       fontFamily: {
         degular: ["degular, sans-serif"],
         nove: ["nove, sans-serif"],
+        marker: ["permanent-marker, sans-serif"],
       },
       fontWeight: {
         thin: 300,
@@ -15,7 +16,7 @@ module.exports = {
       },
     },
   },
-  plugins: [require("daisyui")],
+  plugins: [require("daisyui"), require("@tailwindcss/forms")],
   daisyui: {
     themes: false,
   },
