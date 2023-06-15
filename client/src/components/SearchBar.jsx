@@ -16,6 +16,7 @@ const SearchBar = () => {
     minSize: "",
     minBedrooms: "",
     email: "",
+    buurt: "",
   });
 
   const handleChange = (e) => {
@@ -144,34 +145,6 @@ const SearchBar = () => {
                 </label>
               </button>
             </div>
-            <div className="grid grid-cols-2 gap-2 p-2">
-              <div className="relative flex items-center">
-                <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"></div>
-                <input
-                  type="number"
-                  id="minSize"
-                  className="input block w-full rounded-lg border p-2.5 pl-16 text-sm"
-                  placeholder="Size"
-                  value={formData.minSize}
-                  name="minSize"
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="relative flex items-center">
-                <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"></div>
-                <input
-                  type="number"
-                  id="minBedrooms"
-                  className="input block w-full rounded-lg border p-2.5 pl-10 text-sm"
-                  placeholder="Bedrooms"
-                  value={formData.minBedrooms}
-                  name="minBedrooms"
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-            </div>
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <div className="p-2">
                 <div className="relative">
@@ -189,6 +162,23 @@ const SearchBar = () => {
                   />
                 </div>
               </div>
+              <div className="p-2">
+                <div className="relative">
+                  <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                    <MapIcon className="h-5 w-5 text-gray-500" />
+                  </div>
+                  <input
+                    type="text"
+                    className="input block w-full rounded-lg border p-2.5 pl-10 text-sm"
+                    placeholder="Neighborhood"
+                    value={formData.buurt}
+                    name="buurt"
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <div className="grid grid-cols-2 gap-2 p-2">
                 <div className="relative flex items-center">
                   <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
@@ -221,7 +211,36 @@ const SearchBar = () => {
                   />
                 </div>
               </div>
+              <div className="grid grid-cols-2 gap-2 p-2">
+                <div className="relative flex items-center">
+                  <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"></div>
+                  <input
+                    type="number"
+                    id="minSize"
+                    className="input block w-full rounded-lg border p-2.5 pl-16 text-sm"
+                    placeholder="Size"
+                    value={formData.minSize}
+                    name="minSize"
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="relative flex items-center">
+                  <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"></div>
+                  <input
+                    type="number"
+                    id="minBedrooms"
+                    className="input block w-full rounded-lg border p-2.5 pl-10 text-sm"
+                    placeholder="Bedrooms"
+                    value={formData.minBedrooms}
+                    name="minBedrooms"
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+              </div>
             </div>
+            <div className="grid grid-cols-2 gap-2 p-2"></div>
             <div className="grid grid-cols-1 p-2">
               <div className="flex justify-between">
                 <div className="relative flex w-full items-center">
