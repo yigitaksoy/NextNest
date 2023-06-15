@@ -8,7 +8,9 @@ const PriceInput = ({ handleChange, formData }) => {
   const options = listingType === "huur" ? priceRental : priceSale;
 
   const minPriceOptions = options;
-  const maxPriceOptions = options.filter((option) => option.value >= minPrice);
+  const maxPriceOptions = options.filter(
+    (option) => Number(option.value) >= Number(minPrice)
+  );
 
   const selectedMinPrice = minPriceOptions.find(
     (option) => option.value === minPrice
