@@ -1,0 +1,11 @@
+[
+  { "value": "0", "label": "All" },
+  { "value": "20", "label": "20+ m²" },
+  { "value": "30", "label": "30+ m²" },
+  { "value": "40", "label": "40+ m²" },
+  { "value": "50", "label": "50+ m²" },
+  { "value": "70", "label": "70+ m²" },
+  { "value": "90", "label": "90+ m²" },
+  { "value": "110", "label": "110+ m²" },
+  { "value": "130", "label": "130+ m²" }
+]
