@@ -10,6 +10,10 @@ input[type="radio"]:checked + label {
   @apply bg-sky-300;
 }
 
+input[type="radio"]:hover + label {
+  @apply bg-sky-300;
+}
+
 #searchbar {
   border: 2px solid #000;
   border-top-color: rgb(0, 0, 0);
