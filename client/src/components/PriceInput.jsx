@@ -5,19 +5,14 @@ import priceSale from "../data/priceSale.json";
 const PriceInput = ({ handleChange, formData }) => {
   const { listingType, minPrice, maxPrice } = formData;
 
-  const options = listingType === "huur" ? priceRental : priceSale;
+  const options = listingType
+    ? listingType === "huur"
+      ? priceRental
+      : priceSale
+    : [];
 
-  const minPriceOptions = options;
-  const maxPriceOptions = options.filter(
-    (option) => Number(option.value) >= Number(minPrice)
-  );
-
-  const selectedMinPrice = minPriceOptions.find(
-    (option) => option.value === minPrice
-  );
-  const selectedMaxPrice = maxPriceOptions.find(
-    (option) => option.value === maxPrice
-  );
+  const selectedMinPrice = options.find((option) => option.value === minPrice);
+  const selectedMaxPrice = options.find((option) => option.value === maxPrice);
 
   const handleMinPriceChange = (selectedOption) => {
     const event = {
@@ -38,12 +33,23 @@ const PriceInput = ({ handleChange, formData }) => {
     };
     handleChange(event);
   };
+
+  const maxPriceOptions =
+    minPrice && listingType
+      ? options.filter((option) => Number(option.value) >= Number(minPrice))
+      : options;
+
+  const minPriceOptions =
+    maxPrice && listingType
+      ? options.filter((option) => Number(option.value) <= Number(maxPrice))
+      : options;
+
   return (
     <div className="grid grid-cols-2 gap-2 p-2">
       <div className="relative flex items-center">
         <Select
           id="minPrice"
-          options={minPriceOptions}
+          options={listingType ? minPriceOptions : []}
           value={selectedMinPrice}
           isClearable
           isSearchable={false}
@@ -83,8 +89,8 @@ const PriceInput = ({ handleChange, formData }) => {
       </div>
       <div className="relative flex items-center">
         <Select
-          id="minPrice"
-          options={maxPriceOptions}
+          id="maxPrice"
+          options={listingType ? maxPriceOptions : []}
           value={selectedMaxPrice}
           isClearable
           isSearchable={false}
