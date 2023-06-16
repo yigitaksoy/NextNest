@@ -1,6 +1,6 @@
 const ListingTypeInput = ({ handleChange, formData }) => {
   return (
-    <div className="flex flex-shrink-0">
+    <div className="flex flex-shrink-0 font-marker">
       <button className="bg-transparent p-2" type="button">
         <input
           className="hidden"
@@ -19,7 +19,7 @@ const ListingTypeInput = ({ handleChange, formData }) => {
           For Rent
         </label>
       </button>
-      <button className="p-2" type="button">
+      <button className="bg-transparent p-2" type="button">
         <input
           className="hidden"
           type="radio"
