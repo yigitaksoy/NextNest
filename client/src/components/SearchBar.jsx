@@ -6,7 +6,6 @@ import LocationInput from "./LocationInput";
 import PriceInput from "./PriceInput";
 import SizeAndRoomsInput from "./SizeAndRoomsInput";
 import EmailInput from "./EmailInput";
-import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
 
 const SearchBar = () => {
   const [formData, setFormData] = useState({
@@ -119,9 +118,8 @@ const SearchBar = () => {
             </div>
             <EmailInput handleChange={handleChange} formData={formData} />
             <div className="flex justify-center p-2">
-              <button className="btn w-full rounded-md border bg-gray-800 p-2 text-white lg:w-1/4">
+              <button className="btn w-full rounded-md border bg-black p-2 font-nove text-lg text-white hover:bg-sky-300 hover:text-black lg:w-1/4">
                 Search & Send
-                <PaperAirplaneIcon className="h-5 w-5 text-white" />
               </button>
             </div>
           </div>
