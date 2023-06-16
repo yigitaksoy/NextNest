@@ -117,11 +117,6 @@ const SearchBar = () => {
               />
             </div>
             <EmailInput handleChange={handleChange} formData={formData} />
-            <div className="flex justify-center p-2">
-              <button className="btn w-full rounded-md border bg-black p-2 font-nove text-lg text-white hover:bg-sky-300 hover:text-black lg:w-1/4">
-                Search & Send
-              </button>
-            </div>
           </div>
         </form>
       </div>
