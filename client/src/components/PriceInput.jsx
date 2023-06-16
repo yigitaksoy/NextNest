@@ -45,7 +45,7 @@ const PriceInput = ({ handleChange, formData }) => {
       : options;
 
   return (
-    <div className="grid grid-cols-2 gap-2 p-2">
+    <div className="grid grid-cols-1 gap-4 p-2 md:grid-cols-2 md:gap-2">
       <div className="relative flex items-center">
         <Select
           id="minPrice"

@@ -107,10 +107,10 @@ const SearchBar = () => {
     <div className="font-fontDegular">
       <div className="container mx-auto flex h-screen items-center justify-center p-2 md:p-0 lg:w-2/3">
         <form onSubmit={handleSubmit} className="w-screen">
-          <div className="grid grid-cols-1 gap-2 rounded-3xl bg-gray-100 p-6">
+          <div className="grid grid-cols-1 rounded-3xl bg-gray-100 p-6 md:gap-2">
             <ListingTypeInput handleChange={handleChange} formData={formData} />
             <LocationInput handleChange={handleChange} formData={formData} />
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <div className="grid grid-cols-1 md:grid-cols-2 md:gap-4">
               <PriceInput handleChange={handleChange} formData={formData} />
               <SizeAndRoomsInput
                 handleChange={handleChange}
@@ -118,7 +118,7 @@ const SearchBar = () => {
               />
             </div>
             <EmailInput handleChange={handleChange} formData={formData} />
-            <div className="flex justify-center">
+            <div className="flex justify-center p-2">
               <button className="btn w-full rounded-md border bg-gray-800 p-2 text-white lg:w-1/4">
                 Search & Send
                 <PaperAirplaneIcon className="h-5 w-5 text-white" />
