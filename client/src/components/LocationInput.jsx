@@ -10,7 +10,7 @@ const LocationInput = ({ handleChange, formData }) => {
           </div>
           <input
             type="text"
-            className="input block w-full rounded-lg border p-2.5 pl-10 text-sm"
+            className="input block w-full rounded-lg border border-transparent p-2.5 pl-10 text-sm focus:border-transparent focus:ring-0"
             placeholder="City, neighborhood, address, etc."
             value={formData.location}
             name="location"
@@ -26,7 +26,7 @@ const LocationInput = ({ handleChange, formData }) => {
           </div>
           <input
             type="text"
-            className="input block w-full rounded-lg border p-2.5 pl-10 text-sm"
+            className="input block w-full rounded-lg border border-transparent p-2.5 pl-10 text-sm focus:border-transparent focus:ring-0"
             placeholder="Neighborhood"
             value={formData.buurt}
             name="buurt"
