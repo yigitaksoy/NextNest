@@ -54,6 +54,7 @@ const PriceInput = ({ handleChange, formData }) => {
           isClearable
           isSearchable={false}
           placeholder="Min Price"
+          noOptionsMessage={() => "Please select listing type"}
           classNames={{
             control: () => "p-1.5 text-sm rounded-lg",
           }}
@@ -96,6 +97,7 @@ const PriceInput = ({ handleChange, formData }) => {
           isSearchable={false}
           placeholder="Max Price"
           className="w-full"
+          noOptionsMessage={() => "Please select listing type"}
           classNames={{
             control: () => "p-1.5 text-sm rounded-lg",
           }}
