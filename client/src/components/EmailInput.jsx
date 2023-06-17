@@ -22,7 +22,7 @@ const EmailInput = ({ handleChange, formData }) => {
       </div>
       <div className="p-2 md:flex md:justify-end">
         <div className="relative">
-          <button className="btn mt-2 w-full rounded-md border bg-black p-2 font-nove text-lg text-white hover:bg-sky-300 hover:text-black md:mt-0 md:w-auto">
+          <button className="btn mt-2 w-full rounded-md border bg-black p-2 font-marker text-lg text-white hover:bg-sky-300 hover:text-black md:mt-0 md:w-auto">
             Search & Send
           </button>
         </div>
