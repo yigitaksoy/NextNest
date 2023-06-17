@@ -14,6 +14,11 @@ module.exports = {
         black: 700,
         heavy: 900,
       },
+      colors: {
+        "custom-green": "#01fdf6",
+        "custom-purple": "#ff81cc",
+        "custom-black": "#333",
+      },
     },
   },
   plugins: [require("daisyui"), require("@tailwindcss/forms")],
