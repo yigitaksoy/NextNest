@@ -15,9 +15,11 @@ module.exports = {
         heavy: 900,
       },
       colors: {
-        "custom-green": "#01fdf6",
+        "custom-blue": "#01fdf6",
         "custom-purple": "#ff81cc",
         "custom-black": "#333",
+        "custom-yellow": "#ffcb46",
+        "custom-green": "#57ef97",
       },
     },
   },

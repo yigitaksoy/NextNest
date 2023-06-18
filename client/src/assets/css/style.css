@@ -37,3 +37,18 @@ input[type="radio"]:hover + label {
   color: #0d0d0d;
   background: #7dd3fc;
 }
+
+#send-button {
+  color: #0d0d0d;
+  border: 2px solid #000;
+  border-radius: 12px;
+  box-shadow: 4px 4px #0d0d0d;
+}
+
+#send-button:hover,
+#send-button:focus {
+  border: 2px solid #000;
+  box-shadow: none;
+  color: #ffffff;
+  background: #0d0d0d;
+}
