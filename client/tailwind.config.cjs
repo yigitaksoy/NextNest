@@ -21,6 +21,9 @@ module.exports = {
         "custom-yellow": "#ffcb46",
         "custom-green": "#57ef97",
       },
+      boxShadow: {
+        searchBar: "7px 7px #0d0d0d",
+      },
     },
   },
   plugins: [require("daisyui"), require("@tailwindcss/forms")],
