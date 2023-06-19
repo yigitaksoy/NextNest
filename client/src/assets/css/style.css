@@ -8,6 +8,7 @@
 
 /*  Login & Registration Page */
 
+#register-form,
 #login {
   border: 2px solid #000;
   border-top-color: rgb(0, 0, 0);
@@ -36,7 +37,6 @@
   color: #ffffff;
   background: #0d0d0d;
 }
-
 
 /*  Search Bar  */
 

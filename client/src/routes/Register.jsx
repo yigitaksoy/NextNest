@@ -71,7 +71,7 @@ const Register = () => {
   }, [userPassword, confirmPassword]);
 
   return (
-    <section className="h-screen bg-sky-400 font-degular lg:h-full">
+    <section className="h-screen bg-sky-300 font-degular lg:h-full">
       <div className="mx-auto flex flex-col items-center justify-center px-6 py-8 md:h-auto md:py-3.5">
         <Link to="/" className="mb-6">
           <img src={NextNest} alt="nextnest-logo" className="w-22 h-10" />
