@@ -31,6 +31,7 @@ const LocationInput = ({ handleChange, formData }) => {
             value={formData.buurt}
             name="buurt"
             onChange={handleChange}
+            disabled
           />
         </div>
       </div>
