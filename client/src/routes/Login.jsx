@@ -100,7 +100,7 @@ const Login = () => {
               <div>
                 <label
                   htmlFor="email"
-                  className="mb-2 block text-sm font-medium text-gray-900 "
+                  className="mb-2 block text-sm font-black text-custom-black"
                 >
                   Email
                 </label>
@@ -108,7 +108,7 @@ const Login = () => {
                   type="email"
                   name="email"
                   id="email"
-                  className="block  w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 sm:text-sm"
+                  className="input-shadow block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-custom-black focus:border-sky-300 focus:outline-none focus:ring-0 sm:text-sm"
                   placeholder="name@email.com"
                   required
                 />
@@ -116,7 +116,7 @@ const Login = () => {
               <div>
                 <label
                   htmlFor="password"
-                  className="mb-2 block text-sm font-medium text-gray-900 "
+                  className="mb-2 block text-sm font-black text-custom-black"
                 >
                   Password
                 </label>
@@ -127,7 +127,7 @@ const Login = () => {
                   pattern=".{8,}"
                   placeholder="••••••••"
                   title="8 characters minimum"
-                  className="focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 sm:text-sm"
+                  className="input-shadow block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 focus:border-sky-300 focus:outline-none focus:ring-0 sm:text-sm"
                   required
                 />
               </div>
@@ -141,7 +141,7 @@ const Login = () => {
               </div>
               <button
                 type="submit"
-                className="w-full rounded-lg bg-black px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-neutral-800 focus:outline-none focus:ring-4 focus:ring-violet-300"
+                className="form-button w-full rounded-lg bg-custom-yellow px-5 py-2.5 text-center font-marker text-sm font-medium text-white focus:outline-none focus:ring-4"
               >
                 Sign in
               </button>
@@ -161,7 +161,7 @@ const Login = () => {
               <div className="flex flex-col space-y-4">
                 <button
                   onClick={googleSignIn}
-                  className="group flex items-center justify-center space-x-2 rounded-md border border-gray-800 px-4 py-2 transition-colors duration-300 hover:bg-gray-800 focus:outline-none"
+                  className="form-button group flex items-center justify-center space-x-2 rounded-md border px-4 py-2 font-marker"
                 >
                   <svg
                     className="h-5 w-5 fill-current text-gray-800 group-hover:text-white"
