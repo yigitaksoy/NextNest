@@ -107,7 +107,7 @@ const SearchBar = () => {
       <div className="container mx-auto flex h-screen items-center justify-center p-2 md:p-0 lg:w-2/3">
         <form
           onSubmit={handleSubmit}
-          className="lg:shadow-searchBar w-screen"
+          className="w-screen md:shadow-searchBar"
           id="searchbar"
         >
           <div className="grid grid-cols-1 rounded-xl  bg-gray-50 p-6  md:gap-2">
