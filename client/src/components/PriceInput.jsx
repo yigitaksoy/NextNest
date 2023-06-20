@@ -56,9 +56,9 @@ const PriceInput = ({ handleChange, formData }) => {
           placeholder="Min Price"
           noOptionsMessage={() => "Please select listing type"}
           classNames={{
-            control: () => "p-1.5 text-sm rounded-lg",
+            control: () => "p-1.5 text-sm rounded-xl",
           }}
-          className="w-full"
+          className="search-input w-full"
           styles={{
             input: (base) => ({
               ...base,
@@ -96,10 +96,10 @@ const PriceInput = ({ handleChange, formData }) => {
           isClearable
           isSearchable={false}
           placeholder="Max Price"
-          className="w-full"
+          className="search-input w-full"
           noOptionsMessage={() => "Please select listing type"}
           classNames={{
-            control: () => "p-1.5 text-sm rounded-lg",
+            control: () => "p-1.5 text-sm rounded-xl",
           }}
           styles={{
             input: (base) => ({

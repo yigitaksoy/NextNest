@@ -19,7 +19,7 @@
 
 .input-shadow {
   color: #0d0d0d;
-  border: 1px solid #000;
+  border: 1.5px solid #000;
   border-radius: 12px;
 }
 
@@ -69,6 +69,12 @@ input[type="radio"]:hover + label {
   box-shadow: none;
   color: #0d0d0d;
   background: #7dd3fc;
+}
+
+.search-input {
+  color: #0d0d0d;
+  border: 1.7px solid #000;
+  border-radius: 12px;
 }
 
 #send-button {

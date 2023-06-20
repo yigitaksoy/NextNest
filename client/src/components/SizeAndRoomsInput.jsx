@@ -43,9 +43,9 @@ const SizeAndRoomsInput = ({ handleChange, formData }) => {
           isSearchable={false}
           placeholder="Surface"
           classNames={{
-            control: () => "p-1.5 text-sm rounded-lg",
+            control: () => "p-1.5 text-sm rounded-xl",
           }}
-          className="w-full"
+          className="w-full search-input"
           styles={{
             input: (base) => ({
               ...base,
@@ -84,9 +84,9 @@ const SizeAndRoomsInput = ({ handleChange, formData }) => {
           isSearchable={false}
           placeholder="Rooms"
           classNames={{
-            control: () => "p-1.5 text-sm rounded-lg",
+            control: () => "p-1.5 text-sm rounded-xl",
           }}
-          className="w-full"
+          className="w-full search-input"
           styles={{
             input: (base) => ({
               ...base,

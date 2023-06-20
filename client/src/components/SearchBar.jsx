@@ -107,10 +107,10 @@ const SearchBar = () => {
       <div className="container mx-auto flex h-screen items-center justify-center p-2 md:p-0 lg:w-2/3">
         <form
           onSubmit={handleSubmit}
-          className="w-screen md:shadow-searchBar"
+          className="w-screen bg-white md:shadow-searchBar"
           id="searchbar"
         >
-          <div className="grid grid-cols-1 rounded-xl  bg-gray-50 p-6  md:gap-2">
+          <div className="grid grid-cols-1 rounded-xl bg-white md:gap-2 md:p-6">
             <ListingTypeInput handleChange={handleChange} formData={formData} />
             <LocationInput handleChange={handleChange} formData={formData} />
             <div className="grid grid-cols-1 md:grid-cols-2 md:gap-4">

@@ -10,7 +10,7 @@ const LocationInput = ({ handleChange, formData }) => {
           </div>
           <input
             type="text"
-            className="input block w-full rounded-lg border border-transparent p-2.5 pl-10 text-sm focus:border-transparent focus:ring-0"
+            className="search-input  input block w-full rounded-lg border border-gray-300 p-2.5 pl-10 text-custom-black focus:border-sky-300 focus:outline-none focus:ring-0 sm:text-sm"
             placeholder="City, neighborhood, address, etc."
             value={formData.location}
             name="location"
@@ -24,10 +24,11 @@ const LocationInput = ({ handleChange, formData }) => {
           <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
             <MapIcon className="h-5 w-5 text-gray-500" />
           </div>
+
           <input
             type="text"
-            className="input block w-full rounded-lg border border-transparent p-2.5 pl-10 text-sm focus:border-transparent focus:ring-0"
-            placeholder="Neighborhood"
+            className="search-input input block w-full rounded-lg border border-transparent  p-2.5 pl-10 text-sm focus:border-sky-300 focus:outline-none focus:ring-0"
+            placeholder="Neighbourhood - coming soon!"
             value={formData.buurt}
             name="buurt"
             onChange={handleChange}
