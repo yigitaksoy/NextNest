@@ -60,7 +60,7 @@ const RegisterForm = ({
         </h1>
         <form
           method="POST"
-          className="space-y-4 md:space-y-6"
+          className="space-y-4 md:space-y-4"
           onSubmit={handleSubmit}
         >
           <div>
@@ -74,7 +74,7 @@ const RegisterForm = ({
               type="email"
               name="email"
               id="email"
-              className="input-shadow block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-custom-black focus:border-sky-300 focus:outline-none focus:ring-0 sm:text-sm"
+              className="input-shadow input block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-custom-black focus:border-sky-300 focus:outline-none focus:ring-0 sm:text-sm"
               placeholder="name@email.com"
               required
             />
@@ -96,7 +96,7 @@ const RegisterForm = ({
               name="password"
               id="password"
               placeholder="••••••••"
-              className={`input-shadow block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-custom-black focus:border-sky-300 focus:outline-none focus:ring-0 sm:text-sm ${
+              className={`input-shadow input block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-custom-black focus:border-sky-300 focus:outline-none focus:ring-0 sm:text-sm ${
                 !passwordsMatch ? " focus:text-red-500" : ""
               }`}
               pattern=".{8,}"
@@ -120,7 +120,7 @@ const RegisterForm = ({
               name="confirmPassword"
               id="confirmPassword"
               placeholder="••••••••"
-              className={`input-shadow block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-custom-black focus:border-sky-300 focus:outline-none focus:ring-0 sm:text-sm ${
+              className={`input-shadow input block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-custom-black focus:border-sky-300 focus:outline-none focus:ring-0 sm:text-sm ${
                 !passwordsMatch ? "focus:text-red-500" : ""
               }`}
               required
