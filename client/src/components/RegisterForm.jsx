@@ -60,7 +60,7 @@ const RegisterForm = ({
         </h1>
         <form
           method="POST"
-          className="space-y-4 md:space-y-4"
+          className="space-y-2 md:space-y-4"
           onSubmit={handleSubmit}
         >
           <div>
