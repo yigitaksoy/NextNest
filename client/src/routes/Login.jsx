@@ -108,7 +108,7 @@ const Login = () => {
                   type="email"
                   name="email"
                   id="email"
-                  className="input-shadow block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-custom-black focus:border-sky-300 focus:outline-none focus:ring-0 sm:text-sm"
+                  className="input-shadow input block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 font-medium text-custom-black focus:border-sky-300 focus:outline-none focus:ring-0 sm:text-sm"
                   placeholder="name@email.com"
                   required
                 />
@@ -127,9 +127,12 @@ const Login = () => {
                   pattern=".{8,}"
                   placeholder="••••••••"
                   title="8 characters minimum"
-                  className="input-shadow block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 focus:border-sky-300 focus:outline-none focus:ring-0 sm:text-sm"
+                  className="input-shadow input block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 font-medium text-gray-900 focus:border-sky-300 focus:outline-none focus:ring-0 sm:text-sm"
                   required
                 />
+                <p className="text-xs text-neutral-700">
+                  Passwords must be min. 8 characters
+                </p>
               </div>
               <div className="flex items-center justify-between">
                 <Link
