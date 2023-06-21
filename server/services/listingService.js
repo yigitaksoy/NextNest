@@ -1,6 +1,10 @@
 require("dotenv").config();
 const puppeteer = require("puppeteer-extra");
+const StealthPlugin = require("puppeteer-extra-plugin-stealth");
 const useProxy = require("puppeteer-page-proxy");
+const { listingDetails } = require("./listingDetails");
+
+puppeteer.use(StealthPlugin());
 
 const scrapeListings = async (url) => {
   console.log("Scraping listings for URL:", url);
@@ -77,13 +81,25 @@ const scrapeListings = async (url) => {
         });
       });
 
+      // Scrape details for each listing
+      for (let i = 0; i < listings.length; i++) {
+        try {
+          // Handle errors for individual listings
+          const listing = listings[i];
+          const details = await listingDetails(page, listing.url);
+          listing.features = details;
+        } catch (error) {
+          console.error(`Error scraping details for listing ${i}:`, error);
+        }
+      }
+
       allListings.push(...listings);
 
       const nextPageButton = await page.$(
         ".pagination-pages a[aria-current='page'] + a"
       );
       if (!nextPageButton || currentPage >= 28) {
-        break; // Exit the loop if there's no next page button or reached the end of pagination
+        break;
       }
 
       const nextPageUrl = await page.evaluate(
@@ -91,7 +107,7 @@ const scrapeListings = async (url) => {
         nextPageButton
       );
       currentPage++;
-      await page.waitForNavigation({ waitUntil: "domcontentloaded" });
+      await page.waitForNavigation({ waitUntil: "domcontentloaded" }); // use networkidle2
     }
 
     await browser.close();
