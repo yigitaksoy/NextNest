@@ -6,7 +6,7 @@ const { listingDetails } = require("./listingDetails");
 
 puppeteer.use(StealthPlugin());
 
-const scrapeListings = async (url) => {
+const scrapeListings = async (url, listingType) => {
   console.log("Scraping listings for URL:", url);
 
   try {
@@ -86,8 +86,12 @@ const scrapeListings = async (url) => {
         try {
           // Handle errors for individual listings
           const listing = listings[i];
-          const details = await listingDetails(page, listing.url);
-          listing.features = details;
+          const details = await listingDetails(page, listing.url, listingType);
+          listing.details = details;
+
+          // Add listingType and neighborhood
+          listing.listingType = listingType;
+          listing.neighbourhood = details.neighbourhood;
         } catch (error) {
           console.error(`Error scraping details for listing ${i}:`, error);
         }
@@ -107,7 +111,7 @@ const scrapeListings = async (url) => {
         nextPageButton
       );
       currentPage++;
-      await page.waitForNavigation({ waitUntil: "domcontentloaded" }); // use networkidle2
+      await page.waitForNavigation({ waitUntil: "domcontentloaded" });
     }
 
     await browser.close();

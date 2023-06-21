@@ -1,4 +1,4 @@
-const listingDetails = async (page, url) => {
+const listingDetails = async (page, url, listingType) => {
   console.log("Scraping details for URL:", url);
 
   try {
@@ -51,21 +51,20 @@ const listingDetails = async (page, url) => {
 
     // Structure the data
     const details = {
-      asking_price: rawDetails["Asking price"]
-        ? rawDetails["Asking price"].split(" kosten koper")[0]
-        : "",
-      price_per_m2: rawDetails["Asking price per m²"],
+      price_per_m2:
+        listingType === "koop" ? rawDetails["Asking price per m²"] : undefined,
       listed_since: rawDetails["Listed since"],
       status: rawDetails["Status"],
       type_apartment: rawDetails["Type apartment"],
-      neighborhood: rawDetails["Neighborhood"],
-      layout: {
-        living_area: rawDetails["Living area"],
-        number_of_rooms: rawDetails["Number of rooms"],
-        located_at: rawDetails["Located at"],
-      },
+      neighbourhood: rawDetails["Neighborhood"],
+      living_area: rawDetails["Living area"],
+      number_of_rooms: rawDetails["Number of rooms"],
+      located_at: rawDetails["Located at"],
     };
 
+    if (listingType === "huur") {
+      delete details.price_per_m2;
+    }
     console.log("Details:", details);
 
     return details;

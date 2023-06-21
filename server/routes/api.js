@@ -23,7 +23,7 @@ router.get("/scrape-listings", async (req, res) => {
     const url = `https://www.funda.nl/en/${listingTypeDutch}/${location}/beschikbaar/${minPrice}-${maxPrice}/${minSize}+woonopp/${minBedrooms}+kamers/1-dag/`;
 
     console.log(`Started scraping listings for URL: ${url}`);
-    const scrapedListings = await scrapeListings(url);
+    const scrapedListings = await scrapeListings(url, listingType);
 
     const userId = req.user.uid;
     const user = await User.findOne({ uid: userId });
@@ -71,11 +71,37 @@ router.get("/scrape-listings", async (req, res) => {
       // If the listing does not exist in the user's "userListings" array, add it
       if (!existingListingInUserListings) {
         console.log("Updating user's userListings in the database");
+        const details = listing.details || {};
+        const layout = details.layout || {};
+
+        const price_per_m2 = details.price_per_m2 || "N/A";
+
         await User.findOneAndUpdate(
           { uid: userId },
-          { $push: { userListings: listing } },
+          {
+            $push: {
+              userListings: {
+                image: listing.image,
+                title: listing.title,
+                url: listing.url,
+                price: listing.price,
+                neighborhood: listing.neighborhood,
+                listingType: listing.listingType,
+                details: {
+                  price_per_m2,
+                  listed_since: details.listed_since || "N/A",
+                  status: details.status || "N/A",
+                  type_apartment: details.type_apartment || "N/A",
+                  living_area: layout.living_area || "N/A",
+                  number_of_rooms: layout.number_of_rooms || "N/A",
+                  located_at: layout.located_at || "N/A",
+                },
+              },
+            },
+          },
           { upsert: true, new: true }
         );
+
         console.log("Successfully updated user's userListings");
       } else {
         console.log(
