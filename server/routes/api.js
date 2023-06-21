@@ -85,7 +85,7 @@ router.get("/scrape-listings", async (req, res) => {
                 title: listing.title,
                 url: listing.url,
                 price: listing.price,
-                neighborhood: listing.neighborhood,
+                neighbourhood: listing.neighbourhood,
                 listingType: listing.listingType,
                 details: {
                   price_per_m2,
