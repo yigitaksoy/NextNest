@@ -12,7 +12,7 @@ const sendEmail = (toEmail, listingData) => {
     },
   });
 
-  const emailTemplatePath = path.join(__dirname, "../views/index.ejs");
+  const emailTemplatePath = path.join(__dirname, "../views/listings.ejs");
 
   ejs.renderFile(emailTemplatePath, { listingData }, (error, renderedHtml) => {
     if (error) {

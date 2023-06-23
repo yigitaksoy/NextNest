@@ -11,13 +11,14 @@ const scrapeListings = async (url, listingType) => {
 
   try {
     const browser = await puppeteer.launch({
+      headless: "new",
       args: [
         "--disable-setuid-sandbox",
         "--disable-web-security",
         "--no-sandbox",
         "--single-process",
         "--no-zygote",
-        `--proxy-server=${process.env.PROXY}`,
+        // `--proxy-server=${process.env.PROXY}`,
       ],
       executablePath:
         process.env.NODE_ENV === "production"
