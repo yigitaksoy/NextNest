@@ -27,6 +27,12 @@ const scrapeListings = async (url, listingType) => {
     });
     const page = await browser.newPage();
 
+    page.on("console", (msg) => {
+      for (let i = 0; i < msg.args().length; ++i) {
+        console.log(`${i}: ${msg.args()[i]}`);
+      }
+    });
+
     await page.setViewport({ width: 1080, height: 1024 });
 
     let currentPage = 1;
@@ -62,6 +68,10 @@ const scrapeListings = async (url, listingType) => {
             ".search-result-main a[data-object-url-tracking='resultlist']"
           );
           const url = linkElement?.getAttribute("href")?.replace(/(\?.*)$/, "");
+          const postal_code = element
+            ?.querySelector(".search-result__header-subtitle")
+            ?.textContent.trim();
+
           const price = element
             ?.querySelector(".search-result-price")
             ?.textContent.trim();
@@ -76,6 +86,7 @@ const scrapeListings = async (url, listingType) => {
               url && url.startsWith("https://www.funda.nl")
                 ? url
                 : `https://www.funda.nl${url}`,
+            postal_code,
             price,
             details,
           };
