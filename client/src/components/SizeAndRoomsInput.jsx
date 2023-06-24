@@ -45,7 +45,7 @@ const SizeAndRoomsInput = ({ handleChange, formData }) => {
           classNames={{
             control: () => "p-1.5 text-sm rounded-xl",
           }}
-          className="w-full search-input"
+          className="w-full"
           styles={{
             input: (base) => ({
               ...base,
@@ -55,10 +55,10 @@ const SizeAndRoomsInput = ({ handleChange, formData }) => {
             }),
             control: (base, state) => ({
               ...base,
-              border: state.isFocused ? 0 : 0,
-              boxShadow: state.isFocused ? 0 : 0,
+              border: state.isFocused ? "2px solid #7dd3fc" : "2px solid black",
+              boxShadow: state.isFocused ? "0px 0px .5px #7dd3fc" : "none",
               "&:hover": {
-                border: state.isFocused ? 0 : 0,
+                border: "2px solid #7dd3fc",
               },
             }),
           }}
@@ -86,7 +86,7 @@ const SizeAndRoomsInput = ({ handleChange, formData }) => {
           classNames={{
             control: () => "p-1.5 text-sm rounded-xl",
           }}
-          className="w-full search-input"
+          className="w-full"
           styles={{
             input: (base) => ({
               ...base,
@@ -96,10 +96,10 @@ const SizeAndRoomsInput = ({ handleChange, formData }) => {
             }),
             control: (base, state) => ({
               ...base,
-              border: state.isFocused ? 0 : 0,
-              boxShadow: state.isFocused ? 0 : 0,
+              border: state.isFocused ? "2px solid #7dd3fc" : "2px solid black",
+              boxShadow: state.isFocused ? "0px 0px .5px #7dd3fc" : "none",
               "&:hover": {
-                border: state.isFocused ? 0 : 0,
+                border: "2px solid #7dd3fc",
               },
             }),
           }}

@@ -58,7 +58,7 @@ const PriceInput = ({ handleChange, formData }) => {
           classNames={{
             control: () => "p-1.5 text-sm rounded-xl",
           }}
-          className="search-input w-full"
+          className="w-full"
           styles={{
             input: (base) => ({
               ...base,
@@ -68,10 +68,10 @@ const PriceInput = ({ handleChange, formData }) => {
             }),
             control: (base, state) => ({
               ...base,
-              border: state.isFocused ? 0 : 0,
-              boxShadow: state.isFocused ? 0 : 0,
+              border: state.isFocused ? "2px solid #7dd3fc" : "2px solid black",
+              boxShadow: state.isFocused ? "0px 0px .5px #7dd3fc" : "none",
               "&:hover": {
-                border: state.isFocused ? 0 : 0,
+                border: "2px solid #7dd3fc",
               },
             }),
           }}
@@ -96,7 +96,7 @@ const PriceInput = ({ handleChange, formData }) => {
           isClearable
           isSearchable={false}
           placeholder="Max Price"
-          className="search-input w-full"
+          className="w-full"
           noOptionsMessage={() => "Please select listing type"}
           classNames={{
             control: () => "p-1.5 text-sm rounded-xl",
@@ -110,10 +110,10 @@ const PriceInput = ({ handleChange, formData }) => {
             }),
             control: (base, state) => ({
               ...base,
-              border: state.isFocused ? 0 : 0,
-              boxShadow: state.isFocused ? 0 : 0,
+              border: state.isFocused ? "2px solid #7dd3fc" : "2px solid black",
+              boxShadow: state.isFocused ? "0px 0px .5px #7dd3fc" : "none",
               "&:hover": {
-                border: state.isFocused ? 0 : 0,
+                border: "2px solid #7dd3fc",
               },
             }),
           }}
