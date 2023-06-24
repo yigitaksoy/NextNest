@@ -21,7 +21,10 @@ router.get("/scrape-listings", async (req, res) => {
     } = req.query;
 
     const listingTypeDutch = listingType === "huur" ? "huur" : "koop";
-    const url = `https://www.funda.nl/en/${listingTypeDutch}/${location}/${neighbourhood}/beschikbaar/${minPrice}-${maxPrice}/${minSize}+woonopp/${minBedrooms}+kamers/1-dag/`;
+    let neighbourhoods = Array.isArray(neighbourhood)
+      ? neighbourhood.join(",")
+      : neighbourhood;
+    const url = `https://www.funda.nl/en/${listingTypeDutch}/${location}/${neighbourhoods}/beschikbaar/${minPrice}-${maxPrice}/${minSize}+woonopp/${minBedrooms}+kamers/1-dag/`;
 
     console.log(`Started scraping listings for URL: ${url}`);
     const scrapedListings = await scrapeListings(url, listingType);
