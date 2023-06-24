@@ -10,15 +10,17 @@ const LocationInput = ({ handleChange, formData }) => {
     (option) => option.value === formData.location
   );
 
-  const selectedNeighbourhood = neighbourhoodOptions.find(
-    (option) => option.value === formData.neighbourhood
-  );
+  const selectedNeighbourhood = Array.isArray(formData.neighbourhood)
+    ? neighbourhoodOptions.filter((option) =>
+        formData.neighbourhood.map((n) => n.value).includes(option.value)
+      )
+    : [];
 
-  const handleNeighbourhoodChange = (selectedNeighbourhood) => {
+  const handleNeighbourhoodChange = (selectedNeighbourhoods) => {
     const event = {
       target: {
         name: "neighbourhood",
-        value: selectedNeighbourhood ? selectedNeighbourhood.value : "",
+        value: selectedNeighbourhoods || [],
       },
     };
     handleChange(event);
@@ -86,7 +88,9 @@ const LocationInput = ({ handleChange, formData }) => {
             options={neighbourhoodOptions}
             value={selectedNeighbourhood}
             isClearable
-            placeholder="Neighbourhoods"
+            isMulti
+            closeMenuOnSelect={false}
+            placeholder="Neighborhoods"
             noOptionsMessage={() => "Nothing to show"}
             classNames={{
               control: () => "p-1.5 text-sm rounded-xl",

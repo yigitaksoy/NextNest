@@ -16,7 +16,7 @@ const SearchBar = () => {
     minSize: "",
     minBedrooms: "",
     email: "",
-    neighbourhood: "",
+    neighbourhood: [],
   });
 
   const handleChange = (e) => {
@@ -45,6 +45,15 @@ const SearchBar = () => {
           );
 
           const searchCriteria = response.data;
+          let neighbourhood;
+          if (Array.isArray(searchCriteria.neighbourhood)) {
+            neighbourhood = searchCriteria.neighbourhood;
+          } else if (typeof searchCriteria.neighbourhood === "string") {
+            neighbourhood = [searchCriteria.neighbourhood];
+          } else {
+            neighbourhood = [];
+          }
+
           setFormData((prevData) => ({ ...prevData, ...searchCriteria }));
         }
       } catch (error) {
@@ -81,13 +90,20 @@ const SearchBar = () => {
       console.log("Search criteria saved:", saveSearchResponse.data);
 
       try {
+        let tempFormData = { ...formData };
+
+        // Join the neighbourhood array into a string with commas
+        tempFormData.neighbourhood = Array.isArray(tempFormData.neighbourhood)
+          ? tempFormData.neighbourhood.map((object) => object.value).join(",")
+          : "";
+
         //Make API call to scrape listings and send email
         const scrapeListingsResponse = await axios.get(
           import.meta.env.MODE === "production"
             ? import.meta.env.VITE_NEXTNEST_API
             : "http://localhost:3000/api/scrape-listings",
           {
-            params: formData,
+            params: tempFormData,
             headers: {
               Authorization: `Bearer ${idToken}`,
             },
