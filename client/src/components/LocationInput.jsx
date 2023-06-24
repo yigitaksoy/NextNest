@@ -110,6 +110,7 @@ const LocationInput = ({ handleChange, formData }) => {
             isClearable
             isMulti
             closeMenuOnSelect={false}
+            blurInputOnSelect={false}
             placeholder="Neighborhoods"
             noOptionsMessage={() =>
               isAllSelected ? null : "Neighborhood not found"
