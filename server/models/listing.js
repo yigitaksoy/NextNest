@@ -6,6 +6,7 @@ const listingSchema = new mongoose.Schema({
   url: String,
   price: String,
   neighbourhood: String,
+  postal_code: String,
   listingType: String,
   details: {
     price_per_m2: String,
