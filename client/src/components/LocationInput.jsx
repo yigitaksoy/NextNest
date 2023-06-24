@@ -65,7 +65,7 @@ const LocationInput = ({ handleChange, formData }) => {
             options={locationOptions}
             value={selectedLocation}
             isClearable
-            placeholder="City, neighborhood, address, etc."
+            placeholder="Cities & Municipalities"
             noOptionsMessage={() => "Nothing to show"}
             classNames={{
               control: () => "p-1.5 text-sm rounded-xl",
