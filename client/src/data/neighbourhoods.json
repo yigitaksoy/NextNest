@@ -1,0 +1,207 @@
+[
+  {
+    "label": "Amstel III/Bullewijk",
+    "value": "amstel-iii-bullewijk"
+  },
+  { "label": "Apollobuurt", "value": "apollobuurt" },
+  { "label": "Banne Buiksloot", "value": "banne-buiksloot" },
+  {
+    "label": "Bedrijventerrein Sloterdijk",
+    "value": "bedrijventerrein-sloterdijk"
+  },
+  { "label": "Betondorp", "value": "betondorp" },
+  {
+    "label": "Bijlmer Centrum (D,F,H)",
+    "value": "bijlmer-centrum-dfh"
+  },
+  {
+    "label": "Bijlmer Oost (E,G,K)",
+    "value": "bijlmer-oost-egk"
+  },
+  { "label": "Buikslotermeer", "value": "buikslotermeer" },
+  {
+    "label": "Buitenveldert-Oost",
+    "value": "buitenveldert-oost"
+  },
+  {
+    "label": "Buitenveldert-West",
+    "value": "buitenveldert-west"
+  },
+  {
+    "label": "Burgwallen-Nieuwe Zijde",
+    "value": "burgwallen-nieuwe-zijde"
+  },
+  {
+    "label": "Burgwallen-Oude Zijde",
+    "value": "burgwallen-oude-zijde"
+  },
+  { "label": "Centrale Markt", "value": "centrale-markt" },
+  { "label": "Chassébuurt", "value": "chassebuurt" },
+  { "label": "Da Costabuurt", "value": "da-costabuurt" },
+  { "label": "Dapperbuurt", "value": "dapperbuurt" },
+  { "label": "De Kolenkit", "value": "de-kolenkit" },
+  { "label": "De Punt", "value": "de-punt" },
+  { "label": "De Weteringschans", "value": "de-weteringschans" },
+  { "label": "Driemond", "value": "driemond" },
+  { "label": "Eendracht", "value": "eendracht" },
+  { "label": "Elzenhagen", "value": "elzenhagen" },
+  { "label": "Erasmuspark", "value": "erasmuspark" },
+  { "label": "Frankendael", "value": "frankendael" },
+  {
+    "label": "Frederik Hendrikbuurt",
+    "value": "frederik-hendrikbuurt"
+  },
+  { "label": "Gein", "value": "gein" },
+  { "label": "Geuzenbuurt", "value": "geuzenbuurt" },
+  { "label": "Geuzenveld", "value": "geuzenveld" },
+  {
+    "label": "Grachtengordel-West",
+    "value": "grachtengordel-west"
+  },
+  {
+    "label": "Grachtengordel-Zuid",
+    "value": "grachtengordel-zuid"
+  },
+  { "label": "Haarlemmerbuurt", "value": "haarlemmerbuurt" },
+  { "label": "Helmersbuurt", "value": "helmersbuurt" },
+  {
+    "label": "Holendrecht/Reigersbos",
+    "value": "holendrecht-reigersbos"
+  },
+  {
+    "label": "Hoofddorppleinbuurt",
+    "value": "hoofddorppleinbuurt"
+  },
+  { "label": "Hoofdweg e.o.", "value": "hoofdweg-eo" },
+  { "label": "Houthavens", "value": "houthavens" },
+  { "label": "IJburg Oost", "value": "ijburg-oost" },
+  { "label": "IJburg West", "value": "ijburg-west" },
+  { "label": "IJburg Zuid", "value": "ijburg-zuid" },
+  {
+    "label": "IJplein/Vogelbuurt",
+    "value": "ijplein-vogelbuurt"
+  },
+  { "label": "IJselbuurt", "value": "ijselbuurt" },
+  {
+    "label": "Indische Buurt Oost",
+    "value": "indische-buurt-oost"
+  },
+  {
+    "label": "Indische Buurt West",
+    "value": "indische-buurt-west"
+  },
+  { "label": "Jordaan", "value": "jordaan" },
+  { "label": "Kadoelen", "value": "kadoelen" },
+  { "label": "Kinkerbuurt", "value": "kinkerbuurt" },
+  { "label": "Landlust", "value": "landlust" },
+  { "label": "Lutkemeer/Ookmeer", "value": "lutkemeer-ookmeer" },
+  {
+    "label": "Middelveldsche Akerpolder",
+    "value": "middelveldsche-akerpolder"
+  },
+  { "label": "Middenmeer", "value": "middenmeer" },
+  { "label": "Museumkwartier", "value": "museumkwartier" },
+  { "label": "Nellestein", "value": "nellestein" },
+  { "label": "Nieuwe Pijp", "value": "nieuwe-pijp" },
+  {
+    "label": "Nieuwendammerdijk/Buiksloterdijk",
+    "value": "nieuwendammerdijk-buiksloterdijk"
+  },
+  {
+    "label": "Nieuwmarkt/Lastage",
+    "value": "nieuwmarkt-lastage"
+  },
+  {
+    "label": "Noordelijke IJ-oevers Oost",
+    "value": "noordelijke-ij-oevers-oost"
+  },
+  {
+    "label": "Noordelijke IJ-oevers West",
+    "value": "noordelijke-ij-oevers-west"
+  },
+  { "label": "Omval/Overamstel", "value": "omval-overamstel" },
+  {
+    "label": "Oostelijk Havengebied",
+    "value": "oostelijk-havengebied"
+  },
+  {
+    "label": "Oostelijke Eilanden/Kadijken",
+    "value": "oostelijke-eilanden-kadijken"
+  },
+  { "label": "Oosterparkbuurt", "value": "oosterparkbuurt" },
+  { "label": "Oostzanerwerf", "value": "oostzanerwerf" },
+  { "label": "Osdorp-Midden", "value": "osdorp-midden" },
+  { "label": "Osdorp-Oost", "value": "osdorp-oost" },
+  { "label": "Oude Pijp", "value": "oude-pijp" },
+  { "label": "Overtoomse Sluis", "value": "overtoomse-sluis" },
+  { "label": "Overtoomse Veld", "value": "overtoomse-veld" },
+  {
+    "label": "Prinses Irenebuurt e.o.",
+    "value": "prinses-irenebuurt-eo"
+  },
+  { "label": "Rijnbuurt", "value": "rijnbuurt" },
+  { "label": "Scheldebuurt", "value": "scheldebuurt" },
+  { "label": "Schinkelbuurt", "value": "schinkelbuurt" },
+  {
+    "label": "Sloter-/Riekerpolder",
+    "value": "sloter-riekerpolder"
+  },
+  { "label": "Sloterdijk", "value": "sloterdijk" },
+  {
+    "label": "Slotermeer-Noordoost",
+    "value": "slotermeer-noordoost"
+  },
+  {
+    "label": "Slotermeer-Zuidwest",
+    "value": "slotermeer-zuidwest"
+  },
+  { "label": "Slotervaart Noord", "value": "slotervaart-noord" },
+  { "label": "Slotervaart Zuid", "value": "slotervaart-zuid" },
+  {
+    "label": "Spaarndammer- en Zeeheldenbuurt",
+    "value": "spaarndammer-en-zeeheldenbuurt"
+  },
+  { "label": "Staatsliedenbuurt", "value": "staatsliedenbuurt" },
+  { "label": "Stadionbuurt", "value": "stadionbuurt" },
+  { "label": "Transvaalbuurt", "value": "transvaalbuurt" },
+  {
+    "label": "Tuindorp Buiksloot",
+    "value": "tuindorp-buiksloot"
+  },
+  {
+    "label": "Tuindorp Nieuwendam",
+    "value": "tuindorp-nieuwendam"
+  },
+  { "label": "Tuindorp Oostzaan", "value": "tuindorp-oostzaan" },
+  { "label": "Van Galenbuurt", "value": "van-galenbuurt" },
+  { "label": "Van Lennepbuurt", "value": "van-lennepbuurt" },
+  { "label": "Volewijck", "value": "volewijck" },
+  { "label": "Vondelbuurt", "value": "vondelbuurt" },
+  { "label": "Water", "value": "water" },
+  { "label": "Waterland", "value": "waterland" },
+  {
+    "label": "Waterlandpleinbuurt",
+    "value": "waterlandpleinbuurt"
+  },
+  {
+    "label": "Weesperbuurt/Plantage",
+    "value": "weesperbuurt-plantage"
+  },
+  { "label": "Weesperzijde", "value": "weesperzijde" },
+  {
+    "label": "Westelijk Havengebied",
+    "value": "westelijk-havengebied"
+  },
+  {
+    "label": "Westindische Buurt",
+    "value": "westindische-buurt"
+  },
+  { "label": "Westlandgracht", "value": "westlandgracht" },
+  { "label": "Willemspark", "value": "willemspark" },
+  {
+    "label": "Zeeburgereiland/Nieuwe Diep",
+    "value": "zeeburgereiland-nieuwe-diep"
+  },
+  { "label": "Zuid Pijp", "value": "zuid-pijp" },
+  { "label": "Zuidas", "value": "zuidas" }
+]
