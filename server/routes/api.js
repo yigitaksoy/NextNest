@@ -17,10 +17,11 @@ router.get("/scrape-listings", async (req, res) => {
       minSize,
       minBedrooms,
       email,
+      neighbourhood,
     } = req.query;
 
     const listingTypeDutch = listingType === "huur" ? "huur" : "koop";
-    const url = `https://www.funda.nl/en/${listingTypeDutch}/${location}/beschikbaar/${minPrice}-${maxPrice}/${minSize}+woonopp/${minBedrooms}+kamers/1-dag/`;
+    const url = `https://www.funda.nl/en/${listingTypeDutch}/${location}/${neighbourhood}/beschikbaar/${minPrice}-${maxPrice}/${minSize}+woonopp/${minBedrooms}+kamers/1-dag/`;
 
     console.log(`Started scraping listings for URL: ${url}`);
     const scrapedListings = await scrapeListings(url, listingType);

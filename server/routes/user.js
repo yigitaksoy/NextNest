@@ -41,6 +41,7 @@ router.post("/search", async (req, res, next) => {
     const {
       listingType,
       location,
+      neighbourhood,
       minPrice,
       maxPrice,
       minSize,
@@ -54,6 +55,7 @@ router.post("/search", async (req, res, next) => {
         userSearch: {
           listingType,
           location,
+          neighbourhood,
           minPrice,
           maxPrice,
           minSize,

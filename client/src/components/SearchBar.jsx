@@ -16,7 +16,7 @@ const SearchBar = () => {
     minSize: "",
     minBedrooms: "",
     email: "",
-    buurt: "",
+    neighbourhood: "",
   });
 
   const handleChange = (e) => {
