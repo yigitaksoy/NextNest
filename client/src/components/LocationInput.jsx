@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Select from "react-select";
 import municipalities from "../data/municipalities.json";
 import neighbourhoods from "../data/neighbourhoods.json";
@@ -5,6 +6,8 @@ import neighbourhoods from "../data/neighbourhoods.json";
 const LocationInput = ({ handleChange, formData }) => {
   const locationOptions = municipalities;
   const neighbourhoodOptions = neighbourhoods;
+
+  const [isAllSelected, setIsAllSelected] = useState(false);
 
   const selectedLocation = locationOptions.find(
     (option) => option.value === formData.location
@@ -17,6 +20,19 @@ const LocationInput = ({ handleChange, formData }) => {
     : [];
 
   const handleNeighbourhoodChange = (selectedNeighbourhoods) => {
+    // Check if "All Neighborhoods" is selected
+    const allSelected = selectedNeighbourhoods.find(
+      (option) => option.value === ""
+    );
+
+    // If "All Neighborhoods" is selected, set isAllSelected to true
+    if (allSelected) {
+      setIsAllSelected(true);
+      selectedNeighbourhoods = [allSelected];
+    } else {
+      setIsAllSelected(false);
+    }
+
     const event = {
       target: {
         name: "neighbourhood",
@@ -25,6 +41,10 @@ const LocationInput = ({ handleChange, formData }) => {
     };
     handleChange(event);
   };
+
+  const options = isAllSelected
+    ? [{ value: "", label: "All Neighborhoods" }]
+    : neighbourhoodOptions;
 
   const handleLocationChange = (selectedLocation) => {
     const event = {
@@ -85,13 +105,15 @@ const LocationInput = ({ handleChange, formData }) => {
         <div className="relative">
           <Select
             id="neighbourhood"
-            options={neighbourhoodOptions}
+            options={options}
             value={selectedNeighbourhood}
             isClearable
             isMulti
             closeMenuOnSelect={false}
             placeholder="Neighborhoods"
-            noOptionsMessage={() => "Nothing to show"}
+            noOptionsMessage={() =>
+              isAllSelected ? null : "Neighborhood not found"
+            }
             classNames={{
               control: () => "p-1.5 text-sm rounded-xl",
             }}
