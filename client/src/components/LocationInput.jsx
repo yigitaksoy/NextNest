@@ -133,6 +133,26 @@ const LocationInput = ({ handleChange, formData }) => {
                   border: state.isFocused ? 0 : 0,
                 },
               }),
+              multiValue: (base) => ({
+                ...base,
+                backgroundColor: "black",
+                color: "white",
+                borderRadius: "5px",
+                fontWeight: "700",
+              }),
+              multiValueLabel: (base) => ({
+                ...base,
+                color: "white",
+              }),
+              multiValueRemove: (styles, { data }) => ({
+                ...styles,
+                color: data.color,
+                ":hover": {
+                  backgroundColor: "#ff81cc",
+                  color: "black",
+                  borderRadius: "0px 5px 5px 0px",
+                },
+              }),
             }}
             theme={(theme) => ({
               ...theme,
