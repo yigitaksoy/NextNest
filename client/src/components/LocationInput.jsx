@@ -88,6 +88,11 @@ const LocationInput = ({ handleChange, formData }) => {
                   border: "2px solid #7dd3fc",
                 },
               }),
+              menu: (base) => ({
+                ...base,
+                border: "2px solid black",
+                borderRadius: "7px",
+              }),
             }}
             theme={(theme) => ({
               ...theme,
@@ -137,6 +142,11 @@ const LocationInput = ({ handleChange, formData }) => {
                 "&:hover": {
                   border: "2px solid #7dd3fc",
                 },
+              }),
+              menu: (base) => ({
+                ...base,
+                border: "2px solid black",
+                borderRadius: "7px",
               }),
               multiValue: (base) => ({
                 ...base,
