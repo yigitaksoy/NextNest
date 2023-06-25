@@ -44,7 +44,7 @@ const Login = () => {
           const response = await axios.post(
             import.meta.env.MODE === "production"
               ? import.meta.env.VITE_NEXTNEST_API_REGISTER
-              : "http://localhost:3000/register",
+              : "http://localhost:3000/user/register",
             {
               uid: user.uid,
               email: user.email,
