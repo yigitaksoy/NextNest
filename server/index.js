@@ -6,7 +6,6 @@ const { connectToDatabase } = require("./config/database");
 const apiRoutes = require("./routes/api");
 const errorHandler = require("./middleware/errorHandler");
 const { verifyToken } = require("./middleware/verifyToken");
-const registerRoutes = require("./routes/register");
 const userRoutes = require("./routes/user");
 const admin = require("./config/firebaseAdmin");
 
@@ -34,11 +33,8 @@ connectToDatabase()
     // Apply the middleware before the API routes
     app.use("/api", verifyToken(admin), apiRoutes);
 
-    // Register route
-    app.use("/register", registerRoutes);
-
     // User route
-    app.use("/user", verifyToken(admin), userRoutes);
+    app.use("/user", userRoutes); // Do not apply the verifyToken middleware here
 
     //Error handler middleware
     app.use(errorHandler);
