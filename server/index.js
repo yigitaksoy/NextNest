@@ -34,7 +34,7 @@ connectToDatabase()
     app.use("/api", verifyToken(admin), apiRoutes);
 
     // User route
-    app.use("/user", userRoutes); // Do not apply the verifyToken middleware here
+    app.use("/user", userRoutes);
 
     //Error handler middleware
     app.use(errorHandler);

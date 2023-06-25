@@ -1,13 +1,13 @@
 const express = require("express");
 const userController = require("../controllers/userController");
-const { verifyToken } = require("../middleware/verifyToken"); // Replace with your middleware import
-const admin = require("../config/firebaseAdmin"); // Replace with your import if necessary
+const { verifyToken } = require("../middleware/verifyToken");
+const admin = require("../config/firebaseAdmin");
 
 const router = express.Router();
 
-router.post("/register", userController.register); // This route should not be token-verified
+router.post("/register", userController.register);
 
-router.use(verifyToken(admin)); // Apply the verifyToken middleware to the routes below
+router.use(verifyToken(admin));
 router.get("/search", userController.getUserSearch);
 router.post("/search", userController.saveUserSearch);
 

@@ -1,4 +1,4 @@
-const User = require("../models/user"); // Replace with your User model
+const User = require("../models/user");
 const mongoose = require("mongoose");
 
 // POST route to register a user
