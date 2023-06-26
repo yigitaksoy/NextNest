@@ -12,6 +12,7 @@ const scrapeListings = async (url, listingType) => {
   try {
     const browser = await puppeteer.launch({
       headless: "new",
+      slowMo: 500,
       args: [
         "--disable-setuid-sandbox",
         "--disable-web-security",
