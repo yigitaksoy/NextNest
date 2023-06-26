@@ -74,12 +74,11 @@ const scrapeListings = async (url, listingType) => {
           const postal_code = element
             ?.querySelector(".search-result__header-subtitle")
             ?.textContent.trim();
-          const price = element
-            ?.querySelector(".search-result-price")
-            ?.textContent.trim();
-          const details = Array.from(
-            element?.querySelectorAll(".search-result-kenmerken li")
-          ).map((li) => li.textContent.trim());
+          const price = (
+            element
+              ?.querySelector(".search-result-price")
+              ?.textContent.trim() || ""
+          ).replace(/\s*k\.k\.\s*$/, "");
 
           return {
             image,
@@ -90,7 +89,6 @@ const scrapeListings = async (url, listingType) => {
                 : `https://www.funda.nl${url}`,
             postal_code,
             price,
-            details,
           };
         });
       });
@@ -120,9 +118,11 @@ const scrapeListings = async (url, listingType) => {
             const postal_code = element
               ?.querySelector(".search-result__header-subtitle")
               ?.textContent.trim();
-            const price = element
-              ?.querySelector(".search-result-price")
-              ?.textContent.trim();
+            const price = (
+              element
+                ?.querySelector(".search-result-price")
+                ?.textContent.trim() || ""
+            ).replace(/\s*k\.k\.\s*$/, "");
             const details = Array.from(
               element?.querySelectorAll(".search-result-kenmerken li")
             ).map((li) => li.textContent.trim());
