@@ -9,6 +9,9 @@ const { verifyToken } = require("./middleware/verifyToken");
 const userRoutes = require("./routes/user");
 const admin = require("./config/firebaseAdmin");
 
+// Sync Listings
+require("./services/listingSync");
+
 const app = express();
 const port = process.env.PORT || 3000;
 
