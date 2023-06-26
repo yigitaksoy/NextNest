@@ -4,6 +4,9 @@ const listingDetails = async (page, url, listingType) => {
   try {
     await page.goto(url, { waitUntil: "domcontentloaded" });
 
+    // Wait for a random amount of time between 0 to 10 seconds
+    await page.waitForTimeout(Math.random() * 10000);
+
     // Extract the page title
     const title = await page.title();
     console.log("Page Title:", title);

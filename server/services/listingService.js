@@ -49,8 +49,8 @@ const scrapeListings = async (url, listingType) => {
       console.log("Scraping page:", currentPage);
       await page.goto(url, { waitUntil: "domcontentloaded" });
 
-      // Wait for the title element to appear
-      await page.waitForSelector("title");
+      // Wait for a random amount of time between 0 to 10 seconds
+      await page.waitForTimeout(Math.random() * 10000);
 
       // Extract the page title
       const title = await page.title();
