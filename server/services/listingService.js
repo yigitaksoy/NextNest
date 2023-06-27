@@ -2,6 +2,7 @@ require("dotenv").config();
 const puppeteer = require("puppeteer-extra");
 const StealthPlugin = require("puppeteer-extra-plugin-stealth");
 const useProxy = require("puppeteer-page-proxy");
+const Listing = require("../models/listing");
 const { listingDetails } = require("./listingDetails");
 
 puppeteer.use(StealthPlugin());
@@ -109,12 +110,25 @@ const scrapeListings = async (url, listingType) => {
         try {
           // Handle errors for individual listings
           const listing = listings[i];
-          const details = await listingDetails(page, listing.url, listingType);
-          listing.details = details;
 
-          // Add listingType and neighborhood
-          listing.listingType = listingType;
-          listing.neighbourhood = details.neighbourhood;
+          // Check if a listing with the same title already exists in the "Listing" collection
+          let existingListingInListings = await Listing.findOne({
+            title: listing.title,
+          });
+
+          // If the listing does not exist in the "Listing" collection, fetch details
+          if (!existingListingInListings) {
+            const details = await listingDetails(
+              page,
+              listing.url,
+              listingType
+            );
+            listing.details = details;
+
+            // Add listingType and neighborhood
+            listing.listingType = listingType;
+            listing.neighbourhood = details.neighbourhood;
+          }
         } catch (error) {
           console.error(`Error scraping details for listing ${i}:`, error);
         }
