@@ -18,9 +18,15 @@ exports.fetchListings = async (userId, queryParams) => {
     } = queryParams;
 
     const listingTypeDutch = listingType === "huur" ? "huur" : "koop";
-    let neighbourhoods = Array.isArray(neighbourhood)
-      ? neighbourhood.join(",")
-      : neighbourhood;
+    let neighbourhoods = "";
+
+    if (Array.isArray(neighbourhood)) {
+      neighbourhoods = neighbourhood.map((obj) => obj.value).join(",");
+    } else if (typeof neighbourhood === "object") {
+      neighbourhoods = neighbourhood.value;
+    } else {
+      neighbourhoods = neighbourhood;
+    }
     const url = `https://www.funda.nl/en/${listingTypeDutch}/${location}/${neighbourhoods}/beschikbaar/${minPrice}-${maxPrice}/${minSize}+woonopp/${minBedrooms}+kamers/1-dag/`;
 
     console.log(`Started scraping listings for URL: ${url}`);
