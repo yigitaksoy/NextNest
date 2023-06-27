@@ -10,24 +10,24 @@ puppeteer.use(StealthPlugin());
 const scrapeListings = async (url, listingType) => {
   console.log("Scraping listings for URL:", url);
 
-  try {
-    const browser = await puppeteer.launch({
-      headless: "new",
-      slowMo: 500,
-      args: [
-        "--disable-setuid-sandbox",
-        "--disable-web-security",
-        "--no-sandbox",
-        "--single-process",
-        "--no-zygote",
-        // `--proxy-server=${process.env.PROXY}`,
-      ],
-      executablePath:
-        process.env.NODE_ENV === "production"
-          ? process.env.PUPPETEER_EXECUTABLE_PATH
-          : puppeteer.executablePath(),
-    });
+  const browser = await puppeteer.launch({
+    headless: "new",
+    slowMo: 500,
+    args: [
+      "--disable-setuid-sandbox",
+      "--disable-web-security",
+      "--no-sandbox",
+      "--single-process",
+      "--no-zygote",
+      // `--proxy-server=${process.env.PROXY}`,
+    ],
+    executablePath:
+      process.env.NODE_ENV === "production"
+        ? process.env.PUPPETEER_EXECUTABLE_PATH
+        : puppeteer.executablePath(),
+  });
 
+  try {
     const page = await browser.newPage();
 
     page.on("console", (msg) => {
@@ -48,68 +48,85 @@ const scrapeListings = async (url, listingType) => {
 
     while (true) {
       console.log("Scraping page:", currentPage);
-      try {
-        await page.goto(url, { waitUntil: "domcontentloaded" });
-      } catch (error) {
-        console.error(`Error during navigation: ${error}`);
-        continue;
+
+      let navigationAttempts = 0;
+      while (navigationAttempts < 5) {
+        // Maximum 5 attempts
+        try {
+          await page.goto(url, {
+            waitUntil: "domcontentloaded",
+            timeout: 60000,
+          });
+          break; // break the loop if navigation succeeds
+        } catch (error) {
+          navigationAttempts++;
+          console.error(
+            `Error during navigation attempt ${navigationAttempts}: ${error}`
+          );
+          if (navigationAttempts >= 5) throw error; // if all attempts fail, throw the error
+          await page.waitForTimeout(5000); // wait for 5 seconds before next attempt
+        }
       }
 
       // Wait for a progressive amount of time
       await page.waitForTimeout(currentPage * 1000);
 
-      // Extract the page title
-      const title = await page.title();
-      console.log("Page Title:", title);
+      let rawListings;
+      try {
+        rawListings = await page.evaluate(() => {
+          const extractListingDetails = (element) => {
+            const image =
+              element?.querySelector(".search-result-image img")?.src ||
+              element?.querySelector(".promo-thumbnail img")?.src;
+            const title = element
+              ?.querySelector(".search-result__header-title")
+              ?.textContent.trim();
+            const linkElement = element.querySelector(
+              "a[data-object-url-tracking='resultlist']"
+            );
+            const url = linkElement
+              ?.getAttribute("href")
+              ?.replace(/(\?.*)$/, "");
+            const postal_code = element
+              ?.querySelector(".search-result__header-subtitle")
+              ?.textContent.trim();
+            const price = (
+              element
+                ?.querySelector(".search-result-price")
+                ?.textContent.trim() || ""
+            ).replace(/\s*k\.k\.\s*$/, "");
+            const details = Array.from(
+              element?.querySelectorAll(".search-result-kenmerken li")
+            ).map((li) => li.textContent.trim());
 
-      const listings = await page.evaluate(() => {
-        const extractListingDetails = (element) => {
-          const image =
-            element?.querySelector(".search-result-image img")?.src ||
-            element?.querySelector(".promo-thumbnail img")?.src;
-          const title = element
-            ?.querySelector(".search-result__header-title")
-            ?.textContent.trim();
-          const linkElement = element.querySelector(
-            "a[data-object-url-tracking='resultlist']"
-          );
-          const url = linkElement?.getAttribute("href")?.replace(/(\?.*)$/, "");
-          const postal_code = element
-            ?.querySelector(".search-result__header-subtitle")
-            ?.textContent.trim();
-          const price = (
-            element
-              ?.querySelector(".search-result-price")
-              ?.textContent.trim() || ""
-          ).replace(/\s*k\.k\.\s*$/, "");
-          const details = Array.from(
-            element?.querySelectorAll(".search-result-kenmerken li")
-          ).map((li) => li.textContent.trim());
-
-          return {
-            image,
-            title,
-            url:
-              url && url.startsWith("https://www.funda.nl")
-                ? url
-                : `https://www.funda.nl${url}`,
-            postal_code,
-            price,
-            details,
+            return {
+              image,
+              title,
+              url:
+                url && url.startsWith("https://www.funda.nl")
+                  ? url
+                  : `https://www.funda.nl${url}`,
+              postal_code,
+              price,
+              details,
+            };
           };
-        };
 
-        const elements = Array.from(
-          document.querySelectorAll(".search-result")
-        );
-        return elements.map(extractListingDetails);
-      });
+          const elements = Array.from(
+            document.querySelectorAll(".search-result")
+          );
+          return elements.map(extractListingDetails);
+        });
+      } catch (error) {
+        console.error("Error during page evaluation:", error);
+        // Implement your own error handling logic here...
+      }
 
       // Scrape details for each listing
-      for (let i = 0; i < listings.length; i++) {
+      for (let i = 0; i < rawListings.length; i++) {
         try {
           // Handle errors for individual listings
-          const listing = listings[i];
+          const listing = rawListings[i];
 
           // Check if a listing with the same title already exists in the "Listing" collection
           let existingListingInListings = await Listing.findOne({
@@ -134,7 +151,7 @@ const scrapeListings = async (url, listingType) => {
         }
       }
 
-      allListings.push(...listings);
+      allListings.push(...rawListings);
 
       const nextPageButton = await page.$(
         ".pagination-pages a[aria-current='page'] + a"
@@ -150,8 +167,6 @@ const scrapeListings = async (url, listingType) => {
       );
     }
 
-    await browser.close();
-
     allListings.forEach((listing) => {
       console.log("Listing URL:", listing.url);
     });
@@ -160,6 +175,8 @@ const scrapeListings = async (url, listingType) => {
   } catch (error) {
     console.error("Error scraping listings:", error);
     throw error;
+  } finally {
+    await browser.close();
   }
 };
 
