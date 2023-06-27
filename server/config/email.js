@@ -19,7 +19,7 @@ const sendEmail = (toEmail, listingData) => {
       console.log(error);
     } else {
       const mailOptions = {
-        from: "NextNest Realtors <info@nextnest.com>",
+        from: "NextNest <info@nextnest.com>",
         to: toEmail,
         subject: "New Listings",
         html: renderedHtml,
