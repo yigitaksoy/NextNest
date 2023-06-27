@@ -19,12 +19,15 @@ exports.scrapeListings = async (req, res) => {
 
 exports.syncListings = async () => {
   try {
-    const users = await User.find({});
-    for (const user of users) {
-      const userId = user.uid;
-      const queryParams = user.userSearch;
+    const users = await User.find({ subscription: true });
 
-      await fetchListings(userId, queryParams);
+    for (const user of users) {
+      if (user.userSearch && Object.keys(user.userSearch).length > 0) {
+        const userId = user.uid;
+        const queryParams = user.userSearch;
+
+        await fetchListings(userId, queryParams);
+      }
     }
   } catch (error) {
     console.error("Error occurred in cronFetchListings:", error);

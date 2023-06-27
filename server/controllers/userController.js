@@ -12,6 +12,7 @@ exports.register = async (req, res) => {
       email,
       userSearch: {},
       userListings: [],
+      subscription: true,
     });
 
     res.status(201).json({ message: "User registered successfully" });
