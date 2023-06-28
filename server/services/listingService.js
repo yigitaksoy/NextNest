@@ -19,7 +19,7 @@ const scrapeListings = async (url, listingType) => {
       "--no-sandbox",
       "--single-process",
       "--no-zygote",
-      // `--proxy-server=${process.env.PROXY}`,
+      `--proxy-server=${process.env.PROXY}`,
     ],
     executablePath:
       process.env.NODE_ENV === "production"
@@ -30,6 +30,10 @@ const scrapeListings = async (url, listingType) => {
   try {
     const page = await browser.newPage();
 
+    await page.authenticate({
+      username: process.env.PROXY_USER,
+      password: process.env.PROXY_PASSWORD,
+    });
     page.on("console", (msg) => {
       for (let i = 0; i < msg.args().length; ++i) {
         console.log(`${i}: ${msg.args()[i]}`);
@@ -40,8 +44,6 @@ const scrapeListings = async (url, listingType) => {
 
     let currentPage = 1;
     const allListings = [];
-
-    await useProxy(page, process.env.PROXY);
 
     try {
       const data = await useProxy.lookup(page);
