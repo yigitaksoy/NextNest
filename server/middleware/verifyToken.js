@@ -22,9 +22,6 @@ const verifyToken = (admin) => {
         return res.status(401).json({ message: "Missing token" });
       }
 
-      console.log("Token found, verifying...");
-      console.log("admin.apps.length:", admin.apps?.length || 0);
-
       try {
         console.log("Invoking Firebase Admin SDK...");
         const decodedToken = await admin.auth().verifyIdToken(token);
