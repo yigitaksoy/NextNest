@@ -28,13 +28,12 @@ exports.fetchListings = async (userId, queryParams) => {
       neighbourhoods = neighbourhood;
     }
 
-    let url = `https://www.funda.nl/en/${listingTypeDutch}/${location}/`;
+    let minSizeString = minSize !== "0" ? `${minSize}+woonopp/` : "";
+    let minBedroomsString = minBedrooms !== "0" ? `${minBedrooms}+kamers/` : "";
 
-    if (neighbourhoods !== "") {
-      url += `${neighbourhoods}/`;
-    }
-
-    url += `beschikbaar/${minPrice}-${maxPrice}/${minSize}+woonopp/${minBedrooms}+kamers/1-dag/`;
+    let url = `https://www.funda.nl/en/${listingTypeDutch}/${location}/${
+      neighbourhoods ? neighbourhoods + "/" : ""
+    }beschikbaar/${minPrice}-${maxPrice}/${minSizeString}${minBedroomsString}1-dag/`;
 
     console.log(`Started scraping listings for URL: ${url}`);
     const scrapedListings = await scrapeListings(url, listingType);
