@@ -5,6 +5,7 @@ import "./assets/css/style.css";
 import Home from "./routes/Home";
 import Register from "./routes/Register";
 import Login from "./routes/Login";
+import Error from "./routes/404";
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
               </ProtectedRoute>
             }
           />
+          <Route path="*" element={<Error />}></Route>
         </Routes>
       </BrowserRouter>
     </AuthContextProvider>
