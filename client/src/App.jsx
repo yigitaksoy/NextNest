@@ -23,7 +23,7 @@ const App = () => {
               </ProtectedRoute>
             }
           />
-          <Route path="*" element={<Error />}></Route>
+          <Route path="*" element={<Error />} />
         </Routes>
       </BrowserRouter>
     </AuthContextProvider>
