@@ -1,13 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { auth } from "../utils/firebase";
 import axios from "axios";
+import { motion } from "framer-motion";
 import ListingTypeInput from "./ListingTypeInput";
 import LocationInput from "./LocationInput";
 import PriceInput from "./PriceInput";
 import SizeAndRoomsInput from "./SizeAndRoomsInput";
 import EmailInput from "./EmailInput";
+import FormSuccess from "./FormSuccess";
 
 const SearchBar = () => {
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [formError, setFormError] = useState(null);
+  const form = useRef(null);
   const [formData, setFormData] = useState({
     listingType: "",
     location: "",
@@ -88,6 +93,7 @@ const SearchBar = () => {
 
       console.log("Search Payload:", saveSearchResponse);
       console.log("Search criteria saved:", saveSearchResponse.data);
+      setFormSubmitted(true);
 
       try {
         let tempFormData = { ...formData };
@@ -114,31 +120,57 @@ const SearchBar = () => {
         console.error("Error sending listing data:", error);
       }
     } catch (error) {
+      setFormError(true);
       console.error("Error:", error);
     }
   };
 
+  useEffect(() => {
+    if (formSubmitted && form.current) {
+      setTimeout(() => {
+        setFormSubmitted(false);
+      }, 3000);
+    }
+  }, [formSubmitted]);
+
   return (
     <div className="font-fontDegular">
       <div className="container mx-auto flex h-screen items-center justify-center p-2 md:p-0 lg:w-2/3">
-        <form
-          onSubmit={handleSubmit}
-          className="w-screen bg-white md:shadow-searchBar"
-          id="searchbar"
-        >
-          <div className="grid grid-cols-1 rounded-xl bg-white md:gap-2 md:p-6">
-            <ListingTypeInput handleChange={handleChange} formData={formData} />
-            <LocationInput handleChange={handleChange} formData={formData} />
-            <div className="grid grid-cols-1 md:grid-cols-2 md:gap-4">
-              <PriceInput handleChange={handleChange} formData={formData} />
-              <SizeAndRoomsInput
+        {formSubmitted ? (
+          <FormSuccess />
+        ) : (
+          <form
+            onSubmit={handleSubmit}
+            className="w-screen bg-white md:shadow-searchBar"
+            id="searchbar"
+          >
+            {formError && (
+              <motion.p
+                transition={{ duration: 0.3, delay: 0.3 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-center font-degular text-md text-[#e63946]"
+              >
+                Something went wrong! Please try again later.
+              </motion.p>
+            )}
+            <div className="grid grid-cols-1 rounded-xl bg-white md:gap-2 md:p-6">
+              <ListingTypeInput
                 handleChange={handleChange}
                 formData={formData}
               />
+              <LocationInput handleChange={handleChange} formData={formData} />
+              <div className="grid grid-cols-1 md:grid-cols-2 md:gap-4">
+                <PriceInput handleChange={handleChange} formData={formData} />
+                <SizeAndRoomsInput
+                  handleChange={handleChange}
+                  formData={formData}
+                />
+              </div>
+              <EmailInput handleChange={handleChange} formData={formData} />
             </div>
-            <EmailInput handleChange={handleChange} formData={formData} />
-          </div>
-        </form>
+          </form>
+        )}
       </div>
     </div>
   );
