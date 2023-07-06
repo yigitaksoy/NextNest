@@ -89,7 +89,7 @@ const Login = () => {
           id="login"
           className=" w-full rounded-lg bg-white font-degular sm:max-w-md md:mt-0 md:shadow-searchBar xl:p-0"
         >
-          <div className="space-y-4 p-6 sm:p-8 md:space-y-6">
+          <div className="space-y-6 p-6 sm:p-8 md:space-y-8">
             <h1 className="text-center font-marker text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
               Welcome back!
             </h1>
