@@ -43,7 +43,7 @@ const SizeAndRoomsInput = ({ handleChange, formData }) => {
           isSearchable={false}
           placeholder="Surface"
           classNames={{
-            control: () => "p-1.5 text-sm rounded-xl",
+            control: () => "p-1.5 text-md rounded-xl",
           }}
           className="w-full"
           styles={{
@@ -89,7 +89,7 @@ const SizeAndRoomsInput = ({ handleChange, formData }) => {
           isSearchable={false}
           placeholder="Rooms"
           classNames={{
-            control: () => "p-1.5 text-sm rounded-xl",
+            control: () => "p-1.5 text-md rounded-xl",
           }}
           className="w-full"
           styles={{

@@ -91,7 +91,7 @@ const LocationInput = ({ handleChange, formData }) => {
             placeholder="Cities & Municipalities"
             noOptionsMessage={() => "Nothing to show"}
             classNames={{
-              control: () => "p-1.5 text-sm rounded-xl",
+              control: () => "p-1.5 text-md rounded-xl",
             }}
             className="w-full"
             styles={{
@@ -148,7 +148,7 @@ const LocationInput = ({ handleChange, formData }) => {
               isAllSelected ? null : "Neighborhood not found"
             }
             classNames={{
-              control: () => "p-1.5 text-sm rounded-xl",
+              control: () => "p-1.5 text-md rounded-xl",
             }}
             className=" w-full"
             styles={{

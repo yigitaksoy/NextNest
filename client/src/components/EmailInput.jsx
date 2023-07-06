@@ -11,7 +11,7 @@ const EmailInput = ({ handleChange, formData }) => {
           <input
             type="email"
             id="maxPrice"
-            className="search-input input block w-full rounded-lg border border-transparent p-2.5 pl-10 text-sm focus:border-sky-300 focus:outline-none focus:ring-0 hover:border-sky-300"
+            className="search-input text-md input block w-full rounded-lg border border-transparent p-2.5 pl-10 hover:border-sky-300 focus:border-sky-300 focus:outline-none focus:ring-0"
             placeholder="E-mail"
             value={formData.email}
             name="email"
