@@ -13,6 +13,7 @@ const SearchBar = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formError, setFormError] = useState(null);
   const form = useRef(null);
+  const [isAmsterdam, setIsAmsterdam] = useState(false);
   const [formData, setFormData] = useState({
     listingType: "",
     location: "",
@@ -60,6 +61,10 @@ const SearchBar = () => {
           }
 
           setFormData((prevData) => ({ ...prevData, ...searchCriteria }));
+
+          // After setting form data, check if location is Amsterdam and update `isAmsterdam`
+          const isCityAmsterdam = searchCriteria.location === "amsterdam";
+          setIsAmsterdam(isCityAmsterdam);
         }
       } catch (error) {
         console.error("Error fetching search criteria:", error);
@@ -159,7 +164,12 @@ const SearchBar = () => {
                 handleChange={handleChange}
                 formData={formData}
               />
-              <LocationInput handleChange={handleChange} formData={formData} />
+              <LocationInput
+                handleChange={handleChange}
+                formData={formData}
+                isAmsterdam={isAmsterdam}
+                setIsAmsterdam={setIsAmsterdam}
+              />
               <div className="grid grid-cols-1 md:grid-cols-2 md:gap-4">
                 <PriceInput handleChange={handleChange} formData={formData} />
                 <SizeAndRoomsInput

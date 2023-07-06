@@ -3,10 +3,14 @@ import Select from "react-select";
 import municipalities from "../data/municipalities.json";
 import neighbourhoods from "../data/neighbourhoods.json";
 
-const LocationInput = ({ handleChange, formData }) => {
+const LocationInput = ({
+  handleChange,
+  formData,
+  isAmsterdam,
+  setIsAmsterdam,
+}) => {
   const locationOptions = municipalities;
   const neighbourhoodOptions = neighbourhoods;
-  const [isAmsterdam, setIsAmsterdam] = useState(false);
   const [isAllSelected, setIsAllSelected] = useState(false);
 
   const selectedLocation = locationOptions.find(
