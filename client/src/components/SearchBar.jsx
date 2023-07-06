@@ -139,7 +139,7 @@ const SearchBar = () => {
   }, [formSubmitted]);
 
   return (
-    <div className="font-degular">
+    <div className="pb-28 font-degular">
       <div className="container mx-auto flex items-center justify-center p-2 md:mt-40 md:p-0 lg:mt-28 lg:w-2/3">
         {formSubmitted ? (
           <FormSuccess />
