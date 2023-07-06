@@ -6,7 +6,9 @@ const Home = () => {
   return (
     <div className="bg-gray-300">
       <Navbar />
-      <SearchBar />
+      <div className="md:h-auto md:mb-10">
+        <SearchBar />
+      </div>
     </div>
   );
 };
