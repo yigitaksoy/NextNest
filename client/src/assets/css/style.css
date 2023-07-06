@@ -8,6 +8,10 @@
 
 /*  Login & Registration Page */
 
+html {
+  background: #d1d5db!important;
+}
+
 #register-form,
 #login {
   border: 2px solid #000;
