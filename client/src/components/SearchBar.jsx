@@ -135,7 +135,7 @@ const SearchBar = () => {
 
   return (
     <div className="font-fontDegular">
-      <div className="container mx-auto flex h-screen items-center justify-center p-2 md:p-0 lg:w-2/3">
+      <div className="container mx-auto flex h-auto items-center justify-center p-2 md:h-screen md:p-0 lg:w-2/3">
         {formSubmitted ? (
           <FormSuccess />
         ) : (
@@ -149,7 +149,7 @@ const SearchBar = () => {
                 transition={{ duration: 0.3, delay: 0.3 }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="text-center font-degular text-md text-[#e63946]"
+                className="text-md text-center font-degular text-[#e63946]"
               >
                 Something went wrong! Please try again later.
               </motion.p>
