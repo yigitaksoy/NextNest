@@ -16,7 +16,7 @@ const FormSuccess = () => {
         },
       }}
     >
-      <div className="mx-auto flex flex-col items-center justify-center px-6 py-8 md:h-screen lg:py-0">
+      <div className="mx-auto mt-10 flex flex-col items-center justify-center px-6 py-8 lg:py-0">
         <div
           id="form-success"
           className="w-full rounded-lg bg-white font-degular sm:max-w-md md:mt-0 md:shadow-searchBar xl:p-0"
