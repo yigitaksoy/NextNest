@@ -6,7 +6,7 @@ import neighbourhoods from "../data/neighbourhoods.json";
 const LocationInput = ({ handleChange, formData }) => {
   const locationOptions = municipalities;
   const neighbourhoodOptions = neighbourhoods;
-
+  const [isAmsterdam, setIsAmsterdam] = useState(false);
   const [isAllSelected, setIsAllSelected] = useState(false);
 
   const selectedLocation = locationOptions.find(
@@ -20,6 +20,18 @@ const LocationInput = ({ handleChange, formData }) => {
     : [];
 
   const handleNeighbourhoodChange = (selectedNeighbourhoods) => {
+    // If empty array is passed, clear the neighbourhood selection
+    if (selectedNeighbourhoods.length === 0) {
+      const event = {
+        target: {
+          name: "neighbourhood",
+          value: [],
+        },
+      };
+      handleChange(event);
+      return;
+    }
+
     // Check if "All Neighborhoods" is selected
     const allSelected = selectedNeighbourhoods.find(
       (option) => option.value === ""
@@ -53,6 +65,17 @@ const LocationInput = ({ handleChange, formData }) => {
         value: selectedLocation ? selectedLocation.value : "",
       },
     };
+
+    // Check if selected city is Amsterdam
+    const isCityAmsterdam =
+      selectedLocation && selectedLocation.value === "amsterdam";
+    setIsAmsterdam(isCityAmsterdam);
+
+    // If city is not Amsterdam, clear the neighbourhood selection
+    if (!isCityAmsterdam) {
+      handleNeighbourhoodChange([]);
+    }
+
     handleChange(event);
   };
 
@@ -118,7 +141,9 @@ const LocationInput = ({ handleChange, formData }) => {
             isMulti
             closeMenuOnSelect={false}
             blurInputOnSelect={false}
-            placeholder="Neighborhoods"
+            placeholder="Neighborhoods - Amsterdam only"
+            isDisabled={!isAmsterdam}
+            onChange={handleNeighbourhoodChange}
             noOptionsMessage={() =>
               isAllSelected ? null : "Neighborhood not found"
             }
@@ -178,7 +203,6 @@ const LocationInput = ({ handleChange, formData }) => {
                 primary: "black",
               },
             })}
-            onChange={handleNeighbourhoodChange}
           />
         </div>
       </div>
