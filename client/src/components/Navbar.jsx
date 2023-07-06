@@ -7,7 +7,7 @@ import NextNest from "../assets/images/nextnest-white.png";
 const Navbar = () => {
   const { currentUser } = useContext(AuthContext);
   return (
-    <div className="navbar sticky top-0 z-50 bg-black p-5 md:fixed">
+    <div className="navbar sticky top-0 z-50 bg-black p-5">
       <div className="flex-1">
         <img src={NextNest} alt="nextnest-logo" className="w-22 h-10" />
       </div>
