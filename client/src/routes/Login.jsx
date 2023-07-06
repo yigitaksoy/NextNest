@@ -8,7 +8,7 @@ import {
 } from "firebase/auth";
 import { auth, db } from "../utils/firebase";
 import { doc, setDoc, getDoc } from "firebase/firestore";
-import NextNest from "../assets/images/nextnest-black.png";
+import NextNest from "../assets/images/nextnest-white-shadow.png";
 
 const Login = () => {
   const [err, setErr] = useState(false);
@@ -187,7 +187,7 @@ const Login = () => {
                       fill="#ea4335"
                     />
                   </svg>
-                  <span className="text-sm font-medium text-gray-800 group-hover:text-white">
+                  <span className="font-degular text-sm font-medium text-gray-800 group-hover:text-white">
                     Sign in with Google
                   </span>
                 </button>

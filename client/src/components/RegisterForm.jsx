@@ -177,7 +177,7 @@ const RegisterForm = ({
                   fill="#ea4335"
                 />
               </svg>
-              <span className="text-sm font-medium text-gray-800 group-hover:text-white">
+              <span className="font-degular text-sm font-medium text-gray-800 group-hover:text-white">
                 Sign up with Google
               </span>
             </button>

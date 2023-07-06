@@ -4,7 +4,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import axios from "axios";
 import RegisterForm from "../components/RegisterForm";
-import NextNest from "../assets/images/nextnest-black.png";
+import NextNest from "../assets/images/nextnest-white-shadow.png";
 
 const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
