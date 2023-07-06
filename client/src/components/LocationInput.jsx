@@ -26,6 +26,7 @@ const LocationInput = ({
   const handleNeighbourhoodChange = (selectedNeighbourhoods) => {
     // If empty array is passed, clear the neighbourhood selection
     if (selectedNeighbourhoods.length === 0) {
+      setIsAllSelected(false);
       const event = {
         target: {
           name: "neighbourhood",
