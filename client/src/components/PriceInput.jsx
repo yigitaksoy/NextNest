@@ -56,7 +56,7 @@ const PriceInput = ({ handleChange, formData }) => {
           placeholder="Min Price"
           noOptionsMessage={() => "Please select listing type"}
           classNames={{
-            control: () => "p-1.5 text-sm rounded-xl",
+            control: () => "p-1.5 text-md rounded-xl",
           }}
           className="w-full"
           styles={{
@@ -104,7 +104,7 @@ const PriceInput = ({ handleChange, formData }) => {
           className="w-full"
           noOptionsMessage={() => "Please select listing type"}
           classNames={{
-            control: () => "p-1.5 text-sm rounded-xl",
+            control: () => "p-1.5 text-md rounded-xl",
           }}
           styles={{
             input: (base) => ({
