@@ -141,7 +141,14 @@ const LocationInput = ({ handleChange, formData }) => {
             isMulti
             closeMenuOnSelect={false}
             blurInputOnSelect={false}
-            placeholder="Neighborhoods - Amsterdam only"
+            placeholder={
+              <p>
+                Neighborhoods
+                {!isAmsterdam && (
+                  <span className="font-marker text-sm"> - Amsterdam only</span>
+                )}
+              </p>
+            }
             isDisabled={!isAmsterdam}
             onChange={handleNeighbourhoodChange}
             noOptionsMessage={() =>
