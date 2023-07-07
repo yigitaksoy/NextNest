@@ -1,5 +1,5 @@
 const listingDetails = async (page, url, listingType) => {
-  console.log("Scraping details for URL:", url);
+  console.log("Fetching details for:", url);
 
   try {
     let navigationAttempts = 0;
