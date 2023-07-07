@@ -35,7 +35,6 @@ exports.fetchListings = async (userId, queryParams) => {
       neighbourhoods ? neighbourhoods + "/" : ""
     }beschikbaar/${minPrice}-${maxPrice}/${minSizeString}${minBedroomsString}1-dag/`;
 
-    console.log(`Started scraping listings for URL: ${url}`);
     const scrapedListings = await scrapeListings(url, listingType);
 
     const user = await User.findOne({ uid: userId });
