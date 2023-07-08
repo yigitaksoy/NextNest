@@ -2,7 +2,7 @@ require("dotenv").config();
 const { UA } = require("./userAgents");
 const useProxy = require("puppeteer-page-proxy");
 
-const setupPage = async (browser, url) => {
+const initializePage = async (browser, url) => {
   const page = await browser.newPage();
 
   await page.authenticate({
@@ -35,4 +35,4 @@ const setupPage = async (browser, url) => {
   return page;
 };
 
-module.exports = { setupPage };
+module.exports = { initializePage };

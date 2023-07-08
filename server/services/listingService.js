@@ -1,5 +1,5 @@
 const { initializeBrowser } = require("../utils/browser");
-const { setupPage } = require("../utils/page");
+const { initializePage } = require("../utils/page");
 const { fetchAndExtractListings } = require("../utils/listings");
 const Listing = require("../models/listing");
 const { listingDetails } = require("./listingDetails");
@@ -10,7 +10,7 @@ const scrapeListings = async (url, listingType) => {
   const browser = await initializeBrowser();
 
   try {
-    const page = await setupPage(browser, url);
+    const page = await initializePage(browser, url);
     const allListings = [];
     let currentPage = 1;
 
@@ -37,7 +37,7 @@ const scrapeListings = async (url, listingType) => {
             listing.neighbourhood = details.neighbourhood;
           }
         } catch (error) {
-          console.error(`⛔ Error scraping details for listing ${i}:`, error);
+          console.error(`⛔ Error fetching details for listing ${i}:`, error);
         }
       }
 
@@ -63,7 +63,7 @@ const scrapeListings = async (url, listingType) => {
 
     return allListings;
   } catch (error) {
-    console.error("⛔ Error scraping listings:", error);
+    console.error("⛔ Error fetching listings:", error);
     throw error;
   } finally {
     await browser.close();
