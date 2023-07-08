@@ -1,4 +1,5 @@
 require("dotenv").config();
+const { UA } = require("./userAgents");
 const useProxy = require("puppeteer-page-proxy");
 
 const setupPage = async (browser, url) => {
@@ -7,6 +8,11 @@ const setupPage = async (browser, url) => {
   await page.authenticate({
     username: process.env.PROXY_USER,
     password: process.env.PROXY_PASSWORD,
+  });
+
+  await page.setExtraHTTPHeaders({
+    "Accept-Language": "en-US,en;q=0.9",
+    "User-Agent": UA(),
   });
 
   await page.setViewport({ width: 1920, height: 1080 });
