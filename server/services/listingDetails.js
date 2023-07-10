@@ -7,14 +7,30 @@ const listingDetails = async (page, url, listingType) => {
       // Maximum 5 attempts
       try {
         await page.goto(url, { waitUntil: "domcontentloaded", timeout: 60000 });
-        break; // break the loop if navigation succeeds
+        await page.waitForTimeout(Math.random() * 10000);
+
+        // Extract the page title
+        const title = await page.title();
+
+        // If the page title is in Dutch, try to switch language
+        if (title.includes("te koop") || title.includes("te huur")) {
+          try {
+            await page.waitForSelector("#langSwitch", { timeout: 5000 });
+            await page.select("#langSwitch", "en");
+            await page.waitForTimeout(5000);
+          } catch (error) {
+            console.log("Could not find language switcher");
+          }
+        }
+
+        break;
       } catch (error) {
         navigationAttempts++;
         console.error(
           `Error during navigation attempt ${navigationAttempts}: ${error}`
         );
-        if (navigationAttempts >= 5) throw error; // if all attempts fail, throw the error
-        await page.waitForTimeout(5000); // wait for 5 seconds before next attempt
+        if (navigationAttempts >= 5) throw error;
+        await page.waitForTimeout(5000);
       }
     }
 
