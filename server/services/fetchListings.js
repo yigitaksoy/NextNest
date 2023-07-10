@@ -38,7 +38,17 @@ exports.fetchListings = async (userId, queryParams) => {
 
     let url = `https://www.funda.nl/en/zoeken/${listingTypeDutch}?selected_area=[${selectedArea}]&price=${price}${floorArea}${rooms}&publication_date=1`;
 
-    const scrapedListings = await scrapeListings(url, listingType);
+    let scrapedListings;
+    try {
+      scrapedListings = await scrapeListings(url, listingType);
+    } catch (error) {
+      console.error(
+        `⛔ Error occurred while scraping listings from ${url}`,
+        error
+      );
+
+      return;
+    }
 
     const user = await User.findOne({ uid: userId });
     const newScrapedListings = scrapedListings.filter(
