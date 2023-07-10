@@ -18,22 +18,25 @@ exports.fetchListings = async (userId, queryParams) => {
     } = queryParams;
 
     const listingTypeDutch = listingType === "huur" ? "huur" : "koop";
-    let neighbourhoods = "";
 
-    if (Array.isArray(neighbourhood)) {
-      neighbourhoods = neighbourhood.map((obj) => obj.value).join(",");
-    } else if (typeof neighbourhood === "object") {
-      neighbourhoods = neighbourhood.value;
+    let selectedArea = "";
+
+    if (Array.isArray(neighbourhood) && neighbourhood.length > 0) {
+      // It's an array of neighborhoods
+      selectedArea = neighbourhood.map((obj) => `${obj.value}`).join(",");
+    } else if (typeof neighbourhood === "string" && neighbourhood !== "") {
+      // It's a non-empty string, should be the neighbourhood
+      selectedArea = neighbourhood;
     } else {
-      neighbourhoods = neighbourhood;
+      // It's either an empty string or any other case, fallback to location
+      selectedArea = location;
     }
 
-    let minSizeString = minSize !== "0" ? `${minSize}+woonopp/` : "";
-    let minBedroomsString = minBedrooms !== "0" ? `${minBedrooms}+kamers/` : "";
+    let price = `"${minPrice}-${maxPrice}"`;
+    let floorArea = minSize !== "0" ? `&floor_area="${minSize}-"` : "";
+    let rooms = minBedrooms !== "0" ? `&rooms="${minBedrooms}-"` : "";
 
-    let url = `https://www.funda.nl/en/${listingTypeDutch}/${location}/${
-      neighbourhoods ? neighbourhoods + "/" : ""
-    }beschikbaar/${minPrice}-${maxPrice}/${minSizeString}${minBedroomsString}1-dag/`;
+    let url = `https://www.funda.nl/en/zoeken/${listingTypeDutch}?selected_area=["${selectedArea}"]&price=${price}${floorArea}${rooms}&publication_date=1`;
 
     const scrapedListings = await scrapeListings(url, listingType);
 
