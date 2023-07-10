@@ -22,16 +22,13 @@ exports.fetchListings = async (userId, queryParams) => {
     let selectedArea = "";
 
     if (typeof neighbourhood === "string" && neighbourhood.includes(",")) {
-      // It's a string containing comma-separated values
       selectedArea = neighbourhood
         .split(",")
         .map((val) => `"${val.trim()}"`)
         .join(",");
     } else if (typeof neighbourhood === "string" && neighbourhood !== "") {
-      // It's a non-empty string, should be the neighbourhood
       selectedArea = `"${neighbourhood}"`;
     } else {
-      // It's either an empty string or any other case, fallback to location
       selectedArea = `"${location}"`;
     }
 
@@ -52,14 +49,12 @@ exports.fetchListings = async (userId, queryParams) => {
     );
 
     if (newScrapedListings.length > 0) {
-      console.log(
-        `Scraped ${newScrapedListings.length} new listings. Preparing to send email to ${email}`
-      );
+      console.log(`🏠 Found ${newScrapedListings.length} new listings!`);
 
       sendEmail(email, newScrapedListings);
-      console.log("Email sent");
+      console.log(`✉️  Email sent to ${email}`);
     } else {
-      console.log("No new listings to send email about.");
+      console.log("No new listings found.");
     }
 
     for (const listing of newScrapedListings) {
@@ -76,7 +71,7 @@ exports.fetchListings = async (userId, queryParams) => {
         await newListing.save();
       } else {
         console.log(
-          `Listing "${listing.title}" already exists in Listings collection.`
+          `"${listing.title}" already exists in Listings collection.`
         );
       }
 
@@ -122,15 +117,13 @@ exports.fetchListings = async (userId, queryParams) => {
 
         console.log("Successfully updated user's userListings");
       } else {
-        console.log(
-          `Listing "${listing.title}" already exists in user's userListings.`
-        );
+        console.log(`"${listing.title}" already exists in user's listings.`);
       }
     }
 
     return { listings: newScrapedListings };
   } catch (error) {
-    console.error("Error occurred in fetchListings function:", error);
+    console.error("⛔ Error occurred in fetchListings function:", error);
     throw error;
   }
 };
