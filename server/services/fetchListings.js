@@ -21,22 +21,25 @@ exports.fetchListings = async (userId, queryParams) => {
 
     let selectedArea = "";
 
-    if (Array.isArray(neighbourhood) && neighbourhood.length > 0) {
-      // It's an array of neighborhoods
-      selectedArea = neighbourhood.map((obj) => `${obj.value}`).join(",");
+    if (typeof neighbourhood === "string" && neighbourhood.includes(",")) {
+      // It's a string containing comma-separated values
+      selectedArea = neighbourhood
+        .split(",")
+        .map((val) => `"${val.trim()}"`)
+        .join(",");
     } else if (typeof neighbourhood === "string" && neighbourhood !== "") {
       // It's a non-empty string, should be the neighbourhood
-      selectedArea = neighbourhood;
+      selectedArea = `"${neighbourhood}"`;
     } else {
       // It's either an empty string or any other case, fallback to location
-      selectedArea = location;
+      selectedArea = `"${location}"`;
     }
 
     let price = `"${minPrice}-${maxPrice}"`;
     let floorArea = minSize !== "0" ? `&floor_area="${minSize}-"` : "";
     let rooms = minBedrooms !== "0" ? `&rooms="${minBedrooms}-"` : "";
 
-    let url = `https://www.funda.nl/en/zoeken/${listingTypeDutch}?selected_area=["${selectedArea}"]&price=${price}${floorArea}${rooms}&publication_date=1`;
+    let url = `https://www.funda.nl/en/zoeken/${listingTypeDutch}?selected_area=[${selectedArea}]&price=${price}${floorArea}${rooms}&publication_date=1`;
 
     const scrapedListings = await scrapeListings(url, listingType);
 
