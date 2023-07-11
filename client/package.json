@@ -19,7 +19,8 @@
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "format": "prettier --write \"src/**/*.{js,jsx}\""
   },
   "keywords": [],
   "author": "Yigit Aksoy",
