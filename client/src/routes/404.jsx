@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const Error = () => {
   return (
     <section id="404" className="font-degular">
-      <div className="grid h-screen place-items-center">
+      <div className="grid h-screen place-items-center bg-white">
         <div className="text-center text-black">
           <p className="py-2 text-2xl font-bold">404</p>
           <p className="py-2 text-2xl font-heavy">Page Not Found</p>
