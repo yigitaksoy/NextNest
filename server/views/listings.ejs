@@ -330,12 +330,12 @@
                                                             </tr>
                                                             <tr>
                                                               <td style="background-color: #fff; padding-top: 10px; width: 100%;" align="left">
+                                                                <p style="margin: 0; font-size: 14px; color: #333;"><%= listingData[i].neighbourhood %></p>
                                                                 <% for (let key in listingData[i].details) { 
-                                                                    if(detailsToDisplay.includes(key)) { 
-                                                                %>
-                                                                <p style="margin: 0; font-size: 14px; color: #333;"><%= listingData[i].details[key] %></p>
-                                                                <% } %>
-                                                                <% } %>
+                                                                  if(detailsToDisplay.includes(key)) { %>
+                                                                      <p style="margin: 0; font-size: 14px; color: #333;"><%= listingData[i].details[key] %></p>
+                                                                  <% } %>
+                                                              <% } %>
                                                               </td>
                                                             </tr>
                                                             <tr>
