@@ -90,6 +90,12 @@ const listingDetails = async (page, url, listingType) => {
       // Implement your own error handling logic here...
     }
 
+    // Add Today's Date for the new listings
+    if (rawDetails["Listed since"] === "Today") {
+      const currentDate = new Date().toISOString().split("T")[0];
+      rawDetails["Listed since"] = currentDate;
+    }
+
     // Structure the data
     const details = {
       price_per_m2:
