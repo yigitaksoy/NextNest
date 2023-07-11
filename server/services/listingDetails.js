@@ -60,6 +60,15 @@ const listingDetails = async (page, url, listingType) => {
                   .map((str) => str.trim())
                   .join(" ")
               : undefined;
+
+            // Extract the number of bedrooms
+            if (label === "Number of rooms") {
+              value = value.replace(
+                /^.+?\((\d+)\s+bedrooms?\)/i,
+                "$1 bedrooms"
+              );
+            }
+
             details[label] = value;
           }
         });
