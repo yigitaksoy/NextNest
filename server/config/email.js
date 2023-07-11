@@ -21,7 +21,7 @@ const sendEmail = (toEmail, listingData) => {
       const mailOptions = {
         from: "NextNest <info@nextnest.com>",
         to: toEmail,
-        subject: "New Listings",
+        subject: "🏠 New Listings",
         html: renderedHtml,
       };
 
