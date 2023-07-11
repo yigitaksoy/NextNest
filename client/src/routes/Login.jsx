@@ -48,7 +48,7 @@ const Login = () => {
             {
               uid: user.uid,
               email: user.email,
-            }
+            },
           );
 
           navigate("/home");

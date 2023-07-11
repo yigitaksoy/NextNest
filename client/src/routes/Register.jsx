@@ -38,7 +38,7 @@ const Register = () => {
         const userCredential = await createUserWithEmailAndPassword(
           auth,
           email,
-          password
+          password,
         );
 
         // Make a POST request to the server-side /register route
@@ -49,7 +49,7 @@ const Register = () => {
           {
             uid: userCredential.user.uid,
             email,
-          }
+          },
         );
 
         navigate("/home");

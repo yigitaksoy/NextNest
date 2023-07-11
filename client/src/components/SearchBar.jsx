@@ -47,7 +47,7 @@ const SearchBar = () => {
               headers: {
                 Authorization: `Bearer ${idToken}`,
               },
-            }
+            },
           );
 
           const searchCriteria = response.data;
@@ -93,7 +93,7 @@ const SearchBar = () => {
           headers: {
             Authorization: `Bearer ${idToken}`,
           },
-        }
+        },
       );
 
       console.log("Search Payload:", saveSearchResponse);
@@ -118,7 +118,7 @@ const SearchBar = () => {
             headers: {
               Authorization: `Bearer ${idToken}`,
             },
-          }
+          },
         );
         console.log("Email sent:", scrapeListingsResponse.data);
       } catch (error) {

@@ -7,10 +7,10 @@ const SizeAndRoomsInput = ({ handleChange, formData }) => {
   const roomOptions = rooms;
 
   const selectedSurface = surfaceOptions.find(
-    (option) => option.value === formData.minSize
+    (option) => option.value === formData.minSize,
   );
   const selectedRoom = roomOptions.find(
-    (option) => option.value === formData.minBedrooms
+    (option) => option.value === formData.minBedrooms,
   );
 
   const handleSurfaceChange = (selectedOption) => {

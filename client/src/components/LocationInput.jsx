@@ -14,12 +14,12 @@ const LocationInput = ({
   const [isAllSelected, setIsAllSelected] = useState(false);
 
   const selectedLocation = locationOptions.find(
-    (option) => option.value === formData.location
+    (option) => option.value === formData.location,
   );
 
   const selectedNeighbourhood = Array.isArray(formData.neighbourhood)
     ? neighbourhoodOptions.filter((option) =>
-        formData.neighbourhood.map((n) => n.value).includes(option.value)
+        formData.neighbourhood.map((n) => n.value).includes(option.value),
       )
     : [];
 
@@ -39,7 +39,7 @@ const LocationInput = ({
 
     // Check if "All Neighborhoods" is selected
     const allSelected = selectedNeighbourhoods.find(
-      (option) => option.value === ""
+      (option) => option.value === "",
     );
 
     // If "All Neighborhoods" is selected, set isAllSelected to true
