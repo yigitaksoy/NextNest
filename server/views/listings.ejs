@@ -102,8 +102,14 @@
       word-break: break-word;
     "
   >
+  <% for (let i = 0; i < listingData.length; i++) { %>
     <div style="display: none">
-      New listings have arrived! &#847; &#847; &#847; &#847; &#847; &#847;
+      <% if (i === 0) { %>
+        We're excited to let you know that we've found
+        <span style="color: #333333; font-weight: 700; font-style: normal"><%= listingData.length %></span>
+        new listings for you! 🎉
+      <% } %>
+      &#847; &#847; &#847; &#847; &#847; &#847;
       &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847;
       &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847;
       &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847;
@@ -120,6 +126,7 @@
       &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847;
       &#847; &#847; &#847; &#847;
     </div>
+    <% } %>
     <div
       role="article"
       aria-roledescription="email"
