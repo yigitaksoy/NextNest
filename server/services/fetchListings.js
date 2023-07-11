@@ -58,42 +58,36 @@ exports.fetchListings = async (userId, queryParams) => {
         )
     );
 
-    if (newScrapedListings.length > 0) {
-      console.log(`🏠 Found ${newScrapedListings.length} new listings!`);
-
-      sendEmail(email, newScrapedListings);
-      console.log(`✉️  Email sent to ${email}`);
-    } else {
-      console.log("No new listings found.");
-    }
-
-    for (const listing of newScrapedListings) {
+    for (let i = 0; i < newScrapedListings.length; i++) {
       const listingId = uuidv4();
 
       // Check if a listing with the same title already exists in the "Listing" collection
       const existingListingInListings = await Listing.findOne({
-        title: listing.title,
+        title: newScrapedListings[i].title,
       });
 
-      // If the listing does not exist in the "Listing" collection, add it
-      if (!existingListingInListings) {
-        let newListing = new Listing(listing);
-        await newListing.save();
-      } else {
+      // If a listing already exists in the /listings collection, dont fetch details. Instead, merge them from the existing collection.
+      if (existingListingInListings) {
         console.log(
-          `"${listing.title}" already exists in Listings collection.`
+          `"${newScrapedListings[i].title}" already exists in Listings collection.`
         );
+        newScrapedListings[i] = existingListingInListings;
+      } else {
+        let newListing = new Listing(newScrapedListings[i]);
+        await newListing.save();
+        newScrapedListings[i] = newListing;
       }
 
       // Check if a listing with the same title already exists in the user's "userListings" array
       const existingListingInUserListings = user.userListings.find(
-        (userListing) => userListing.title === listing.title
+        (userListing) => userListing.title === newScrapedListings[i].title
       );
 
       // If the listing does not exist in the user's "userListings" array, add it
       if (!existingListingInUserListings) {
         console.log("Updating user's userListings in the database");
-        const details = listing.details || {};
+
+        const details = newScrapedListings[i].details || {};
         const layout = details.layout || {};
 
         const price_per_m2 = details.price_per_m2 || "N/A";
@@ -103,13 +97,13 @@ exports.fetchListings = async (userId, queryParams) => {
           {
             $push: {
               userListings: {
-                image: listing.image,
-                title: listing.title,
-                url: listing.url,
-                price: listing.price,
-                neighbourhood: listing.neighbourhood,
-                postal_code: listing.postal_code,
-                listingType: listing.listingType,
+                image: newScrapedListings[i].image,
+                title: newScrapedListings[i].title,
+                url: newScrapedListings[i].url,
+                price: newScrapedListings[i].price,
+                neighbourhood: newScrapedListings[i].neighbourhood,
+                postal_code: newScrapedListings[i].postal_code,
+                listingType: newScrapedListings[i].listingType,
                 details: {
                   price_per_m2,
                   listed_since: details.listed_since || "N/A",
@@ -127,8 +121,19 @@ exports.fetchListings = async (userId, queryParams) => {
 
         console.log("Successfully updated user's userListings");
       } else {
-        console.log(`"${listing.title}" already exists in user's listings.`);
+        console.log(
+          `"${newScrapedListings[i].title}" already exists in user's listings.`
+        );
       }
+    }
+
+    if (newScrapedListings.length > 0) {
+      console.log(`🏠 Found ${newScrapedListings.length} new listings!`);
+
+      sendEmail(email, newScrapedListings);
+      console.log(`✉️  Email sent to ${email}`);
+    } else {
+      console.log("No new listings found.");
     }
 
     return { listings: newScrapedListings };
