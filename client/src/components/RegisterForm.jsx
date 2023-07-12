@@ -39,10 +39,10 @@ const RegisterForm = ({
             },
           );
 
-          navigate("/home");
+          navigate("/search");
         } else {
           // User document already exists, no need to create it again
-          navigate("/home");
+          navigate("/search");
         }
       })
       .catch((error) => {

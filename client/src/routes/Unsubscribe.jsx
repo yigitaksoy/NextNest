@@ -72,7 +72,7 @@ const Unsubscribe = () => {
                   <span className="font-heavy">Accidental click? </span> Not a
                   problem! You can always re-subscribe again by making a new{" "}
                   <Link
-                    to="/home"
+                    to="/search"
                     className="underline font-heavy cursor-pointer"
                   >
                     search

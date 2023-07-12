@@ -52,7 +52,7 @@ const Register = () => {
           },
         );
 
-        navigate("/home");
+        navigate("/search");
       } catch (error) {
         console.log(error);
         if (error.code === "auth/email-already-in-use") {

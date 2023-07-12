@@ -20,7 +20,7 @@ const Login = () => {
     // Check if the user is already signed in
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        navigate(location.state?.from || "/home");
+        navigate(location.state?.from || "/search");
       }
     });
 
@@ -53,7 +53,7 @@ const Login = () => {
             },
           );
 
-          navigate(location.state?.from || "/home");
+          navigate(location.state?.from || "/search");
         } else {
           // User document already exists, no need to create it again
           console.info("User already exists in Firestore.");
@@ -73,7 +73,7 @@ const Login = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
-        navigate(location.state?.from || "/home");
+        navigate(location.state?.from || "/search");
       })
       .catch((error) => {
         const errorMessage = error.message;
