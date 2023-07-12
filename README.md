@@ -34,7 +34,7 @@ The application checks for new property listings every 30 minutes and notifies r
 - Node-cron
 
 
-#### Key Features
+### Key Features
 
 - **Authentication**: NextNest incorporates user registration and login functionalities with Google & E-mail signup, leveraging Firebase to ensure a personalized and secure user experience.
 
@@ -54,8 +54,8 @@ The application checks for new property listings every 30 minutes and notifies r
 
 ![Template Preview](https://github.com/yigitaksoy/Nextnest-email/blob/master/src/assets/images/nextnest-listing-template.png)
 
-#### Disclaimer
+### Disclaimer
 NextNest is built as a personal side project, and it does not guarantee the accuracy, validity, or timeliness of the real estate listings information. Use it at your own discretion. It is not affiliated with or endorsed by any real estate agencies or websites from which it scrapes the listings. NextNest is a free service and does not generate any income or profit.
 
-#### Contributing
+### Contributing
 Contributions, issues, and feature requests are welcome. Feel free to check the [issues page](https://github.com/yigitaksoy/NextNest/issues) if you want to contribute.
