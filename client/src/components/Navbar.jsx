@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
@@ -9,7 +10,9 @@ const Navbar = () => {
   return (
     <div className="navbar sticky top-0 z-50 bg-black p-5">
       <div className="flex-1">
-        <img src={NextNest} alt="nextnest-logo" className="w-22 h-10" />
+        <Link to="/search">
+          <img src={NextNest} alt="nextnest-logo" className="w-22 h-10" />
+        </Link>
       </div>
       <div className="mx-auto text-lg text-white">
         <button
