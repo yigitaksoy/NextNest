@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import axios from "axios";
 import {
   signInWithEmailAndPassword,
@@ -13,12 +13,13 @@ import NextNest from "../assets/images/nextnest-white-shadow.png";
 const Login = () => {
   const [err, setErr] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     // Check if the user is already signed in
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        navigate("/home");
+        navigate(location.state?.from || "/home");
       }
     });
 
@@ -51,7 +52,7 @@ const Login = () => {
             },
           );
 
-          navigate("/home");
+          navigate(location.state?.from || "/home");
         } else {
           // User document already exists, no need to create it again
           console.info("User already exists in Firestore.");
@@ -71,7 +72,7 @@ const Login = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
-        navigate("/home");
+        navigate(location.state?.from || "/home");
       })
       .catch((error) => {
         const errorMessage = error.message;
