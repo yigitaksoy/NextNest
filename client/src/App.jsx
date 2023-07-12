@@ -5,6 +5,7 @@ import "./assets/css/style.css";
 import Home from "./routes/Home";
 import Register from "./routes/Register";
 import Login from "./routes/Login";
+import Unsubscribe from "./routes/Unsubscribe";
 import Error from "./routes/404";
 
 const App = () => {
@@ -20,6 +21,14 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <Home />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/unsubscribe"
+            element={
+              <ProtectedRoute>
+                <Unsubscribe />
               </ProtectedRoute>
             }
           />
