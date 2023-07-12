@@ -12,6 +12,10 @@ html {
   background: #f3f4f6!important;
 }
 
+.info-message {
+  margin-top: 0!important;
+}
+
 #register-form,
 #login {
   border: 2px solid #000;

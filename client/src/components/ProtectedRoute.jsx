@@ -12,8 +12,13 @@ const ProtectedRoute = ({ children }) => {
   }
 
   if (!user) {
-    console.warn(`Please sign in to continue..`);
-    return <Navigate to="/login" replace={true} state={{ from: location }} />;
+    return (
+      <Navigate
+        to="/login"
+        replace={true}
+        state={{ from: location, message: "Please sign in to continue.." }}
+      />
+    );
   }
 
   return children;

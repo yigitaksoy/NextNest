@@ -14,6 +14,7 @@ const Login = () => {
   const [err, setErr] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const [message, setMessage] = useState(location.state?.message || "");
 
   useEffect(() => {
     // Check if the user is already signed in
@@ -94,9 +95,10 @@ const Login = () => {
             <h1 className="text-center font-marker text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
               Welcome back!
             </h1>
-            <div className="text-center text-sm text-red-500">
+            <p className="text-center text-sm font-heavy text-red-500 info-message">
               {err && <span>Something went wrong</span>}
-            </div>
+              {message && <span>{message}</span>}
+            </p>
             <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
               <div>
                 <label
