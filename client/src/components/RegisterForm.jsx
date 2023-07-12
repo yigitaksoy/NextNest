@@ -42,7 +42,7 @@ const RegisterForm = ({
           navigate("/home");
         } else {
           // User document already exists, no need to create it again
-          console.info("User already exists in Firestore.");
+          navigate("/home");
         }
       })
       .catch((error) => {
