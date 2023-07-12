@@ -80,6 +80,7 @@ exports.saveUserSearch = async (req, res, next) => {
           minBedrooms,
           email,
         },
+        subscription: true,
       },
       { new: true }
     );
@@ -91,5 +92,38 @@ exports.saveUserSearch = async (req, res, next) => {
     res.json(updatedUser.userSearch);
   } catch (error) {
     next(error);
+  }
+};
+
+// PUT route to update user subscription
+exports.updateSubscription = async (req, res) => {
+  try {
+    const user = req.user;
+
+    // Check if the user is authenticated
+    if (!user) {
+      return res.status(401).json({ message: "User not authenticated!" });
+    }
+
+    const { subscription } = req.body;
+
+    const updatedUser = await User.findOneAndUpdate(
+      { uid: user.uid },
+      {
+        subscription: subscription,
+      },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json({ message: "Subscription updated successfully!" });
+  } catch (error) {
+    console.error("Error updating subscription:", error);
+    res
+      .status(500)
+      .json({ error: "An error occurred while updating subscription" });
   }
 };

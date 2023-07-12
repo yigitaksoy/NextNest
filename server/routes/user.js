@@ -10,5 +10,6 @@ router.post("/register", userController.register);
 router.use(verifyToken(admin));
 router.get("/search", userController.getUserSearch);
 router.post("/search", userController.saveUserSearch);
+router.put("/subscription", userController.updateSubscription);
 
 module.exports = router;
