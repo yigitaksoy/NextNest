@@ -19,7 +19,7 @@ const listingDetails = async (page, url, listingType) => {
             await page.select("#langSwitch", "en");
             await page.waitForTimeout(5000);
           } catch (error) {
-            console.log("Could not find language switcher");
+            console.log("⚠️ Could not find language switcher");
           }
         }
 
@@ -27,7 +27,7 @@ const listingDetails = async (page, url, listingType) => {
       } catch (error) {
         navigationAttempts++;
         console.error(
-          `Error during navigation attempt ${navigationAttempts}: ${error}`
+          `⛔ Error during navigation attempt ${navigationAttempts}: ${error}`
         );
         if (navigationAttempts >= 5) throw error;
         await page.waitForTimeout(5000);
@@ -95,8 +95,7 @@ const listingDetails = async (page, url, listingType) => {
         return details;
       });
     } catch (error) {
-      console.error("Error during page evaluation:", error);
-      // Implement your own error handling logic here...
+      console.error("⛔ Error during page evaluation:", error);
     }
 
     // Add Today's Date for the new listings
@@ -125,7 +124,7 @@ const listingDetails = async (page, url, listingType) => {
 
     return details;
   } catch (error) {
-    console.error("Error scraping listing details:", error);
+    console.error("⛔ Error fetching listing details:", error);
     throw error;
   }
 };
