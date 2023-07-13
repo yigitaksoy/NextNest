@@ -1,7 +1,6 @@
-<h3 align="center">
-<img src="https://github.com/yigitaksoy/NextNest/blob/master/client/public/nextnest.png" alt="NextNest Logo">
-</h3>
+![NextNest](https://github.com/yigitaksoy/NextNest/blob/master/client/public/nextnest-readme.png)
 
+---
 ### About
 
 NextNest is a personalized real estate notification service designed specifically to the dynamic Dutch real estate market. This tool is designed to keep users informed about the latest real estate listings in the Netherlands that match their preferences. By automating the search process and providing personalized notifications, NextNest takes the hassle out of finding the perfect property, allowing users to respond to new listings promptly as they become available.
