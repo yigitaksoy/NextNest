@@ -1,13 +1,13 @@
 require("dotenv").config();
-const express = require("express");
 const path = require("path");
+const express = require("express");
 const cors = require("cors");
-const { connectToDatabase } = require("./config/database");
-const apiRoutes = require("./routes/api");
-const errorHandler = require("./middleware/errorHandler");
-const { verifyToken } = require("./middleware/verifyToken");
-const userRoutes = require("./routes/user");
 const admin = require("./config/firebaseAdmin");
+const { connectToDatabase } = require("./config/database");
+const { verifyToken } = require("./middleware/verifyToken");
+const errorHandler = require("./middleware/errorHandler");
+const apiRoutes = require("./routes/api");
+const userRoutes = require("./routes/user");
 
 // Sync Listings
 require("./services/listingSync");
