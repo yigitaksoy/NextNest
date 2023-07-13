@@ -6,7 +6,7 @@
 
 NextNest is a personalized real estate notification service designed specifically to the dynamic Dutch real estate market. This tool is designed to keep users informed about the latest real estate listings in the Netherlands that match their preferences. By automating the search process and providing personalized notifications, NextNest takes the hassle out of finding the perfect property, allowing users to respond to new listings promptly as they become available.
 
-The application checks for new property listings every 30 minutes and notifies registered users when a new listing matches their search criteria. Notifications are sent directly to the user's email to provide immediate updates.
+The application checks for new property listings every 15 minutes and notifies registered users when a new listing matches their search criteria. Notifications are sent directly to the user's email to provide immediate updates.
 
 ### Tech
 
@@ -32,6 +32,7 @@ The application checks for new property listings every 30 minutes and notifies r
 - Mongoose
 - Nodemailer
 - Node-cron
+- Better-queue
 
 
 ### Key Features
@@ -40,7 +41,9 @@ The application checks for new property listings every 30 minutes and notifies r
 
 - **API Handling**: By scraping data from Dutch property websites, NextNest retrieves up-to-date real estate information. The NodeJS and Express backend manages API calls, data extraction, and storage, providing users with seamless interactions.
 
-- **Automated Tasks**: Utilizing node-cron, NextNest executes its main data fetching function every 30 minutes. This ensures users receive the most current data without manual intervention.
+- **Automated Tasks**: Utilizing node-cron, NextNest executes its main data fetching function every 15 minutes. This ensures users receive the most current data without manual intervention.
+
+- **Queue Management**: Utilizing better-queue, each fetch operation is added to the queue as a job, and jobs are processed in the order they were added (FIFO - First In, First Out). The queue then processes each job as resources allow, ensuring that no two fetch operations run concurrently. This significantly improves resource management and reliability of the application.
 
 - **Personalized Search**: NextNest enables users to set their search parameters based on property type, location, price range, size, and more, offering a truly personalized experience. For those searching in Amsterdam, the application provides an additional feature to customize searches from 97 distinct neighborhoods.
 
