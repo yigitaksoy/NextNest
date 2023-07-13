@@ -10,7 +10,7 @@ const Navbar = () => {
   return (
     <div className="navbar sticky top-0 z-50 bg-black p-5">
       <div className="flex-1">
-        <Link to="/search">
+        <Link to="/">
           <img src={NextNest} alt="nextnest-logo" className="w-22 h-10" />
         </Link>
       </div>
