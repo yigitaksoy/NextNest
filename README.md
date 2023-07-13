@@ -38,7 +38,7 @@ The application checks for new property listings every 15 minutes and notifies r
 
 - **Authentication**: NextNest incorporates user registration and login functionalities with Google & E-mail signup, leveraging Firebase to ensure a personalized and secure user experience.
 
-- **API Handling**: By scraping data from Dutch property websites, NextNest retrieves up-to-date real estate information. The NodeJS and Express backend manages API calls, data extraction, and storage, providing users with seamless interactions.
+- **API Handling**: By retrieving data from Dutch property websites, NextNest retrieves up-to-date real estate information. The NodeJS and Express backend manages API calls, data extraction, and storage, providing users with seamless interactions.
 
 - **Automated Tasks**: Utilizing node-cron, NextNest executes its main data fetching function every 15 minutes. This ensures users receive the most current data without manual intervention.
 
@@ -52,12 +52,12 @@ The application checks for new property listings every 15 minutes and notifies r
 
 - **Responsive and User-Friendly Interface**: The application's frontend, designed with React and TailwindCSS, delivers a responsive, pixel-perfect, and easy-to-navigate interface.
 
-- **Custom Email Templates**: NextNest employs a pixel-perfect, responsive custom email template built with TailwindCSS & Adobe Fonts in Maizzle for its notification service. For more information, please see [here](https://github.com/yigitaksoy/Nextnest-email).
+- **Custom Email Templates**: NextNest employs a pixel-perfect, responsive custom email template built with TailwindCSS & Adobe Fonts in Maizzle for its notification service. For more information, please see the template repo [here](https://github.com/yigitaksoy/Nextnest-email).
 
 ![Template Preview](https://github.com/yigitaksoy/Nextnest-email/blob/master/src/assets/images/nextnest-listing-template.png)
 
 ### Disclaimer
-NextNest is built as a personal side project, and it does not guarantee the accuracy, validity, or timeliness of the real estate listings information. Use it at your own discretion. It is not affiliated with or endorsed by any real estate agencies or websites from which it scrapes the listings. NextNest is a free service and does not generate any income or profit.
+NextNest is built as a personal side project, and it does not guarantee the accuracy, validity, or timeliness of the real estate listings information. Use it at your own discretion. NextNest is not affiliated with or endorsed by any real estate agencies or websites from which it retrieves the listings. NextNest is a free service and does not generate any income or profit.
 
 ### Contributing
 Contributions, issues, and feature requests are welcome. Feel free to check the [issues page](https://github.com/yigitaksoy/NextNest/issues) if you want to contribute.
