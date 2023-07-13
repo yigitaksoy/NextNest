@@ -77,8 +77,6 @@ const SearchBar = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("Form Data:", formData);
-
     try {
       // Save search criteria to MongoDB
       const user = auth.currentUser;
@@ -96,8 +94,6 @@ const SearchBar = () => {
         },
       );
 
-      console.log("Search Payload:", saveSearchResponse);
-      console.log("Search criteria saved:", saveSearchResponse.data);
       setFormSubmitted(true);
 
       try {
@@ -120,7 +116,6 @@ const SearchBar = () => {
             },
           },
         );
-        console.log("Email sent:", scrapeListingsResponse.data);
       } catch (error) {
         console.error("Error sending listing data:", error);
       }
