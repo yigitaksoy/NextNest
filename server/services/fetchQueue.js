@@ -14,6 +14,8 @@ const fetchQueue = new Queue(
   {
     concurrent: 1, // Limit the number of concurrent jobs
     maxTimeout: 1200000, // Set a maximum timeout to 20 minutes
+    maxRetries: 5, // Set maximum retries
+    retryDelay: 10000, // Set a delay of 10 seconds for each retry
   }
 );
 
