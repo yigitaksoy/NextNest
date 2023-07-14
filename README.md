@@ -38,6 +38,8 @@ The application checks for new property listings every 15 minutes and notifies r
 
 - **Authentication**: NextNest incorporates user registration and login functionalities with Google & E-mail signup, leveraging Firebase to ensure a personalized and secure user experience.
 
+- **Secure User Verification**: NextNest utilizes Firebase Admin SDK for token verification. This ensures that all user tokens are validated prior to making any API call, thus enhancing security and preserving the integrity of user data.
+
 - **API Handling**: By retrieving data from Dutch property websites, NextNest retrieves up-to-date real estate information. The NodeJS and Express backend manages API calls, data extraction, and storage, providing users with seamless interactions.
 
 - **Automated Tasks**: Utilizing node-cron, NextNest executes its main data fetching function every 15 minutes. This ensures users receive the most current data without manual intervention.
