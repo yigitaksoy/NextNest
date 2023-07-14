@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth, db } from "../utils/firebase";
 import axios from "axios";
 import { doc, setDoc, getDoc } from "firebase/firestore";
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 
 const RegisterForm = ({
   handleSubmit,
@@ -12,6 +14,9 @@ const RegisterForm = ({
   passwordsMatch,
 }) => {
   const navigate = useNavigate();
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const togglePasswordVisibility = () =>
+    setIsPasswordVisible((prevState) => !prevState);
 
   const googleSignUp = () => {
     const provider = new GoogleAuthProvider();
@@ -84,7 +89,7 @@ const RegisterForm = ({
               </span>
             )}
           </div>
-          <div>
+          <div className="relative">
             <label
               htmlFor="password"
               className="mb-2 block text-sm font-black text-gray-900 "
@@ -92,7 +97,7 @@ const RegisterForm = ({
               Password
             </label>
             <input
-              type="password"
+              type={isPasswordVisible ? "text" : "password"}
               name="password"
               id="password"
               placeholder="••••••••"
@@ -104,11 +109,25 @@ const RegisterForm = ({
               required
               onChange={handleChange}
             />
+            <div className="absolute inset-y-0 right-0 mt-3 mr-5 text-gray-600 flex items-center">
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  togglePasswordVisibility();
+                }}
+              >
+                {isPasswordVisible ? (
+                  <EyeSlashIcon class="h-5 w-5 text-gray-500" />
+                ) : (
+                  <EyeIcon class="h-5 w-5 text-gray-500" />
+                )}
+              </button>
+            </div>
             <p className="text-xs text-neutral-700">
               Passwords must be min. 8 characters
             </p>
           </div>
-          <div>
+          <div className="relative">
             <label
               htmlFor="confirmPassword"
               className="mb-2 block text-sm font-black text-gray-900 "
@@ -116,7 +135,7 @@ const RegisterForm = ({
               Confirm Password
             </label>
             <input
-              type="password"
+              type={isPasswordVisible ? "text" : "password"}
               name="confirmPassword"
               id="confirmPassword"
               placeholder="••••••••"
