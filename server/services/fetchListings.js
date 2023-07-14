@@ -21,13 +21,27 @@ exports.fetchListings = async (userId, queryParams) => {
 
     let selectedArea = "";
 
-    if (typeof neighbourhood === "string" && neighbourhood.includes(",")) {
+    if (Array.isArray(neighbourhood) && neighbourhood.length > 0) {
+      const neighbourhoodValues = neighbourhood
+        .map((n) => n.value.trim())
+        .filter(Boolean);
+      if (neighbourhoodValues.length > 0) {
+        selectedArea = neighbourhoodValues.map((val) => `"${val}"`).join(",");
+      } else {
+        selectedArea = `"${location}"`;
+      }
+    } else if (
+      typeof neighbourhood === "string" &&
+      neighbourhood.trim() !== ""
+    ) {
       selectedArea = neighbourhood
         .split(",")
         .map((val) => `"${val.trim()}"`)
+        .filter(Boolean)
         .join(",");
-    } else if (typeof neighbourhood === "string" && neighbourhood !== "") {
-      selectedArea = `"${neighbourhood}"`;
+      if (selectedArea === "") {
+        selectedArea = `"${location}"`;
+      }
     } else {
       selectedArea = `"${location}"`;
     }
