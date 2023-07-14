@@ -54,7 +54,7 @@ The application checks for new property listings every 15 minutes and notifies r
 
 - **Custom Email Templates**: NextNest employs a pixel-perfect, responsive custom email template built with TailwindCSS & Adobe Fonts in Maizzle for its notification service. For more information, please see the template repo [here](https://github.com/yigitaksoy/Nextnest-email).
 
-![Template Preview](https://github.com/yigitaksoy/Nextnest-email/blob/master/src/assets/images/nextnest-listing-template.png)
+![Template Preview](https://github.com/yigitaksoy/Nextnest-email/blob/master/src/assets/images/nextnest-template.png)
 
 ### Disclaimer
 NextNest is built as a personal side project, and it does not guarantee the accuracy, validity, or timeliness of the real estate listings information. Use it at your own discretion. NextNest is not affiliated with or endorsed by any real estate agencies or websites from which it retrieves the listings. NextNest is a free service and does not generate any income or profit.
