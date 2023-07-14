@@ -42,6 +42,8 @@ The application checks for new property listings every 15 minutes and notifies r
 
 - **API Handling**: By retrieving data from Dutch property websites, NextNest retrieves up-to-date real estate information. The NodeJS and Express backend manages API calls, data extraction, and storage, providing users with seamless interactions.
 
+- **Scalable Data Management**: NextNest uses MongoDB to store and manage data, ensuring the app can handle growth without compromising speed or reliability. This ensures a consistently responsive, efficient, and user-friendly experience, even as the number of properties and user queries increases.
+
 - **Automated Tasks**: Utilizing node-cron, NextNest executes its main data fetching function every 15 minutes. This ensures users receive the most current data without manual intervention.
 
 - **Queue Management**: Utilizing better-queue, each fetch operation is added to the queue as a job, and jobs are processed in the order they were added (FIFO - First In, First Out). The queue then processes each job as resources allow, ensuring that no two fetch operations run concurrently. This significantly improves resource management and reliability of the application.
