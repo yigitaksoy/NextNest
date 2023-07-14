@@ -11,7 +11,7 @@ The application checks for new property listings every 15 minutes and notifies r
 
 #### Frontend
 - React
-- React-Router
+- React Router
 - Axios
 - Firebase Auth
 - React Firebase hooks
@@ -61,7 +61,7 @@ The application checks for new property listings every 15 minutes and notifies r
 ![Template Preview](https://github.com/yigitaksoy/Nextnest-email/blob/master/src/assets/images/nextnest-template.png)
 
 ### Disclaimer
-NextNest is built as a personal side project, and it does not guarantee the accuracy, validity, or timeliness of the real estate listings information. Use it at your own discretion. NextNest is not affiliated with or endorsed by any real estate agencies or websites from which it retrieves the listings. NextNest is a free service and does not generate any income or profit.
+NextNest is built as a hobby project, and it does not guarantee the accuracy, validity, or timeliness of the real estate listings information. Use it at your own discretion. NextNest is not affiliated with or endorsed by any real estate agencies or websites from which it retrieves the listings. NextNest is a free service and does not generate any income or profit.
 
 ### Contributing
 Contributions, issues, and feature requests are welcome. Feel free to check the [issues page](https://github.com/yigitaksoy/NextNest/issues) if you want to contribute.
