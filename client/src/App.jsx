@@ -7,11 +7,13 @@ import Register from "./routes/Register";
 import Login from "./routes/Login";
 import Unsubscribe from "./routes/Unsubscribe";
 import Error from "./routes/404";
+import ScrollToTop from "./components/ScrollToTop";
 
 const App = () => {
   return (
     <AuthContextProvider>
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
