@@ -4,6 +4,7 @@ import { AuthContext } from "../context/AuthContext";
 import { signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import NextNest from "../assets/images/nextnest-white.png";
+import Avatar from "../assets/images/avatar.png";
 
 const Navbar = () => {
   const { currentUser } = useContext(AuthContext);
@@ -14,17 +15,29 @@ const Navbar = () => {
           <img src={NextNest} alt="nextnest-logo" className="w-22 h-10" />
         </Link>
       </div>
-      <div className="mx-auto text-lg text-white">
-        <button
-          className="btn-ghost btn-square btn mx-auto flex"
-          onClick={() => signOut(auth)}
-        >
-          <div className="mr-10 flex items-center">
-            <p className="mr-2 font-nove text-white hover:text-sky-300">
-              Logout
-            </p>
+      <div className="dropdown dropdown-end cursor-pointer font-degular">
+        <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+          <div className="w-10 rounded-full">
+            {currentUser && currentUser.photoURL ? (
+              <img src={currentUser.photoURL} alt="User" />
+            ) : (
+              <img src={Avatar} className="" alt="Avatar" />
+            )}
           </div>
-        </button>
+        </label>
+        <ul
+          tabIndex={0}
+          className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-black text-white rounded-box w-52"
+        >
+          <li>
+            <button
+              className="justify-between hover:bg-zinc-800"
+              onClick={() => signOut(auth)}
+            >
+              Logout
+            </button>
+          </li>
+        </ul>
       </div>
     </div>
   );
