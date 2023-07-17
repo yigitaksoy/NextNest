@@ -6,6 +6,14 @@
 @tailwind components;
 @tailwind utilities;
 
+/*  Navbar  */
+
+/* Subscription Toggle */
+input:checked ~ .dot {
+  transform: translateX(100%);
+  background-color: #57ef97;
+}
+
 /*  Login & Registration Page */
 
 html {
