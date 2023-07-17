@@ -13,10 +13,10 @@ exports.listingService = async (req, res) => {
       fetchFunction: fetchListings,
     });
   } catch (error) {
-    console.error("Error occurred in /scrape-listings route:", error);
+    console.error("⛔ Error occurred in /listings route:", error);
     res
       .status(500)
-      .json({ error: "An error occurred while processing your request" });
+      .json({ error: "⛔ An error occurred while processing your request" });
   }
 };
 
@@ -55,7 +55,7 @@ exports.syncListings = async () => {
     // Wait for all jobs to finish
     await Promise.all(jobs);
   } catch (error) {
-    console.error("Error occurred in syncListings:", error);
+    console.error("⛔ Error occurred in syncListings:", error);
     throw error;
   }
 };
