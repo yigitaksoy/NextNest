@@ -4,6 +4,7 @@ import { AuthContext } from "../context/AuthContext";
 import { signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 import NextNest from "../assets/images/nextnest-white.png";
 import Avatar from "../assets/images/avatar.png";
 
@@ -33,7 +34,6 @@ const Navbar = () => {
         url,
         {
           action: "toggle",
-          subscription: newStatus,
         },
         {
           headers: {
@@ -44,14 +44,19 @@ const Navbar = () => {
       );
 
       if (response.status === 200) {
-        console.log("Subscription updated successfully");
+        setSubscriptionStatus(response.data.subscription);
 
-        setSubscriptionStatus(newStatus);
+        // Show toast
+        const toastMessage = response.data.subscription
+          ? "Successfully subscribed!"
+          : "Successfully unsubscribed!";
+        toast.success(toastMessage);
       } else {
-        console.error("Failed to update subscription");
+        toast.error("Error updating subscription!");
       }
     } catch (error) {
       console.error("Error:", error);
+      toast.error("Error updating subscription!");
     }
   };
 
@@ -73,7 +78,6 @@ const Navbar = () => {
       if (response.status === 200) {
         // Set the state for subscription
         setSubscriptionStatus(response.data.subscription);
-        console.log("Subscription data:", response.data);
       } else {
         console.error("Failed to fetch subscription data");
       }
@@ -91,6 +95,25 @@ const Navbar = () => {
   }, [currentUser]);
   return (
     <div className="navbar sticky top-0 z-50 bg-black p-5">
+      <Toaster
+        toastOptions={{
+          success: {
+            style: {
+              background: "#57ef97",
+            },
+            iconTheme: {
+              primary: 'green',
+              secondary: 'white',
+            },
+          },
+          error: {
+            style: {
+              background: "red",
+              color: "white"
+            },
+          },
+        }}
+      />
       <div className="flex-1">
         <Link to="/">
           <img src={NextNest} alt="nextnest-logo" className="w-22 h-10" />
