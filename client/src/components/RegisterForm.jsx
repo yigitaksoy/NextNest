@@ -4,11 +4,11 @@ import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth, db } from "../utils/firebase";
 import axios from "axios";
 import { doc, setDoc, getDoc } from "firebase/firestore";
+import toast, { Toaster } from "react-hot-toast";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 
 const RegisterForm = ({
   handleSubmit,
-  err,
   handleChange,
   setConfirmPassword,
   passwordsMatch,
@@ -51,7 +51,7 @@ const RegisterForm = ({
         }
       })
       .catch((error) => {
-        console.info(error);
+        toast.error(error);
       });
   };
   return (
@@ -59,6 +59,25 @@ const RegisterForm = ({
       id="register-form"
       className="w-full rounded-lg bg-white sm:max-w-md md:mt-0 shadow-searchBar xl:p-0"
     >
+      <Toaster
+        toastOptions={{
+          success: {
+            style: {
+              background: "#57ef97",
+            },
+            iconTheme: {
+              primary: "green",
+              secondary: "white",
+            },
+          },
+          error: {
+            style: {
+              background: "red",
+              color: "white",
+            },
+          },
+        }}
+      />
       <div className="space-y-4 p-6 sm:p-8 md:space-y-6">
         <h1 className="text-center font-marker text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
           Create an account
@@ -83,11 +102,6 @@ const RegisterForm = ({
               placeholder="name@email.com"
               required
             />
-            {err && (
-              <span className="text-center text-sm font-bold text-red-500">
-                {err}
-              </span>
-            )}
           </div>
           <div className="relative">
             <label

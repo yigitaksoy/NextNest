@@ -8,15 +8,23 @@ import {
 } from "firebase/auth";
 import { auth, db } from "../utils/firebase";
 import { doc, setDoc, getDoc } from "firebase/firestore";
+import toast, { Toaster } from "react-hot-toast";
 import NextNest from "../assets/images/nextnest-white-shadow.png";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 
 const Login = () => {
-  const [err, setErr] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  const [message, setMessage] = useState(location.state?.message || "");
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [message, setMessage] = useState(null);
+
+  useEffect(() => {
+    if (location.state?.message) {
+      setMessage(location.state?.message);
+      toast.error(location.state?.message);
+      location.state.message = null;
+    }
+  }, []);
 
   const togglePasswordVisibility = () =>
     setIsPasswordVisible((prevState) => !prevState);
@@ -57,15 +65,14 @@ const Login = () => {
               email: user.email,
             },
           );
-
           navigate(location.state?.from || "/search");
         } else {
           // User document already exists, no need to create it again
-          console.info("User already exists in Firestore.");
+          toast.success("Successfully signed in!");
         }
       })
       .catch((error) => {
-        console.info(error);
+        toast.error(error);
       });
   };
 
@@ -78,15 +85,42 @@ const Login = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         navigate(location.state?.from || "/search");
+        toast.success("Successfully signed in!");
       })
       .catch((error) => {
-        const errorMessage = error.message;
-        setErr(errorMessage);
+        if (error.code === "auth/user-not-found") {
+          toast.error("User not found!");
+        } else if (error.code === "auth/wrong-password") {
+          toast.error("Wrong username or password!");
+        } else if (error.code === "auth/network-request-failed") {
+          toast.error("Network error! Please try again later.");
+        } else {
+          toast.error(error.message);
+        }
       });
   };
 
   return (
     <section className="h-screen bg-sky-300">
+      <Toaster
+        toastOptions={{
+          success: {
+            style: {
+              background: "#57ef97",
+            },
+            iconTheme: {
+              primary: "green",
+              secondary: "white",
+            },
+          },
+          error: {
+            style: {
+              background: "red",
+              color: "white",
+            },
+          },
+        }}
+      />
       <div className="mx-auto flex flex-col items-center justify-center px-6 py-8  md:h-screen lg:py-0">
         <Link to="/" className="mb-6">
           <img src={NextNest} alt="nextnest-logo" className="w-22 h-10" />
@@ -99,10 +133,6 @@ const Login = () => {
             <h1 className="text-center font-marker text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
               Welcome back!
             </h1>
-            <p className="text-center text-sm font-heavy text-red-500 info-message">
-              {err && <span>Something went wrong</span>}
-              {message && <span>{message}</span>}
-            </p>
             <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
               <div>
                 <label

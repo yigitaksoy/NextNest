@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 import RegisterForm from "../components/RegisterForm";
 import NextNest from "../assets/images/nextnest-white-shadow.png";
 
@@ -11,7 +12,6 @@ const Register = () => {
   const [passwordsMatch, setPasswordsMatch] = useState(true);
   const [confirmEmail, setConfirmEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
-  const [err, setErr] = useState(false);
 
   const navigate = useNavigate();
 
@@ -51,14 +51,13 @@ const Register = () => {
             email,
           },
         );
-
         navigate("/search");
       } catch (error) {
         console.log(error);
         if (error.code === "auth/email-already-in-use") {
-          setErr("This email address is already in use.");
+          toast.error("This email address is already in use.");
         } else {
-          setErr(error.message);
+          toast.error(error.message);
         }
       }
     } else {
@@ -72,6 +71,25 @@ const Register = () => {
 
   return (
     <section className="h-screen bg-sky-300 font-degular lg:h-screen">
+      <Toaster
+        toastOptions={{
+          success: {
+            style: {
+              background: "#57ef97",
+            },
+            iconTheme: {
+              primary: "green",
+              secondary: "white",
+            },
+          },
+          error: {
+            style: {
+              background: "red",
+              color: "white",
+            },
+          },
+        }}
+      />
       <div className="mx-auto flex flex-col items-center justify-center px-6 py-8  md:h-screen lg:py-0">
         <Link to="/" className="mb-6">
           <img src={NextNest} alt="nextnest-logo" className="w-22 h-10" />
@@ -81,7 +99,6 @@ const Register = () => {
           setConfirmPassword={setConfirmPassword}
           passwordsMatch={passwordsMatch}
           handleChange={handleChange}
-          err={err}
         />
         <div className="mt-5 text-center font-black text-black transition duration-100 hover:text-white">
           <Link to="/">Go back to the homepage</Link>
