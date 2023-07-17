@@ -16,6 +16,7 @@ The application checks for new property listings every 15 minutes and notifies r
 - Firebase Auth
 - React Firebase hooks
 - React-Select
+- React Hot Toast
 - TailwindCSS
 - TailwindCSS/Forms
 - DaisyUI
