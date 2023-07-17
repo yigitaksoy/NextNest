@@ -169,6 +169,7 @@ const Login = () => {
                 />
                 <div className="absolute inset-y-0 right-0 mt-3 mr-5 text-gray-600 flex items-center">
                   <button
+                    type="button"
                     onClick={(e) => {
                       e.preventDefault();
                       togglePasswordVisibility();
