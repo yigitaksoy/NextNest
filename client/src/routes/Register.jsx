@@ -53,7 +53,6 @@ const Register = () => {
         );
         navigate("/search");
       } catch (error) {
-        console.log(error);
         if (error.code === "auth/email-already-in-use") {
           toast.error("This email address is already in use.");
         } else {
