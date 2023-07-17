@@ -4,7 +4,7 @@ const { fetchAndExtractListings } = require("../utils/listings");
 const Listing = require("../models/listing");
 const { listingDetails } = require("./listingDetails");
 
-const scrapeListings = async (url, listingType) => {
+const listingService = async (url, listingType) => {
   console.log(`🔍 Fetching listings: ${url}`);
 
   const browser = await initializeBrowser();
@@ -71,5 +71,5 @@ const scrapeListings = async (url, listingType) => {
 };
 
 module.exports = {
-  scrapeListings,
+  listingService,
 };

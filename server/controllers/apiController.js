@@ -2,7 +2,7 @@ const fetchQueue = require("../services/fetchQueue");
 const { fetchListings } = require("../services/fetchListings");
 const User = require("../models/user");
 
-exports.scrapeListings = async (req, res) => {
+exports.listingService = async (req, res) => {
   try {
     const userId = req.user.uid;
     const queryParams = req.query;

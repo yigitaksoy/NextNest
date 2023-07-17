@@ -1,6 +1,6 @@
 const User = require("../models/user");
 const Listing = require("../models/listing");
-const { scrapeListings } = require("./listingService");
+const { listingService } = require("./listingService");
 const sendEmail = require("../config/email");
 const { v4: uuidv4 } = require("uuid");
 
@@ -54,7 +54,7 @@ exports.fetchListings = async (userId, queryParams) => {
 
     let scrapedListings;
     try {
-      scrapedListings = await scrapeListings(url, listingType);
+      scrapedListings = await listingService(url, listingType);
     } catch (error) {
       console.error(
         `⛔ Error occurred while scraping listings from ${url}`,
