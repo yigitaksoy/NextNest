@@ -16,10 +16,10 @@ const Unsubscribe = () => {
             ? import.meta.env.VITE_NEXTNEST_API_USER
             : "http://localhost:3000/user/subscription";
 
-        const response = await axios.put(
+        const response = await axios.post(
           url,
           {
-            subscription: false,
+            action: "unsubscribe",
           },
           {
             headers: {
