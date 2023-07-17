@@ -45,7 +45,6 @@ const Navbar = () => {
 
       if (response.status === 200) {
         setSubscriptionStatus(response.data.subscription);
-
         // Show toast
         const toastMessage = response.data.subscription
           ? "Successfully subscribed!"
@@ -102,14 +101,14 @@ const Navbar = () => {
               background: "#57ef97",
             },
             iconTheme: {
-              primary: 'green',
-              secondary: 'white',
+              primary: "green",
+              secondary: "white",
             },
           },
           error: {
             style: {
               background: "red",
-              color: "white"
+              color: "white",
             },
           },
         }}
@@ -140,7 +139,7 @@ const Navbar = () => {
           >
             <li>
               <div className="flex">
-                <div className=" text-white font-medium">Subscription</div>
+                <div className=" text-white font-medium mr-2">Subscription</div>
                 <label
                   htmlFor="subscription"
                   className="flex items-center cursor-pointer"
