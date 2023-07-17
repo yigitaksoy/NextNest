@@ -108,7 +108,7 @@ const SearchBar = () => {
         const scrapeListingsResponse = await axios.get(
           import.meta.env.MODE === "production"
             ? import.meta.env.VITE_NEXTNEST_API
-            : "http://localhost:3000/api/scrape-listings",
+            : "http://localhost:3000/api/listings",
           {
             params: tempFormData,
             headers: {

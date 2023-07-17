@@ -3,6 +3,6 @@ const apiController = require("../controllers/apiController");
 
 const router = express.Router();
 
-router.get("/scrape-listings", apiController.listingService);
+router.get("/listings", apiController.listingService);
 
 module.exports = router;
