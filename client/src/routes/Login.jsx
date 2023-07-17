@@ -246,9 +246,6 @@ const Login = () => {
             </form>
           </div>
         </div>
-        <div className="mt-5 text-center font-degular font-black text-black transition duration-100 hover:text-white">
-          <Link to="/">Go back to the homepage</Link>
-        </div>
       </div>
     </section>
   );

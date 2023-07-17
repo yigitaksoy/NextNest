@@ -99,9 +99,6 @@ const Register = () => {
           passwordsMatch={passwordsMatch}
           handleChange={handleChange}
         />
-        <div className="mt-5 text-center font-black text-black transition duration-100 hover:text-white">
-          <Link to="/">Go back to the homepage</Link>
-        </div>
       </div>
     </section>
   );
