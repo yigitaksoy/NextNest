@@ -145,9 +145,9 @@ const Login = () => {
                     }}
                   >
                     {isPasswordVisible ? (
-                      <EyeSlashIcon class="h-5 w-5 text-gray-500" />
+                      <EyeSlashIcon className="h-5 w-5 text-gray-500" />
                     ) : (
-                      <EyeIcon class="h-5 w-5 text-gray-500" />
+                      <EyeIcon className="h-5 w-5 text-gray-500" />
                     )}
                   </button>
                 </div>
