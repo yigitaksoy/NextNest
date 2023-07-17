@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
@@ -13,6 +13,7 @@ const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [subscriptionStatus, setSubscriptionStatus] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
   const toggleDropdown = () => {
     if (!isDropdownOpen) {
@@ -162,7 +163,11 @@ const Navbar = () => {
             <li>
               <button
                 className="justify-between hover:bg-zinc-800"
-                onClick={() => signOut(auth)}
+                onClick={() => {
+                  signOut(auth).then(() => {
+                    navigate("/login", { replace: true });
+                  });
+                }}
               >
                 Logout
               </button>
