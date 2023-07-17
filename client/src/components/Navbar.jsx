@@ -26,7 +26,7 @@ const Navbar = () => {
       const idToken = await currentUser.getIdToken();
       const url =
         import.meta.env.MODE === "production"
-          ? `${import.meta.env.VITE_NEXTNEST_API_USER}/subscription`
+          ? import.meta.env.VITE_NEXTNEST_API_SUBSCRIPTION
           : "http://localhost:3000/user/subscription";
 
       const response = await axios.post(
@@ -60,7 +60,7 @@ const Navbar = () => {
       const idToken = await currentUser.getIdToken();
       const url =
         import.meta.env.MODE === "production"
-          ? `${import.meta.env.VITE_NEXTNEST_API_USER}/subscription`
+          ? import.meta.env.VITE_NEXTNEST_API_SUBSCRIPTION
           : "http://localhost:3000/user/subscription";
 
       const response = await axios.get(url, {
