@@ -95,8 +95,8 @@ exports.saveUserSearch = async (req, res, next) => {
   }
 };
 
-// PUT route to update user subscription
-exports.updateSubscription = async (req, res) => {
+// POST route to handle user subscription
+exports.handleSubscription = async (req, res) => {
   try {
     const user = req.user;
 
@@ -105,25 +105,75 @@ exports.updateSubscription = async (req, res) => {
       return res.status(401).json({ message: "User not authenticated!" });
     }
 
-    const { subscription } = req.body;
+    const { action } = req.body;
 
-    const updatedUser = await User.findOneAndUpdate(
-      { uid: user.uid },
-      {
-        subscription: subscription,
-      },
-      { new: true }
-    );
+    // Handle 'toggle' action
+    if (action === "toggle") {
+      const userData = await User.findOne({ uid: user.uid });
 
-    if (!updatedUser) {
-      return res.status(404).json({ message: "User not found" });
+      if (!userData) {
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      userData.subscription = !userData.subscription;
+      await userData.save();
+
+      return res.json({
+        message: "Subscription toggled successfully!",
+        subscription: userData.subscription,
+      });
     }
 
-    res.json({ message: "Subscription updated successfully!" });
+    // Handle 'unsubscribe' action
+    else if (action === "unsubscribe") {
+      const updatedUser = await User.findOneAndUpdate(
+        { uid: user.uid },
+        { subscription: false },
+        { new: true }
+      );
+
+      if (!updatedUser) {
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      return res.json({ message: "Unsubscribed successfully!" });
+    }
+
+    // Handle unknown action
+    else {
+      return res.status(400).json({ message: "Invalid action" });
+    }
   } catch (error) {
-    console.error("Error updating subscription:", error);
+    console.error("Error handling subscription:", error);
     res
       .status(500)
-      .json({ error: "An error occurred while updating subscription" });
+      .json({ error: "An error occurred while handling subscription" });
+  }
+};
+
+// GET route to fetch user subscription status
+exports.getSubscription = async (req, res) => {
+  try {
+    const user = req.user;
+
+    // Check if the user is authenticated
+    if (!user) {
+      return res.status(401).json({ message: "User not authenticated!" });
+    }
+
+    const userData = await User.findOne({ uid: user.uid }).select(
+      "subscription"
+    );
+
+    if (!userData) {
+      return res.status(404).json({ message: "User data not found" });
+    }
+
+    return res.json({ subscription: userData.subscription });
+  } catch (error) {
+    console.error("Error getting subscription:", error);
+    res
+      .status(500)
+      .json({ error: "An error occurred while getting subscription" });
   }
 };
