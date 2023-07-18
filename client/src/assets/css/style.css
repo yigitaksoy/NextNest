@@ -14,6 +14,10 @@ input:checked ~ .dot {
   background-color: #57ef97;
 }
 
+input:checked ~ .dot-bg {
+  background-color: #3b3b3b;
+}
+
 /*  Login & Registration Page */
 
 html {

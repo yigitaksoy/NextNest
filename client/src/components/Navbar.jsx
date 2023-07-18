@@ -136,16 +136,16 @@ const Navbar = () => {
         {isDropdownOpen && (
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-black text-white rounded-box w-52"
+            className="menu menu-sm dropdown-content mt-2 z-[1] p-2 bg-black text-white font-medium rounded-box w-52 text-md"
           >
-            <li>
-              <div className="flex">
-                <div className=" text-white font-medium mr-2">Subscription</div>
+            <li className="cursor-default focus:bg-none">
+              <div className="flex active:bg-sky-300 active:text-black">
+                <div className="mr-2 cursor-default">Subscription</div>
                 <label
                   htmlFor="subscription"
-                  className="flex items-center cursor-pointer"
+                  className="flex items-center cursor-default"
                 >
-                  <div className="relative">
+                  <div className="relative cursor-pointer">
                     <input
                       type="checkbox"
                       id="subscription"
@@ -154,7 +154,7 @@ const Navbar = () => {
                       onChange={handleSubscriptionToggle}
                       disabled={isLoading}
                     />
-                    <div className="block bg-gray-600 w-14 h-8 rounded-full"></div>
+                    <div className="dot-bg block bg-gray-500 w-14 h-8 rounded-full shadow"></div>
                     <div className="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition"></div>
                   </div>
                 </label>
@@ -162,7 +162,7 @@ const Navbar = () => {
             </li>
             <li>
               <button
-                className="justify-between hover:bg-zinc-800"
+                className="justify-between hover:bg-sky-300 hover:text-black"
                 onClick={() => {
                   signOut(auth).then(() => {
                     navigate("/login", { replace: true });
