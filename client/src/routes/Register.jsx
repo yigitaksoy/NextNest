@@ -55,6 +55,8 @@ const Register = () => {
       } catch (error) {
         if (error.code === "auth/email-already-in-use") {
           toast.error("This email address is already in use.");
+        } else if (error.code === "auth/invalid-email") {
+          toast.error("Invalid email address");
         } else {
           toast.error(error.message);
         }
