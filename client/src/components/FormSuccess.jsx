@@ -40,7 +40,7 @@ const FormSuccess = () => {
                 </p>
                 <p className="pt-10 text-center">
                   Thank you for using{" "}
-                  <span className="font-nove">NextNest! ♥️</span>
+                  <span className="font-nove text-sm">NextNest!</span>
                 </p>
               </div>
             </div>
