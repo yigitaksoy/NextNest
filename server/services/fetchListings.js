@@ -1,5 +1,6 @@
 const User = require("../models/user");
 const Listing = require("../models/listing");
+const StatusHistory = require("../models/listingHistory");
 const { listingService } = require("./listingService");
 const sendEmail = require("../config/email");
 const { v4: uuidv4 } = require("uuid");
@@ -90,6 +91,24 @@ exports.fetchListings = async (userId, queryParams) => {
         let newListing = new Listing(newScrapedListings[i]);
         await newListing.save();
         newScrapedListings[i] = newListing;
+
+        // Save the first status update only if the status is available in the details
+        if (
+          newScrapedListings[i].details &&
+          newScrapedListings[i].details.status
+        ) {
+          const statusHistory = new StatusHistory({
+            listing: newListing._id,
+            updates: [
+              {
+                status: newScrapedListings[i].details.status,
+                date: Date.now(),
+              },
+            ],
+          });
+
+          await statusHistory.save().catch((err) => console.error(err));
+        }
       }
 
       // Check if a listing with the same title already exists in the user's "userListings" array
