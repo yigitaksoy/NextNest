@@ -106,6 +106,7 @@ exports.fetchListings = async (userId, queryParams) => {
         ) {
           const statusHistory = new StatusHistory({
             listing: newListing._id,
+            url: newScrapedListings[i].url,
             updates: [
               {
                 status: newScrapedListings[i].details.status,
