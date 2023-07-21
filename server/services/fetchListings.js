@@ -74,6 +74,13 @@ exports.fetchListings = async (userId, queryParams) => {
     );
 
     for (let i = 0; i < newScrapedListings.length; i++) {
+      // Check if the listing is from Amsterdam
+      if (
+        !newScrapedListings[i].postal_code.includes("Amsterdam") &&
+        !newScrapedListings[i].url.includes("/amsterdam/")
+      ) {
+        continue;
+      }
       const listingId = uuidv4();
 
       // Check if a listing with the same title already exists in the "Listing" collection
