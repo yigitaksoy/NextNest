@@ -9,6 +9,7 @@ const StatusUpdateSchema = new Schema({
 const ListingHistorySchema = new Schema({
   listing: { type: Schema.Types.ObjectId, ref: "Listing", required: true },
   updates: [StatusUpdateSchema],
+  active: { type: Boolean, default: true },
 });
 
 module.exports = mongoose.model(
