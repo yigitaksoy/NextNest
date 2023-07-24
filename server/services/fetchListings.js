@@ -74,13 +74,6 @@ exports.fetchListings = async (userId, queryParams) => {
     );
 
     for (let i = 0; i < newScrapedListings.length; i++) {
-      // Check if the listing is from Amsterdam
-      if (
-        !newScrapedListings[i].postal_code.includes("Amsterdam") &&
-        !newScrapedListings[i].url.includes("/amsterdam/")
-      ) {
-        continue;
-      }
       const listingId = uuidv4();
 
       // Check if a listing with the same title already exists in the "Listing" collection
@@ -109,13 +102,19 @@ exports.fetchListings = async (userId, queryParams) => {
             url: newScrapedListings[i].url,
             updates: [
               {
-                status: newScrapedListings[i].details.status,
+                status: newScrapedListings[i].details?.status || "Available",
                 date: Date.now(),
               },
             ],
           });
 
-          await statusHistory.save().catch((err) => console.error(err));
+          // Only save the listing to StatusHistory if it's from Amsterdam
+          if (
+            newScrapedListings[i].postal_code.includes("Amsterdam") ||
+            newScrapedListings[i].url.includes("/amsterdam/")
+          ) {
+            await statusHistory.save().catch((err) => console.error(err));
+          }
         }
       }
 
